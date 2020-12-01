@@ -14,18 +14,18 @@
 <section class="u-clearfix u-section-1" id="sec-2543">
     <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
 <!--        modal button -->
-        <a th:if="${case.getCaseId()==null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#sec-7902'+${case.getCaseId()}" th:text="update"></a>
-        <a th:unless="${case.getCaseId()==null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#sec-7902'+${case}" th:text="new"></a>
+        <a th:if="${case!=null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#'+${case?.getCaseId()} ?: '#sec-7902'" th:text="Opdater"></a>
+        <a th:unless="${case!=null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#sec-7902'" th:text="Ny"></a>
     </div>
 </section>
 
 <!--modal -->
 
-<section class="u-black u-clearfix u-container-style u-dialog-block u-opacity u-opacity-70 u-valign-middle u-section-4" th:id="'sec-7902'+${case.getCaseId()}" >
+<section class="u-black u-clearfix u-container-style u-dialog-block u-opacity u-opacity-70 u-valign-middle u-section-4" th:id="${case?.getCaseId()} ?: 'sec-7902'" >
     <div class="u-container-style u-dialog u-white u-dialog-1">
         <div class="u-container-layout u-container-layout-1">
             <div class="u-expanded-width u-form u-form-1">
-<!--                insert post action-->
+<!--         todo       insert post action-->
                 <form action="" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" method="POST"
                       name="form" source="custom" style="padding: 10px">
                     <div class="u-form-group u-form-name">
@@ -34,13 +34,12 @@
                                required="" type="text">
                     </div>
                     <div class="u-form-email u-form-group">
-                        <label class="u-form-control-hidden u-label" for="email-374d">Email</label>
-                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" id="email-374d" name="adress" placeholder="adresse"
-                               required="" type="email">
+<!--                        <label class="u-form-control-hidden u-label" for="email-374d">Email</label>-->
+                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" id="email-374d" name="adress" th:placeholder="${case?.getLocation()} ?: 'adresse'" required="" type="email">
                     </div>
                     <div class="u-form-group u-form-message">
                         <label class="u-form-control-hidden u-label" for="message-374d">Message</label>
-                        <textarea class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" cols="50" id="message-374d" name="description" placeholder="Beskrivelse"
+                        <textarea class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" cols="50" id="message-374d" name="description" th:placeholder="${case?.getDescription()} ?: 'Beskrivelse'"
                                   rows="4"></textarea>
                     </div>
                     <div class="u-form-group u-form-partition-factor-2 u-form-group-4">

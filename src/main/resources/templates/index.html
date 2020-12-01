@@ -7,7 +7,8 @@
 <body>
 
 
-<section th:replace="modals/case-modal.html :: case-modal(new)"></section>
+<section th:replace="modals/case-modal.html :: case-modal(${null})"></section>
+<section th:replace="modals/case-modal.html :: case-modal(${newCase})"></section>
 
 <div>
     <img src="https://hercules-storage-bucket.s3.eu-central-1.amazonaws.com/before-after-pictures/test_pic.jpg">
