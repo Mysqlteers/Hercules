@@ -3,6 +3,7 @@ package com.hercules.service.springdatajpa;
 import com.hercules.model.Contact;
 import com.hercules.repository.ContactRepository;
 import com.hercules.service.ContactService;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;

@@ -1,15 +1,14 @@
 package com.hercules.service.springdatajpa;
 
 import com.hercules.model.Case;
-import com.hercules.repository.CaseRepository;
 import com.hercules.service.CaseService;
-import org.hibernate.cache.spi.entry.CacheEntryStructure;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Sort;
 
 import static org.junit.jupiter.api.Assertions.*;
 
