@@ -8,6 +8,7 @@ public class DBConnection {
 
 
     /**
+     * Creates a connection to the database, given the information in the variables.
      * @Author Norsker, Rasmus
      * @return Connection to the DB.
      */
