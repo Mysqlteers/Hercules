@@ -36,20 +36,31 @@ class CaseJPATest {
     }
 
     @Test
-    @Order(4)
+    @Order(5)
     void canDeleteById() {
         int sizeBefore = cs.findAll().size();
 
-        cs.deleteById((long) cs.findByLocation(location).get().getCaseId());
+        cs.deleteById(cs.findByLocation(location).get().getCaseId());
 
-        assertFalse(sizeBefore >= cs.findAll().size());
+        assertTrue(sizeBefore > cs.findAll().size());
+    }
+
+    @Test
+    @Order(4)
+    void canUpdate() {
+        Case newCase = cs.findByLocation(location).get();
+        newCase.setStatus(2);
+        cs.save(newCase);
+        Case updatedCase = cs.findById(newCase.getCaseId()).get();
+        assertEquals(newCase.getDescription(), updatedCase.getDescription());
+        assertTrue(updatedCase.getStatus() == 2);
     }
 
     @Test
     @Order(3)
     void canFindById() {
         Case newCase = cs.findByLocation(location).get();
-        Case otherCase = cs.findById((long) newCase.getCaseId()).get();
+        Case otherCase = cs.findById(newCase.getCaseId()).get();
         assertEquals(newCase.getDescription(), otherCase.getDescription());
         assertEquals(newCase.getStatus(), otherCase.getStatus());
         assertEquals(newCase.getCaseId(), otherCase.getCaseId());

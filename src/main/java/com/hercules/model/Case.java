@@ -5,10 +5,10 @@ import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 import javax.persistence.*;
 
 @Entity
-//@Table(name = "cases")
+@Table(name = "cases")
 public class Case {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)@Column(name = "case_id")
-    private int caseId;
+    private Long caseId;
 
     private String description;
 
@@ -20,7 +20,7 @@ public class Case {
         return description;
     }
 
-    public Case(int caseId, String description, int status, String location) {
+    public Case(Long caseId, String description, int status, String location) {
         this.caseId = caseId;
         this.description = description;
         this.status = status;
@@ -40,11 +40,11 @@ public class Case {
         this.description = description;
     }
 
-    public int getCaseId() {
+    public Long getCaseId() {
         return caseId;
     }
 
-    public void setCaseId(int caseId) {
+    public void setCaseId(Long caseId) {
         this.caseId = caseId;
     }
 

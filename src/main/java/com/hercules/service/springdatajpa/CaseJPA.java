@@ -5,6 +5,7 @@ import com.hercules.repository.CaseRepository;
 import com.hercules.service.CaseService;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -19,26 +20,28 @@ public class CaseJPA implements CaseService {
 
     @Override
     public Set<Case> findAll() {
-        return null;
+        Set<Case> caseSet = new HashSet<>();
+        caseRepository.findAll().forEach(caseSet::add);
+        return caseSet;
     }
 
     @Override
     public Case save(Case object) {
-        return null;
+        return caseRepository.save(object);
     }
 
     @Override
     public void deleteById(Long aLong) {
-
+        caseRepository.deleteById(aLong);
     }
 
     @Override
     public Optional<Case> findById(Long aLong) {
-        return Optional.empty();
+        return caseRepository.findById(aLong);
     }
 
     @Override
     public Optional<Case> findByLocation(String location) {
-        return Optional.empty();
+        return caseRepository.findByLocation(location);
     }
 }
