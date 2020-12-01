@@ -11,8 +11,7 @@ public class Person {
     private Long personId;
     @ManyToOne @JoinColumn(name = "contact_id")
     @JsonBackReference
-    @Column(name = "contact_id")
-    private Long contactId;
+    private Contact contact;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
@@ -23,9 +22,9 @@ public class Person {
     public Person() {
     }
 
-    public Person(Long personId, Long contactId, String firstName, String lastName, String phone, String email) {
+    public Person(Long personId, Contact contact, String firstName, String lastName, String phone, String email) {
         this.personId = personId;
-        this.contactId = contactId;
+        this.contact = contact;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
@@ -40,12 +39,12 @@ public class Person {
         this.personId = personId;
     }
 
-    public Long getContactId() {
-        return contactId;
+    public Contact getContact() {
+        return contact;
     }
 
-    public void setContactId(Long contactId) {
-        this.contactId = contactId;
+    public void setContact(Contact contact) {
+        this.contact = contact;
     }
 
     public String getFirstName() {
