@@ -3,7 +3,6 @@ package com.hercules.service.springdatajpa;
 import com.hercules.model.Case;
 import com.hercules.repository.CaseRepository;
 import com.hercules.service.CaseService;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -45,7 +44,7 @@ public class CaseJPA implements CaseService {
     }
 
     @Override
-    public List<Case> findAllByOrderByStatusAsc() {
-        return caseRepository.findAllByOrderByStatusAsc();
+    public List<Case> findAllByOrderByStatusAscCaseIdAsc() {
+        return caseRepository.findAllByOrderByStatusAscCaseIdAsc();
     }
 }

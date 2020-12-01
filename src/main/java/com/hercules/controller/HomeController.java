@@ -1,20 +1,26 @@
 package com.hercules.controller;
 
-import com.hercules.model.Case;
+import com.hercules.service.CaseService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomeController
-{
-    @GetMapping
-    public String index(Model model) {
+public class HomeController {
+    @Autowired
+    CaseService caseService;
 
-        Case newcase = new Case();
-newcase.setDescription("im a very goodest boi");
-        newcase.setCaseId(new Long(100));
-        model.addAttribute("newCase", newcase); //needed for modal to create 'new case'
-        return "index";
+    @GetMapping("/")
+    public String inex(Model model) {
+        model.addAttribute("cases", caseService.findAllByOrderByStatusAscCaseIdAsc());
+        return "casesHome";
     }
+
+
+    @GetMapping(value="/modal")
+    public String index() {
+        return "case-modal";
+    }
+
 }
