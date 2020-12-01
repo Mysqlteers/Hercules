@@ -27,6 +27,12 @@ public class Case {
         this.location = location;
     }
 
+    public Case(String description, int status, String location) {
+        this.description = description;
+        this.status = status;
+        this.location = location;
+    }
+
     public Case() {
     }
 

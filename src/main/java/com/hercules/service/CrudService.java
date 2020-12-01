@@ -9,4 +9,5 @@ public interface CrudService<T, ID> {
     T save(T object);
     void deleteById(ID id);
     Optional<T> findById(ID id);
+    Optional<T> findByLocation(String location);
 }

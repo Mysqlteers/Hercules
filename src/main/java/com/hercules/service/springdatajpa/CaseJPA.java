@@ -36,4 +36,9 @@ public class CaseJPA implements CaseService {
     public Optional<Case> findById(Long aLong) {
         return Optional.empty();
     }
+
+    @Override
+    public Optional<Case> findByLocation(String location) {
+        return Optional.empty();
+    }
 }
