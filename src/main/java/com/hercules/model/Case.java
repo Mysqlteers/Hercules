@@ -3,6 +3,7 @@ package com.hercules.model;
 import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "cases")
@@ -16,15 +17,19 @@ public class Case {
 
     private String location;
 
+    @Column(name = "case_start_date")
+    private Date caseStartDate;
+
     public String getDescription() {
         return description;
     }
 
-    public Case(Long caseId, String description, int status, String location) {
+    public Case(Long caseId, String description, int status, String location, Date caseStartDate) {
         this.caseId = caseId;
         this.description = description;
         this.status = status;
         this.location = location;
+        this.caseStartDate = caseStartDate;
     }
 
     public Case(String description, int status, String location) {
@@ -34,6 +39,14 @@ public class Case {
     }
 
     public Case() {
+    }
+
+    public Date getCaseStartDate() {
+        return caseStartDate;
+    }
+
+    public void setCaseStartDate(Date caseStartDate) {
+        this.caseStartDate = caseStartDate;
     }
 
     public void setDescription(String description) {
