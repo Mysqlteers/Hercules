@@ -8,6 +8,13 @@ public class HomeController
 {
     @GetMapping
     public String inex() {
-        return "index";
+        return "create-case-modal";
     }
+
+
+    @GetMapping(value="/modal")
+    public String index() {
+        return "create-case-modal";
+    }
+
 }
