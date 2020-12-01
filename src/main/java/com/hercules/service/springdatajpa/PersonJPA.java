@@ -5,6 +5,7 @@ import com.hercules.repository.PersonRepository;
 import com.hercules.service.PersonService;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -18,21 +19,28 @@ public class PersonJPA implements PersonService {
 
     @Override
     public Set<Person> findAll() {
-        return null;
+        Set<Person> personSet = new HashSet<>();
+        pr.findAll().forEach(personSet::add);
+        return personSet;
     }
 
     @Override
     public Person save(Person object) {
-        return null;
+        return pr.save(object);
     }
 
     @Override
     public void deleteById(Long aLong) {
-
+        pr.deleteById(aLong);
     }
 
     @Override
     public Optional<Person> findById(Long aLong) {
-        return Optional.empty();
+        return pr.findById(aLong);
+    }
+
+    @Override
+    public Optional<Person> findPersonByPhone(String phone) {
+        return pr.findPersonByPhone(phone);
     }
 }
