@@ -43,9 +43,9 @@ public class CaseJPA implements CaseService {
     public Optional<Case> findByLocation(String location) {
         return caseRepository.findByLocation(location);
     }
-//
-//    @Override
-//    public List<Case> findAllByOrderByStatusCaseIdAsc() {
-//        return ;
-//    }
+
+    @Override
+    public List<Case> findAllByOrderByStatusAsc() {
+        return caseRepository.findAllByOrderByStatusAsc();
+    }
 }

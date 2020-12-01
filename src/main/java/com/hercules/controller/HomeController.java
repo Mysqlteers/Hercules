@@ -1,14 +1,21 @@
 package com.hercules.controller;
 
+import com.hercules.service.CaseService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomeController
-{
+public class HomeController {
+    @Autowired
+    CaseService caseService;
+
+
     @GetMapping
-    public String inex() {
-        return "index";
+    public String inex(Model model) {
+        model.addAttribute("cases", caseService.findAllByOrderByStatusAsc());
+        return "casesHome";
     }
 
 

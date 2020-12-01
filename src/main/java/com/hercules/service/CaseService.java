@@ -8,6 +8,6 @@ import java.util.Optional;
 public interface CaseService extends CrudService<Case, Long>{
     Optional<Case> findByLocation(String location);
 
-//    List<Case> findAllByOrderByStatusByCaseIdAsc();
+    List<Case> findAllByOrderByStatusAsc();
 
 }
