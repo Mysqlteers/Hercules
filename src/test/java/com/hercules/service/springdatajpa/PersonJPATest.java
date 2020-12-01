@@ -49,7 +49,7 @@ class PersonJPATest {
     }
 
     @Test
-    @Order(4)
+    @Order(5)
     void canDeleteById() {
         int sizeBefore = ps.findAll().size();
         ps.deleteById(ps.findPersonByPhone(testPhone).get().getPersonId());
@@ -64,5 +64,17 @@ class PersonJPATest {
         Person otherPerson = ps.findById(person.getPersonId()).get();
         assertEquals(person.getPhone(), otherPerson.getPhone());
         assertEquals(person.getPersonId(), otherPerson.getPersonId());
+    }
+
+    @Test
+    @Order(4)
+    void canUpdatePerson() {
+        String newMail = "newandimproved@mail.dk";
+        Person person = ps.findPersonByPhone(testPhone).get();
+        person.setEmail(newMail);
+        ps.save(person);
+        Person newPerson = ps.findById(person.getPersonId()).get();
+        assertEquals(person.getFirstName(), newPerson.getFirstName());
+        assertEquals(newMail, newPerson.getEmail());
     }
 }
