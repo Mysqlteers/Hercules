@@ -9,7 +9,7 @@ import java.util.Date;
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)@Column(name = "task_id")
-    private Long task_id;
+    private Long taskId;
 
     private String before_pic;
 
@@ -25,8 +25,8 @@ public class Task {
 
     private String done;
 
-    public Task(Long task_id, String before_pic, String after_pic, Date task_start_date, Date deadline, String est_time, String subtask, String done){
-      this.task_id = task_id;
+    public Task(Long taskId, String before_pic, String after_pic, Date task_start_date, Date deadline, String est_time, String subtask, String done){
+      this.taskId = taskId;
       this.before_pic = before_pic;
       this.after_pic = after_pic;
       this.task_start_date = task_start_date;
@@ -49,12 +49,12 @@ public class Task {
 
     }
 
-    public Long getTask_id() {
-        return task_id;
+    public Long getTaskId() {
+        return taskId;
     }
 
-    public void setTask_id(Long task_id) {
-        this.task_id = task_id;
+    public void setTask_id(Long taskId) {
+        this.taskId = taskId;
     }
 
     public String getBefore_pic() {

@@ -18,6 +18,6 @@ public class TaskTest {
         Long taskId = (long) 1;
         Task task = new Task();
         task.setTask_id(taskId);
-        assertEquals(task.getTask_id(), taskId);
+        assertEquals(task.getTaskId(), taskId);
     }
 }

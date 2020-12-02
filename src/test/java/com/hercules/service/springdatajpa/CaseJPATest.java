@@ -25,7 +25,7 @@ class CaseJPATest {
     void canFindAll() {
         assertTrue(cs.findAll().size() >= 1);
     }
-
+/*
     @Test
     @Order(1)
     void canSaveAndFindByLocation() {
@@ -33,7 +33,7 @@ class CaseJPATest {
         cs.save(newCase);
         assertTrue(cs.findByLocation(location).isPresent());
     }
-
+*/
     @Test
     @Order(5)
     void canDeleteById() {

@@ -1,8 +1,6 @@
 package com.hercules.service.springdatajpa;
 
-import com.hercules.model.Case;
 import com.hercules.model.Task;
-import com.hercules.repository.CaseRepository;
 import com.hercules.repository.TaskRepository;
 import com.hercules.service.TaskService;
 import org.springframework.stereotype.Service;
@@ -15,7 +13,7 @@ import java.util.Set;
 public class TaskJPA implements TaskService {
     private TaskRepository taskRepository;
 
-    public TaskJPA(TaskRepository taskRepository){this.taskRepository = taskRepository; }
+    public TaskJPA(TaskRepository taskRepository){ this.taskRepository = taskRepository; }
 
 
     @Override
@@ -35,5 +33,5 @@ public class TaskJPA implements TaskService {
     public Optional<Task> findById(Long aLong) { return taskRepository.findById(aLong); }
 
     @Override
-    public Optional<Case> findByTaskId(Long taskId) { return taskRepository.findByTaskId(taskId); }
+    public Optional<Task> findByTaskId(Long taskId) { return taskRepository.findByTaskId(taskId); }
 }
