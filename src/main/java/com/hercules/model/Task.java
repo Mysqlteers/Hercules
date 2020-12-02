@@ -1,19 +1,30 @@
 package com.hercules.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "tasks")
 public class Task {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)@Column(name = "task_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "task_id")
     private Long taskId;
 
-    private String before_pic;
 
-    private String after_pic;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "superTask")
+    @Column(name = "before_pic")
+    private Set<S3File> beforePicture;
+//
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "superTask")
+//    @JsonManagedReference
+//    @Column(name= "after_pic")
+//    private Set<S3File> afterPic;
 
     private Date task_start_date;
 
@@ -21,57 +32,55 @@ public class Task {
 
     private String est_time;
 
-    private String subtask;
+    //used as a supertask
+
+//   @OneToMany(cascade = CascadeType.ALL, mappedBy = "superTask")
+//   private Set<Task> subtasks;
+//
+//
+//   //used as a subtask
+//   @ManyToMany @JoinColumn(name = "parent_task_id")
+//   private Task superTask;
+
 
     private String done;
 
-    public Task(Long taskId, String before_pic, String after_pic, Date task_start_date, Date deadline, String est_time, String subtask, String done){
-      this.taskId = taskId;
-      this.before_pic = before_pic;
-      this.after_pic = after_pic;
-      this.task_start_date = task_start_date;
-      this.deadline = deadline;
-      this.est_time = est_time;
-      this.subtask = subtask;
-      this.done = done;
-    }
-
-    public Task(String before_pic, String after_pic, Date task_start_date, Date deadline, String est_time, String subtask, String done){
-        this.before_pic = before_pic;
-        this.after_pic = after_pic;
+    public Task( Set<S3File> beforePicture, Set<S3File> afterPic, Date task_start_date, Date deadline, String est_time, Set<Task> subtask, String done){
+        this.beforePicture = beforePicture;
+//        this.afterPic = afterPic;
         this.task_start_date = task_start_date;
         this.deadline = deadline;
         this.est_time = est_time;
-        this.subtask = subtask;
+//        this.subtask = subtask;
         this.done = done;
     }
-    public Task(){
 
+    public Task(){
     }
 
     public Long getTaskId() {
         return taskId;
     }
 
-    public void setTask_id(Long taskId) {
-        this.taskId = taskId;
+    public void setTaskId(Long task_id) {
+        this.taskId = task_id;
     }
 
-    public String getBefore_pic() {
-        return before_pic;
+    public Set<S3File> getBeforePicture() {
+        return beforePicture;
     }
 
-    public void setBefore_pic(String before_pic) {
-        this.before_pic = before_pic;
+    public void setBeforePicture(Set<S3File> beforePicture) {
+        this.beforePicture = beforePicture;
     }
-
-    public String getAfter_pic() {
-        return after_pic;
-    }
-
-    public void setAfter_pic(String after_pic) {
-        this.after_pic = after_pic;
-    }
+//
+//    public Set<S3File> getAfterPic() {
+//        return afterPic;
+//    }
+//
+//    public void setAfterPic(Set<S3File> after_pic) {
+//        this.afterPic = after_pic;
+//    }
 
     public Date getTask_start_date() {
         return task_start_date;
@@ -96,14 +105,22 @@ public class Task {
     public void setEst_time(String est_time) {
         this.est_time = est_time;
     }
-
-    public String getSubtask() {
-        return subtask;
-    }
-
-    public void setSubtask(String subtask) {
-        this.subtask = subtask;
-    }
+//
+//    public Set<Task> getSubtask() {
+//        return subtask;
+//    }
+//
+//    public void setSubtask(Set<Task> subtask) {
+//        this.subtask = subtask;
+//    }
+//
+//    public Task getSuperTask() {
+//        return superTask;
+//    }
+//
+//    public void setSuperTask(Task superTask) {
+//        this.superTask = superTask;
+//    }
 
     public String getDone() {
         return done;

@@ -29,9 +29,9 @@ class CaseJPATest {
     @Test
     @Order(1)
     void canSaveAndFindByLocation() {
-        Case newCase = new Case("Nedriv væg", 1, location);
-        cs.save(newCase);
-        assertTrue(cs.findByLocation(location).isPresent());
+//        Case newCase = new Case("Nedriv væg", 1, location);
+//        cs.save(newCase);
+//        assertTrue(cs.findByLocation(location).isPresent());
     }
 */
     @Test
