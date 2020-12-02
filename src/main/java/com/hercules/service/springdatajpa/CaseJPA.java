@@ -25,6 +25,7 @@ public class CaseJPA implements CaseService {
 
     @Override
     public Case save(Case object) {
+        System.out.println("Saving new case -From CaseJPA");
         return caseRepository.save(object);
     }
 
