@@ -81,12 +81,69 @@
           <div class="u-layout" style="">
             <div class="u-layout-row" style="">
               <div class="u-align-left u-container-style u-layout-cell u-left-cell u-size-30 u-size-xs-60 u-white u-layout-cell-1" src="">
-                <div class="u-container-layout u-container-layout-1">
-                  <p class="u-text u-text-1" th:text="${case.caseId}"></p>
-                  <p class="u-text u-text-2">Adresse<br>
-                  </p>
-                  <p class="u-text u-text-3">Beskrivelse</p>
-                </div>
+<!--                  th:style="${case.status == 1 ? 'background-color : blue;' : 'background-color: red;'}"-->
+                  <div class="u-container-layout u-container-layout-1" th:if="${case.status == 0}" style="background-color: lightskyblue">
+                      <table>
+                          <tbody>
+                          <tr>
+                              <td style="width: 150px; display: inline-block">Sagsnummer:</td>
+                              <td th:text="${case.caseId}"></td>
+                          </tr>
+                          <tr style="height: 15px"></tr>
+                          <tr>
+                              <td>Adresse:</td>
+                              <td th:text="${case.location}"></td>
+                          </tr>
+                          <tr style="height: 15px"></tr>
+                          <tr>
+                              <td>Beskrivelse:</td>
+                              <td th:text="${case.description}"></td>
+                          </tr>
+                          </tbody>
+                      </table>
+                  </div>
+
+                  <div class="u-container-layout u-container-layout-1" th:if="${case.status == 1}" style="background-color: lightgreen">
+                      <table>
+                          <tbody>
+                          <tr>
+                              <td style="width: 150px; display: inline-block">Sagsnummer:</td>
+                              <td th:text="${case.caseId}"></td>
+                          </tr>
+                          <tr style="height: 15px"></tr>
+                          <tr>
+                              <td>Adresse:</td>
+                              <td th:text="${case.location}"></td>
+                          </tr>
+                          <tr style="height: 15px"></tr>
+                          <tr>
+                              <td>Beskrivelse:</td>
+                              <td th:text="${case.description}"></td>
+                          </tr>
+                          </tbody>
+                      </table>
+                  </div>
+
+                  <div class="u-container-layout u-container-layout-1" th:if="${case.status == 2}" style="background-color: darkgrey">
+                      <table>
+                          <tbody>
+                          <tr>
+                              <td style="width: 150px; display: inline-block">Sagsnummer:</td>
+                              <td th:text="${case.caseId}"></td>
+                          </tr>
+                          <tr style="height: 15px"></tr>
+                          <tr>
+                              <td>Adresse:</td>
+                              <td th:text="${case.location}"></td>
+                          </tr>
+                          <tr style="height: 15px"></tr>
+                          <tr>
+                              <td>Beskrivelse:</td>
+                              <td th:text="${case.description}"></td>
+                          </tr>
+                          </tbody>
+                      </table>
+                  </div>
               </div>
               <div class="u-align-center u-container-style u-image u-layout-cell u-right-cell u-size-30 u-size-xs-60 u-image-1" src="" data-image-width="1080" data-image-height="1080">
                 <div class="u-container-layout u-valign-middle u-container-layout-2" src=""></div>
