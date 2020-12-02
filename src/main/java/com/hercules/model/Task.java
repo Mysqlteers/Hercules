@@ -16,7 +16,6 @@ public class Task {
     private Long taskId;
 
 
-
     @OneToMany(mappedBy = "task")
     @Column(name = "before_pictures")
     @JsonManagedReference
@@ -30,23 +29,24 @@ public class Task {
 
 //    used as a supertask
 
-   @OneToMany(cascade = CascadeType.ALL, mappedBy = "superTask")
-   private Set<Task> subtasks;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "superTask")
+    private Set<Task> subtasks;
 
 
-   //used as a subtask
-   @ManyToOne @JoinColumn(name = "parent_task_id")
-   private Task superTask;
+    //used as a subtask
+    @ManyToOne
+    @JoinColumn(name = "parent_task_id")
+    private Task superTask;
 
 
     private String done;
 
-    public Task(Set<S3File> beforePictures, String task_start_date, String deadline, String est_time, Set<Task> subtask, String done){
+    public Task(Set<S3File> beforePictures, String task_start_date, String deadline, String est_time, Set<Task> subtask, String done) {
 
-        if (beforePictures!=null)
-            for (S3File s3: beforePictures)
-                {
-                    s3.setTask(this);}
+        if (beforePictures != null)
+            for (S3File s3 : beforePictures) {
+                s3.setTask(this);
+            }
 
         this.beforePictures = beforePictures;
 
@@ -56,13 +56,12 @@ public class Task {
         this.est_time = est_time;
         this.subtasks = subtask;
         this.done = done;
-        for (Task t: subtasks)
-        {
+        for (Task t : subtasks) {
             t.setSuperTask(this);
         }
     }
 
-    public Task(){
+    public Task() {
     }
 
     public Long getTaskId() {

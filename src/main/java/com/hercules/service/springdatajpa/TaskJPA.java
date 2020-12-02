@@ -13,25 +13,35 @@ import java.util.Set;
 public class TaskJPA implements TaskService {
     private TaskRepository taskRepository;
 
-    public TaskJPA(TaskRepository taskRepository){ this.taskRepository = taskRepository; }
+    public TaskJPA(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
+    }
 
 
     @Override
     public Set<Task> findAll() {
-            Set<Task> taskSet = new HashSet<>();
-            taskRepository.findAll().forEach(taskSet::add);
-            return taskSet;
+        Set<Task> taskSet = new HashSet<>();
+        taskRepository.findAll().forEach(taskSet::add);
+        return taskSet;
     }
 
     @Override
-    public Task save(Task object) {return taskRepository.save(object); }
+    public Task save(Task object) {
+        return taskRepository.save(object);
+    }
 
     @Override
-    public void deleteById(Long aLong) { taskRepository.deleteById(aLong); }
+    public void deleteById(Long aLong) {
+        taskRepository.deleteById(aLong);
+    }
 
     @Override
-    public Optional<Task> findById(Long aLong) { return taskRepository.findById(aLong); }
+    public Optional<Task> findById(Long aLong) {
+        return taskRepository.findById(aLong);
+    }
 
     @Override
-    public Optional<Task> findByTaskId(Long taskId) { return taskRepository.findByTaskId(taskId); }
+    public Optional<Task> findByTaskId(Long taskId) {
+        return taskRepository.findByTaskId(taskId);
+    }
 }

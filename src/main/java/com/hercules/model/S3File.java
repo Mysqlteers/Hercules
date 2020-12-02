@@ -10,7 +10,8 @@ import javax.persistence.*;
 public class S3File {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "location_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "location_id")
     private Long fileLocationId;
 
     @NotNull
@@ -52,10 +53,9 @@ public class S3File {
 
     public S3File(String location, boolean isAfterPicture) {
         this.location = location;
-        this.isAfterPicture =isAfterPicture;
+        this.isAfterPicture = isAfterPicture;
     }
 
-    public S3File()
-    {
+    public S3File() {
     }
 }
