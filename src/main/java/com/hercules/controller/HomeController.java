@@ -47,6 +47,17 @@ public class HomeController {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        return "testHTML";
+    }
+
+    @GetMapping("/createCase")
+    public String createCase() {
+        return "createCase";
+    }
+
+    @PostMapping("/createCase")
+    public String createCase(@ModelAttribute Case newCase) {
+        caseService.save(newCase);
         return "redirect:/";
     }
 }

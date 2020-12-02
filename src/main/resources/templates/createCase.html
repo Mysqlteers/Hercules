@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="nicepage.css" media="screen">
+    <link rel="stylesheet" href="Sager.css" media="screen">
+    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+    <meta name="generator" content="Nicepage 3.0.9, nicepage.com">
+</head>
+<body>
+<h1>Opret ny sag</h1>
+<form action="/createCase" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" method="post"
+      name="form" source="custom" style="padding: 10px" id="formId">
+    <div class="u-form-email u-form-group">
+        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="location" placeholder="Adresse">
+    </div>
+    <div class="u-form-group u-form-message">
+        <label class="u-form-control-hidden u-label" for="message-374d">Message</label>
+        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="description" placeholder="Beskrivelse">
+    </div>
+    <div class="u-form-date u-form-group u-form-partition-factor-2 u-form-group-5">
+        <label class="u-form-control-hidden u-label">Start dato</label>
+        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"  name="caseStartDate" placeholder="Start dato"
+               type="date">
+    </div>
+    <div class="u-form-group u-form-select u-form-group-6">
+        <label class="u-form-control-hidden u-label" for="select-4adc">Status på sag</label>
+        <div class="u-form-select-wrapper">
+            <select class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" id="select-4adc"
+                    name="status">
+                <option value="0" selected>Igangværende</option>
+                <option value="1">Afsluttet</option>
+                <option value="2">Betalt</option>
+            </select>
+        </div>
+    </div>
+    <div class="u-align-left u-form-group u-form-submit">
+        <input style="background-color: #adcce9; height: 60px" class="u-button-style u-hover-palette-1-light-1 u-btn-1" type="submit" value="Gem ny sag" onclick="alert('Sagen er blevet gemt!')">
+    </div>
+</form>
+</body>
+</html>
