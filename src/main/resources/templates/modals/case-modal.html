@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html style="font-size: 16px;" xmlns:th="http://www.thymeleaf.org" th:fragment="case-modal(case)">
 <head>
+    <link rel="stylesheet" href="../../static/Sager.css" media="screen">
     <link th:href="@{/css/create-case-modal.css}" rel="stylesheet">
     <link th:href="@{/css/nicepage.css}"  rel="stylesheet">
     <script class="u-script" th:src="@{/js/jquery.js}" type="text/javascript"></script>
@@ -10,57 +11,60 @@
           rel="stylesheet">
 
 </head>
-
-<section class="u-clearfix u-section-1" id="sec-2543">
+<body>
+<!--<section class="u-clearfix u-section-1" id="sec-2543">-->
     <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
 <!--        modal button -->
-        <a th:if="${case!=null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#'+${case?.getCaseId()} ?: '#sec-7902'" th:text="Opdater"></a>
-        <a th:unless="${case!=null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#sec-7902'" th:text="Ny"></a>
+        <a th:if="${case != null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#'+${case.getCaseId()} ?: '#sec-7902'" th:text="Opdater"></a>
+<!--        <a th:unless="${case != null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#sec-7902'" th:text="Ny"></a>-->
     </div>
-</section>
+<!--</section>-->
 
 <!--modal -->
 
-<section class="u-black u-clearfix u-container-style u-dialog-block u-opacity u-opacity-70 u-valign-middle u-section-4" th:id="${case?.getCaseId()} ?: 'sec-7902'" >
+<div class="u-black u-clearfix u-container-style u-dialog-block u-opacity u-opacity-70 u-valign-middle u-section-4" th:id="${case?.caseId} ?: 'sec-7902'" >
     <div class="u-container-style u-dialog u-white u-dialog-1">
         <div class="u-container-layout u-container-layout-1">
             <div class="u-expanded-width u-form u-form-1">
 <!--         todo       insert post action-->
-                <form action="" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" method="POST"
-                      name="form" source="custom" style="padding: 10px">
+                <form action="/updateCase" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" method="post"
+                      name="form" source="custom" style="padding: 10px" id="formId">
                     <div class="u-form-group u-form-name">
-                        <label class="u-form-control-hidden u-label" for="name-374d">Name</label>
-                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" id="name-374d" name="case-number" placeholder="Sags nr"
-                               required="" type="text">
+                        <label class="u-form-control-hidden u-label" for="name-374d"></label>
+                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" id="name-374d" name="caseId" placeholder="Sags nr"
+                               required type="text" th:value="${case.getCaseId()}" readonly>
                     </div>
                     <div class="u-form-email u-form-group">
 <!--                        <label class="u-form-control-hidden u-label" for="email-374d">Email</label>-->
-                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" id="email-374d" name="adress" th:placeholder="${case?.getLocation()} ?: 'adresse'" required="" type="email">
+                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" id="email-374d" name="location" th:value="${case?.getLocation()}" placeholder="Adresse">
                     </div>
                     <div class="u-form-group u-form-message">
                         <label class="u-form-control-hidden u-label" for="message-374d">Message</label>
-                        <textarea class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" cols="50" id="message-374d" name="description" th:placeholder="${case?.getDescription()} ?: 'Beskrivelse'"
-                                  rows="4"></textarea>
+                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" id="email-374d" name="description" th:value="${case?.getDescription()}" placeholder="Beskrivelse">
+<!--                        <textarea form="formId" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" cols="50" id="message-374d" name="description" placeholder="Beskrivelse" th:value="${case?.getDescription()}"-->
+<!--                                  rows="4"></textarea>-->
                     </div>
                     <div class="u-form-group u-form-partition-factor-2 u-form-group-4">
-                        <label class="u-form-control-hidden u-label" for="textarea-7907"></label>
-                        <textarea class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" cols="50" id="textarea-7907" name="textarea"
-                                  placeholder="start dato"
-                                  rows="1"></textarea>
+<!--                        <label class="u-form-control-hidden u-label" for="textarea-7907"></label>-->
+<!--                        <textarea class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" cols="50" id="textarea-7907" name="textarea"-->
+<!--                                  placeholder="start dato"-->
+<!--                                  rows="1"></textarea>-->
                     </div>
                     <div class="u-form-date u-form-group u-form-partition-factor-2 u-form-group-5">
-                        <label class="u-form-control-hidden u-label" for="date-f07f">Date</label>
-                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" id="date-f07f" name="start-date" placeholder=""
-                               required="" type="date">
+                        <label class="u-form-control-hidden u-label">Start dato</label>
+<!--                        <input type="date" th:value="${case.caseStartDate}" name="caseStartDate">-->
+                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"  name="caseStartDate" placeholder="Start dato"
+                               type="date" th:value="${case.getCaseStartDate()}">
+<!--                        id="date-f07f"-->
                     </div>
                     <div class="u-form-group u-form-select u-form-group-6">
                         <label class="u-form-control-hidden u-label" for="select-4adc">Select</label>
                         <div class="u-form-select-wrapper">
                             <select class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" id="select-4adc"
-                                    name="select">
-                                <option value="Igangværende">Igangværende</option>
-                                <option value="Afsluttet">Afsluttet</option>
-                                <option value="Betalt">Betalt</option>
+                                    name="status">
+                                <option value="0">Igangværende</option>
+                                <option value="1">Afsluttet</option>
+                                <option value="2">Betalt</option>
                             </select>
                             <svg class="u-caret" height="12" version="1" width="14" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M4 8L0 4h8z" fill="currentColor"></path>
@@ -68,19 +72,19 @@
                         </div>
                     </div>
                     <div class="u-align-left u-form-group u-form-submit">
-                        <a class="u-btn u-btn-submit u-button-style u-hover-palette-1-light-1 u-btn-1"
-                           href="#">Submit</a>
-                        <input class="u-form-control-hidden" type="submit" value="submit">
+<!--                        <a class="u-btn u-btn-submit u-button-style u-hover-palette-1-light-1 u-btn-1"-->
+<!--                           href="#">Submit</a>-->
+                        <input style="background-color: #adcce9; height: 60px" class="u-button-style u-hover-palette-1-light-1 u-btn-1" type="submit" value="Gem ændringer" onclick="alert('Ændringer er blevet gemt!')">
                     </div>
-                    <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent.</div>
-                    <div class="u-form-send-error u-form-send-message"> Unable to send your message. Please fix errors
-                        then try again.
-                    </div>
-                    <input name="recaptchaResponse" type="hidden" value="">
+<!--                    <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent.</div>-->
+<!--                    <div class="u-form-send-error u-form-send-message"> Unable to send your message. Please fix errors-->
+<!--                        then try again.-->
+<!--                    </div>-->
+<!--                    <input name="recaptchaResponse" type="hidden" value="">-->
                 </form>
             </div>
         </div>
-        <button class="u-dialog-close-button u-icon u-text-grey-40 u-icon-1">
+        <button class="u-dialog-close-button u-icon u-text-grey-40 u-icon-1" onclick="window.location.reload(false)">
             <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" style="" viewBox="0 0 16 16">
                 <use xlink:href="#svg-797b" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
             </svg>
@@ -90,18 +94,23 @@
                       y="7"></rect></svg>
         </button>
     </div>
-</section>
-
+</div>
+</body>
+<script>
+    function reloadAfterModal() {
+        window.location.reload(true);
+    }
+</script>
 <!--Style-->
 <style>
     .u-section-4 {
-    min-height: 500px;
+    min-height: 100px;
 }
 
 .u-section-4 .u-dialog-1 {
     width: 800px;
-    min-height: 250px;
-    margin: 60px auto;
+    min-height: 50px;
+    margin: 6px auto;
 }
 
 .u-section-4 .u-container-layout-1 {
@@ -109,7 +118,7 @@
 }
 
 .u-section-4 .u-form-1 {
-    height: 318px;
+    height: 18px;
     margin: 0;
 }
 

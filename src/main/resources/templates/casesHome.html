@@ -31,8 +31,8 @@
     <meta property="og:url" content="index.html">
 </head>
 <body class="u-body"><header class="u-clearfix u-grey-15 u-header u-sticky u-header" id="sec-1f89"><div class="u-clearfix u-sheet u-sheet-1">
-    <a href="https://nicepage.com" class="u-image u-logo u-image-1">
-        <img src="../../../../../../../Desktop/Hercules/images/default-logo.png" class="u-logo-image u-logo-image-1">
+    <a href="/" class="u-image u-logo u-image-1">
+        <img src="https://img.pngio.com/hd-sledge-hammer-png-transparent-sledgehammer-png-free-sledge-hammer-png-855_782.png" class="u-logo-image u-logo-image-1">
     </a>
     <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
         <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
@@ -76,6 +76,11 @@
 </div></header>
 
     <section class="u-clearfix u-section-1" id="sec-444b">
+<!--        <div class="u-sticky" style="height: 10px; width: 10px; left: 95%; top: 220px">-->
+<!--                        <button class="u-sticky" th:replace="modals/case-modal.html :: case-modal(${null})"></button>-->
+<!--            <button class="u-sticky" th:replace="modals/case-modal.html :: case-modal(${newCase})"></button>-->
+<!--        </div>-->
+
       <div class="u-clearfix u-sheet u-sheet-1" th:each="case:${cases}">
         <div class="u-clearfix u-expanded-width u-gutter-0 u-layout-wrap u-layout-wrap-1">
           <div class="u-layout" style="">
@@ -99,6 +104,9 @@
                               <td>Beskrivelse:</td>
                               <td th:text="${case.description}"></td>
                           </tr>
+                          <tr>
+                              <td style="height: 50px"><button th:replace="modals/case-modal.html :: case-modal(${case})"></button></td>
+                          </tr>
                           </tbody>
                       </table>
                   </div>
@@ -119,6 +127,9 @@
                           <tr>
                               <td>Beskrivelse:</td>
                               <td th:text="${case.description}"></td>
+                          </tr>
+                          <tr>
+                              <td style="height: 50px"><button th:replace="modals/case-modal.html :: case-modal(${case})"></button></td>
                           </tr>
                           </tbody>
                       </table>
@@ -141,6 +152,9 @@
                               <td>Beskrivelse:</td>
                               <td th:text="${case.description}"></td>
                           </tr>
+                          <tr>
+                              <td style="height: 50px"><button th:replace="modals/case-modal.html :: case-modal(${case})"></button></td>
+                          </tr>
                           </tbody>
                       </table>
                   </div>
@@ -152,20 +166,12 @@
           </div>
         </div>
       </div>
+
     </section>
+
     
     
-    <footer class="u-align-left u-clearfix u-footer u-grey-80 u-footer" id="sec-6822"><div class="u-clearfix u-sheet u-sheet-1"></div></footer>
-    <section class="u-backlink u-clearfix u-grey-80">
-      <a class="u-link" href="https://nicepage.com/css-templates" target="_blank">
-        <span>CSS Templates</span>
-      </a>
-      <p class="u-text">
-        <span>created with</span>
-      </p>
-      <a class="u-link" href="https://nicepage.com/" target="_blank">
-        <span>Website Builder Software</span>
-      </a>. 
-    </section>
+    <footer class="u-align-left u-clearfix u-footer u-grey-80 u-footer u-sticky" id="sec-6822"><div class="u-clearfix u-sheet u-sheet-1"></div></footer>
+    <section class="u-backlink u-clearfix u-grey-80"></section>
   </body>
 </html>

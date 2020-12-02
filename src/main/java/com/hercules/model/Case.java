@@ -1,6 +1,8 @@
 package com.hercules.model;
 
 import net.bytebuddy.dynamic.loading.InjectionClassLoader;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,18 +20,29 @@ public class Case {
     private String location;
 
     @Column(name = "case_start_date")
-    private Date caseStartDate;
+    private String caseStartDate;
 
     public String getDescription() {
         return description;
     }
 
-    public Case(Long caseId, String description, int status, String location, Date caseStartDate) {
+    public Case(Long caseId, String description, int status, String location, String caseStartDate) {
         this.caseId = caseId;
         this.description = description;
         this.status = status;
         this.location = location;
         this.caseStartDate = caseStartDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Case{" +
+                "caseId=" + caseId +
+                ", description='" + description + '\'' +
+                ", status=" + status +
+                ", location='" + location + '\'' +
+                ", caseStartDate='" + caseStartDate + '\'' +
+                '}';
     }
 
     public Case(String description, int status, String location) {
@@ -41,11 +54,11 @@ public class Case {
     public Case() {
     }
 
-    public Date getCaseStartDate() {
+    public String getCaseStartDate() {
         return caseStartDate;
     }
 
-    public void setCaseStartDate(Date caseStartDate) {
+    public void setCaseStartDate(String caseStartDate) {
         this.caseStartDate = caseStartDate;
     }
 

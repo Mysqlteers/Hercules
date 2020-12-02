@@ -1,10 +1,13 @@
 package com.hercules.controller;
 
+import com.hercules.model.Case;
 import com.hercules.service.CaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class HomeController {
@@ -14,13 +17,29 @@ public class HomeController {
     @GetMapping("/")
     public String inex(Model model) {
         model.addAttribute("cases", caseService.findAllByOrderByStatusAscCaseIdAsc());
+//        for (Case c: caseService.findAll()) {
+//            System.out.println(c.getCaseStartDate());
+//        }
         return "casesHome";
     }
-
 
     @GetMapping(value="/modal")
     public String index() {
         return "case-modal";
     }
 
+    @PostMapping("/updateCase")
+    public String updateCase(@ModelAttribute Case caseToUpdate) {
+        if (caseToUpdate.getLocation().equals("")) {
+            caseToUpdate.setLocation(null);
+        }
+        if (caseToUpdate.getDescription().equals("")) {
+            caseToUpdate.setDescription(null);
+        }
+        if (caseToUpdate.getCaseStartDate().equals("")) {
+            caseToUpdate.setCaseStartDate(null);
+        }
+        caseService.save(caseToUpdate);
+        return "casesHome";
+    }
 }
