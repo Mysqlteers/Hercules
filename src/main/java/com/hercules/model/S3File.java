@@ -14,6 +14,10 @@ public class S3File {
     private Long fileLocationId;
 
     @NotNull
+    @Column(name = "is_after_picture")
+    private boolean isAfterPicture;
+
+    @NotNull
     @Column(name = "location")
     private String location;
 
@@ -22,9 +26,33 @@ public class S3File {
     @JsonBackReference
     private Task task;
 
+    public Long getFileLocationId() {
+        return fileLocationId;
+    }
 
-    public S3File(String location) {
+    public void setFileLocationId(Long fileLocationId) {
+        this.fileLocationId = fileLocationId;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
         this.location = location;
+    }
+
+    public Task getTask() {
+        return task;
+    }
+
+    public void setTask(Task task) {
+        this.task = task;
+    }
+
+    public S3File(String location, boolean isAfterPicture) {
+        this.location = location;
+        this.isAfterPicture =isAfterPicture;
     }
 
     public S3File()

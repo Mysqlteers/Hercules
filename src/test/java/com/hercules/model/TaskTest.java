@@ -19,18 +19,25 @@ public class TaskTest {
     @Test
     void canCreateTaskObject(){
         HashSet<S3File> files= new HashSet<>();
-        files.add(new S3File("before-after-pictures/test_pic.jpg"));
+        files.add(new S3File("before-after-pictures/test_pic.jpg", true) );
 
-        Task task = new Task(files, null, "today", "tommow", null, null, null);
-        task.setBeforePictures(files);
+HashSet<Task> subtasks= new HashSet<>();
+
+Task Subtask_1 = new Task();
+Subtask_1.setEst_time("10");
+Subtask_1.setBeforePictures(files);
+Task Subtask_2 = new Task();
+Subtask_2.setEst_time("20");
+Task Subtask_3 = new Task();
+Subtask_3.setEst_time("30");
+
+        subtasks.add(Subtask_1);
+        subtasks.add(Subtask_2);
+        subtasks.add(Subtask_3);
+        Task task = new Task(files, "today", "tommow", null, subtasks, null);
+
         ts.save(task);
 
-
-
-
-        ts.findAll().forEach(item -> {
-            System.out.println(item.getBeforePictures().toArray().length);
-        });
 
 
     }

@@ -21,11 +21,6 @@ public class Task {
     @Column(name = "before_pictures")
     @JsonManagedReference
     private Set<S3File> beforePictures = new HashSet<S3File>();
-//
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "superTask")
-//    @JsonManagedReference
-//    @Column(name= "after_pic")
-//    private Set<S3File> afterPic;
 
     private String task_start_date;
 
@@ -33,27 +28,38 @@ public class Task {
 
     private String est_time;
 
-    //used as a supertask
+//    used as a supertask
 
-//   @OneToMany(cascade = CascadeType.ALL, mappedBy = "superTask")
-//   private Set<Task> subtasks;
-//
-//
-//   //used as a subtask
-//   @ManyToMany @JoinColumn(name = "parent_task_id")
-//   private Task superTask;
+   @OneToMany(cascade = CascadeType.ALL, mappedBy = "superTask")
+   private Set<Task> subtasks;
+
+
+   //used as a subtask
+   @ManyToOne @JoinColumn(name = "parent_task_id")
+   private Task superTask;
 
 
     private String done;
 
-    public Task(Set<S3File> beforePictures, Set<S3File> afterPic, String task_start_date, String deadline, String est_time, Set<Task> subtask, String done){
+    public Task(Set<S3File> beforePictures, String task_start_date, String deadline, String est_time, Set<Task> subtask, String done){
+
+        if (beforePictures!=null)
+            for (S3File s3: beforePictures)
+                {
+                    s3.setTask(this);}
+
         this.beforePictures = beforePictures;
-//        this.afterPic = afterPic;
+
+
         this.task_start_date = task_start_date;
         this.deadline = deadline;
         this.est_time = est_time;
-//        this.subtask = subtask;
+        this.subtasks = subtask;
         this.done = done;
+        for (Task t: subtasks)
+        {
+            t.setSuperTask(this);
+        }
     }
 
     public Task(){
@@ -74,14 +80,6 @@ public class Task {
     public void setBeforePictures(Set<S3File> beforePicture) {
         this.beforePictures = beforePicture;
     }
-//
-//    public Set<S3File> getAfterPic() {
-//        return afterPic;
-//    }
-//
-//    public void setAfterPic(Set<S3File> after_pic) {
-//        this.afterPic = after_pic;
-//    }
 
     public String getTask_start_date() {
         return task_start_date;
@@ -106,22 +104,22 @@ public class Task {
     public void setEst_time(String est_time) {
         this.est_time = est_time;
     }
-//
-//    public Set<Task> getSubtask() {
-//        return subtask;
-//    }
-//
-//    public void setSubtask(Set<Task> subtask) {
-//        this.subtask = subtask;
-//    }
-//
-//    public Task getSuperTask() {
-//        return superTask;
-//    }
-//
-//    public void setSuperTask(Task superTask) {
-//        this.superTask = superTask;
-//    }
+
+    public Set<Task> getSubtask() {
+        return subtasks;
+    }
+
+    public void setSubtask(Set<Task> subtask) {
+        this.subtasks = subtask;
+    }
+
+    public Task getSuperTask() {
+        return superTask;
+    }
+
+    public void setSuperTask(Task superTask) {
+        this.superTask = superTask;
+    }
 
     public String getDone() {
         return done;
