@@ -21,20 +21,18 @@ public class TaskTest {
         HashSet<S3File> files= new HashSet<>();
         files.add(new S3File("before-after-pictures/test_pic.jpg"));
 
-        HashSet<Task> subtasks= new HashSet<>();
-        Task subtask_1 =new Task();
-        subtask_1.setDone("true");
-        subtask_1.setEst_time("hello");
-
-        subtasks.add(subtask_1);
-
-        Task task = new Task(files, null, null, null, null, subtasks, null);
-
+        Task task = new Task(files, null, "today", "tommow", null, null, null);
+        task.setBeforePictures(files);
         ts.save(task);
-        Task newtask = ts.findByTaskId(task.getTaskId()).get();
 
 
-        assertNotNull(newtask);
+
+
+        ts.findAll().forEach(item -> {
+            System.out.println(item.getBeforePictures().toArray().length);
+        });
+
+
     }
 
     @Test

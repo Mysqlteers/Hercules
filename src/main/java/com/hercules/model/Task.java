@@ -1,11 +1,10 @@
 package com.hercules.model;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -17,18 +16,20 @@ public class Task {
     private Long taskId;
 
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "superTask")
-    @Column(name = "before_pic")
-    private Set<S3File> beforePicture;
+
+    @OneToMany(mappedBy = "task")
+    @Column(name = "before_pictures")
+    @JsonManagedReference
+    private Set<S3File> beforePictures = new HashSet<S3File>();
 //
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "superTask")
 //    @JsonManagedReference
 //    @Column(name= "after_pic")
 //    private Set<S3File> afterPic;
 
-    private Date task_start_date;
+    private String task_start_date;
 
-    private Date deadline;
+    private String deadline;
 
     private String est_time;
 
@@ -45,8 +46,8 @@ public class Task {
 
     private String done;
 
-    public Task( Set<S3File> beforePicture, Set<S3File> afterPic, Date task_start_date, Date deadline, String est_time, Set<Task> subtask, String done){
-        this.beforePicture = beforePicture;
+    public Task(Set<S3File> beforePictures, Set<S3File> afterPic, String task_start_date, String deadline, String est_time, Set<Task> subtask, String done){
+        this.beforePictures = beforePictures;
 //        this.afterPic = afterPic;
         this.task_start_date = task_start_date;
         this.deadline = deadline;
@@ -66,12 +67,12 @@ public class Task {
         this.taskId = task_id;
     }
 
-    public Set<S3File> getBeforePicture() {
-        return beforePicture;
+    public Set<S3File> getBeforePictures() {
+        return beforePictures;
     }
 
-    public void setBeforePicture(Set<S3File> beforePicture) {
-        this.beforePicture = beforePicture;
+    public void setBeforePictures(Set<S3File> beforePicture) {
+        this.beforePictures = beforePicture;
     }
 //
 //    public Set<S3File> getAfterPic() {
@@ -82,19 +83,19 @@ public class Task {
 //        this.afterPic = after_pic;
 //    }
 
-    public Date getTask_start_date() {
+    public String getTask_start_date() {
         return task_start_date;
     }
 
-    public void setTask_start_date(Date task_start_date) {
+    public void setTask_start_date(String task_start_date) {
         this.task_start_date = task_start_date;
     }
 
-    public Date getDeadline() {
+    public String getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(Date deadline) {
+    public void setDeadline(String deadline) {
         this.deadline = deadline;
     }
 
