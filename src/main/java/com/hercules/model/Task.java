@@ -4,7 +4,11 @@ package com.hercules.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -19,13 +23,15 @@ public class Task {
     @OneToMany(mappedBy = "task")
     @Column(name = "before_pictures")
     @JsonManagedReference
-    private Set<S3File> beforePictures = new HashSet<S3File>();
+    private Set<S3File> beforePictures = new HashSet<>();
 
     private String task_start_date;
 
     private String deadline;
 
     private String est_time;
+    
+    private String name;
 
 //    used as a supertask
 
@@ -39,20 +45,34 @@ public class Task {
     private Task superTask;
 
 
-    private String done;
+    private boolean done;
 
-    public Task(Set<S3File> beforePictures, String task_start_date, String deadline, String est_time, Set<Task> subtask, String done) {
+    /**
+     * Constructor of the task class. name, task_start_date and deadline have default values if null is given.
+     */
+    public Task(String name, Set<S3File> pictures, String task_start_date, String deadline, String est_time, Set<Task> subtask, boolean done) {
 
-        if (beforePictures != null)
-            for (S3File s3 : beforePictures) {
+        this.name = name;
+        if (name == null) {
+            name = "new name";
+        }
+
+        if (pictures != null)
+            for (S3File s3 : pictures) {
                 s3.setTask(this);
             }
-
-        this.beforePictures = beforePictures;
-
+        this.beforePictures = pictures;
+            this.name = name;
 
         this.task_start_date = task_start_date;
+        if (task_start_date == null) {
+            this.task_start_date = LocalDate.now().toString();
+        }
+
         this.deadline = deadline;
+        if (deadline == null) {
+            deadline = LocalDate.now().plusDays(1).toString();
+        }
         this.est_time = est_time;
         this.subtasks = subtask;
         this.done = done;
@@ -61,7 +81,18 @@ public class Task {
         }
     }
 
+    public Task(String name)
+    {
+        this.name = name;
+        task_start_date = LocalDate.now().toString();
+        deadline = LocalDate.now().plusDays(1).toString();
+    }
+
     public Task() {
+        task_start_date = LocalDate.now().toString();
+        deadline = LocalDate.now().plusDays(1).toString();
+        task_start_date = LocalDate.now().toString();
+        deadline = LocalDate.now().plusDays(1).toString();
     }
 
     public Long getTaskId() {
@@ -104,11 +135,15 @@ public class Task {
         this.est_time = est_time;
     }
 
-    public Set<Task> getSubtask() {
+    public Set<Task> getSubtasks() {
         return subtasks;
     }
+    public List<Task> getSubtasksAsList() {
+        List<Task> result = new ArrayList<>(subtasks);
+        return result;
+    }
 
-    public void setSubtask(Set<Task> subtask) {
+    public void setSubtasks(Set<Task> subtask) {
         this.subtasks = subtask;
     }
 
@@ -120,11 +155,20 @@ public class Task {
         this.superTask = superTask;
     }
 
-    public String getDone() {
+    public boolean getDone() {
         return done;
     }
 
-    public void setDone(String done) {
+    public void setDone(boolean done) {
         this.done = done;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }

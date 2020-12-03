@@ -22,25 +22,27 @@ public class TaskTest {
 
         HashSet<Task> subtasks = new HashSet<>();
 
-        Task Subtask_1 = new Task();
-        Subtask_1.setEst_time("10");
-        Subtask_1.setBeforePictures(files);
+        Task subtask_1 = new Task("task1");
 
-        Task Subtask_2 = new Task();
-        Subtask_2.setEst_time("20");
+        subtask_1.setEst_time("10-days");
+        subtask_1.setBeforePictures(files);
 
-        Task Subtask_3 = new Task();
-        Subtask_3.setEst_time("30");
+        Task subtask_2 = new Task("task2");
+        subtask_2.setEst_time("1-day");
 
-        subtasks.add(Subtask_1);
-        subtasks.add(Subtask_2);
-        subtasks.add(Subtask_3);
 
-        Task task = new Task(files, "today", "tommow", null, subtasks, null);
+        Task subtask_3 = new Task("task3");
+        subtask_3.setEst_time("4-days");
+
+        subtasks.add(subtask_1);
+        subtasks.add(subtask_2);
+        subtasks.add(subtask_3);
+
+        Task task = new Task("test super task",files, "2020/12/10", "2020/12/20", "", subtasks, false);
 
         ts.save(task);
 
-
+        assert ts.findByTaskId(task.getTaskId()).get()!=null;
     }
 
     @Test
