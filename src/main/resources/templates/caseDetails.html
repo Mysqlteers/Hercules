@@ -21,6 +21,7 @@
 		"url": "index.html",
 		"logo": "images/default-logo.png"
 }</script>
+
     <meta property="og:title" content="caseDetails">
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#478ac9">
@@ -109,6 +110,7 @@
                           </table>
                       </div>
                       <a th:href="@{'/createContact/'+${viewCase.getCaseId()}}" class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-1">Tilføj ny kontakt</a>
+                    <a th:href="@{'/deleteCase/'+${viewCase.getCaseId()}}" class="u-btn u-button-style u-hover-palette-1-dark-1 u-btn-1" style="background-color: crimson; " onclick ="return confirm('Er du sikker på at slette sagen?')">Slet sag</a>
                   </div>
               </div>
             </div>

@@ -98,4 +98,10 @@ public class HomeController {
         contactService.save(contact);
         return "redirect:/caseDetails/" + caseId;
     }
+
+    @GetMapping("/deleteCase/{caseId}")
+    public String deleteCase(@PathVariable Long caseId) {
+        caseService.deleteById(caseId);
+        return "redirect:/";
+    }
 }
