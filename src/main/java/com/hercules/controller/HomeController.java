@@ -57,7 +57,7 @@ public class HomeController {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return "testHTML";
+        return "redirect:/";
     }
 
     @GetMapping("/createCase")
