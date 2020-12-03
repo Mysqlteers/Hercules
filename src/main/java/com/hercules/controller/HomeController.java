@@ -27,10 +27,6 @@ public class HomeController {
     @GetMapping("/")
     public String inex(Model model) {
         model.addAttribute("cases", caseService.findAllByOrderByStatusAscCaseIdAsc());
-        model.addAttribute("createCase", new Case());
-//        for (Case c: caseService.findAll()) {
-//            System.out.println(c.getCaseStartDate());
-//        }
         return "casesHome";
     }
 
@@ -50,13 +46,7 @@ public class HomeController {
         if (caseToUpdate.getCaseStartDate().equals("")) {
             caseToUpdate.setCaseStartDate(null);
         }
-        System.out.println("controller calling");
         caseService.save(caseToUpdate);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         return "redirect:/";
     }
 
