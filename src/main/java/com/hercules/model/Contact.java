@@ -3,6 +3,7 @@ package com.hercules.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -23,6 +24,11 @@ public class Contact {
         this.contactId = contactId;
         this.caseId = caseId;
         this.persons = persons;
+    }
+
+    public Contact(Long caseId) {
+        this.caseId = caseId;
+        this.persons = new HashSet<>();
     }
 
     public Long getContactId() {
@@ -47,5 +53,14 @@ public class Contact {
 
     public void setPersons(Set<Person> persons) {
         this.persons = persons;
+    }
+
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "contactId=" + contactId +
+                ", caseId=" + caseId +
+                ", persons=" + persons +
+                '}';
     }
 }
