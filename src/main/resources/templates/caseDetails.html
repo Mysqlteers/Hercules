@@ -123,7 +123,8 @@
                               </tbody>
                           </table>
                       </div>
-                      <a th:href="@{'/createContact/'+${viewCase.getCaseId()}}" class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-1">Tilføj ny kontakt</a>
+                    <section th:replace="modals/person-modal.html :: person-modal(${null})"></section>
+                    <a th:href="@{'/createContact/'+${viewCase.getCaseId()}}" class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-1">Tilføj ny kontakt</a>
                     <a th:href="@{'/deleteCase/'+${viewCase.getCaseId()}}" class="u-btn u-button-style u-hover-palette-1-dark-1 u-btn-1" style="background-color: crimson; " onclick ="return confirm('Er du sikker på at slette sagen?')">Slet sag</a>
                   </div>
               </div>

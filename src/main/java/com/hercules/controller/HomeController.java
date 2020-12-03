@@ -50,6 +50,29 @@ public class HomeController {
         return "redirect:/";
     }
 
+    @PostMapping("/updatePerson/{caseId}")
+    public String updatePerson(@ModelAttribute Person person, @PathVariable ("caseId") Long caseId) {
+        if(person.getFirstName().equals("")) {
+            person.setFirstName(null);
+        }
+        if(person.getLastName().equals("")) {
+            person.setLastName(null);
+        }
+        if(person.getPosition().equals("")) {
+            person.setPosition(null);
+        }
+        if(person.getEmail().equals("")) {
+            person.setEmail(null);
+        }
+        if(person.getPhone().equals("")) {
+            person.setPhone(null);
+        }
+        personService.save(person);
+//        Long caseId = contactService.findById(contactId).get().getCaseId();
+        return "redirect:/caseDetails/" + caseId;
+//        return "redirect:/";
+    }
+
     @GetMapping("/createCase")
     public String createCase() {
         return "createCase";
@@ -110,4 +133,6 @@ public class HomeController {
         personService.deleteById(personId);
         return "redirect:/caseDetails/" + caseId;
     }
+
+
 }

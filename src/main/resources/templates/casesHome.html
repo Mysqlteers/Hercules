@@ -15,15 +15,6 @@
     <script class="u-script" type="text/javascript" th:src="@{/js/nicepage.js}" defer=""></script>
     <meta name="generator" content="Nicepage 3.0.9, nicepage.com">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
-
-
-    <script type="application/ld+json">{
-        "@context": "http://schema.org",
-        "@type": "Organization",
-        "name": "",
-        "url": "index.html",
-        "logo": "images/default-logo.png"
-    }</script>
     <meta property="og:title" content="Sager">
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#478ac9">
@@ -32,26 +23,13 @@
 </head>
 <body class="u-body">
 <header th:replace="fragments/header :: header"></header>
-<div style="position: absolute; right: 10px; z-index: 50">
-<a href="/createCase">
-    <button class="u-btn u-button-style u-btn-1">Opret ny sag</button>
-</a>
-</div>
-<!--<div th:replace="modals/case-modal :: case-modal(null)"></div>-->
-
-
+<section style="position: absolute; right: 10px; z-index: 50" th:replace="modals/case-modal.html :: case-modal(${null})"></section>
     <section class="u-clearfix u-section-1" id="sec-444b">
-<!--        <div class="u-sticky" style="height: 10px; width: 10px; left: 95%; top: 220px">-->
-<!--                        <button class="u-sticky" th:replace="modals/case-modal.html :: case-modal(${null})"></button>-->
-<!--            <button class="u-sticky" th:replace="modals/case-modal.html :: case-modal(${newCase})"></button>-->
-<!--        </div>-->
-
       <div class="u-clearfix u-sheet u-sheet-1" th:each="case:${cases}">
         <div class="u-clearfix u-expanded-width u-gutter-0 u-layout-wrap u-layout-wrap-1">
           <div class="u-layout" style="">
             <div class="u-layout-row" style="">
               <div class="u-align-left u-container-style u-layout-cell u-left-cell u-size-30 u-size-xs-60 u-white u-layout-cell-1" src="">
-<!--                  th:style="${case.status == 1 ? 'background-color : blue;' : 'background-color: red;'}"-->
                   <div class="u-container-layout u-container-layout-1" th:if="${case.status == 0}" style="background-color: lightskyblue">
                       <table>
                           <tbody>
@@ -128,7 +106,6 @@
                   </div>
               </div>
               <div class="u-align-center u-container-style u-image u-layout-cell u-right-cell u-size-30 u-size-xs-60 u-image-1" src="" data-image-width="1080" data-image-height="1080">
-<!--                <div class="u-container-layout u-valign-middle u-container-layout-2" src=""></div>-->
               </div>
             </div>
           </div>

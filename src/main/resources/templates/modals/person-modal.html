@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;" xmlns:th="http://www.thymeleaf.org" th:fragment="person-modal(person)">
+<head>
+    <link rel="stylesheet" href="../../static/css/Sager.css" media="screen">
+    <link href="@{/css/create-case-modal.css}" rel="stylesheet">
+    <link href="@{/css/nicepage.css}"  rel="stylesheet">
+    <script class="u-script" th:src="@{/js/jquery.js}" type="text/javascript"></script>
+    <script class="u-script" th:src="@{/js/nicepage.js}" type="text/javascript"></script>
+    <meta content="Nicepage 3.0.9, nicepage.com" name="generator">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" id="u-theme-google-font"
+          rel="stylesheet">
+</head>
+<body>
+<div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+    <!--        modal button -->
+    <a th:if="${person != null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#'+${person?.getPersonId()}" th:text="Opdater"></a>
+    <a th:unless="${person != null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#sec-7902'" th:text="Ny"></a>
+</div>
+<!--</section>-->
+
+<!--modal -->
+
+<div class="u-black u-clearfix u-container-style u-dialog-block u-opacity u-opacity-70 u-valign-middle u-section-4" th:id="${person?.getPersonId()} ?: 'sec-7902'" >
+    <div class="u-container-style u-dialog u-white u-dialog-1">
+        <div class="u-container-layout u-container-layout-1">
+            <div class="u-expanded-width u-form u-form-1">
+                <form th:action="'/updatePerson/'+${viewCase.getCaseId()}" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" method="post"
+                      name="form" source="custom" style="padding: 10px" id="formId">
+                    <input type="number" hidden name="contactId" value="person.getContactId">
+                    <div class="u-form-group u-form-name">
+                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="personId" placeholder="Personnummer"
+                               required type="text" th:value="${person?.getPersonId()} ?: ${null}" readonly>
+                    </div>
+                    <div class="u-form-group u-form-message">
+                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="position" th:value="${person?.getPosition()} ?: 'none'" placeholder="Stilling">
+                    </div>
+                    <div class="u-form-email u-form-group">
+                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="firstName" th:value="${person?.getFirstName()  ?: ''}" placeholder="Fornavn">
+                    </div>
+                    <div class="u-form-group u-form-message">
+                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="lastName" th:value="${person?.getLastName()} ?: ''" placeholder="Efternavn">
+                    </div>
+                    <div class="u-form-group u-form-message">
+                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="email" th:value="${person?.getEmail()} ?: ''" placeholder="Email">
+                    </div>
+                    <div class="u-form-group u-form-message">
+                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="phone" th:value="${person?.getPhone()} ?: ''" placeholder="Telefonnummer">
+                    </div>
+
+                    <div class="u-align-left u-form-group u-form-submit">
+                        <input style="background-color: #adcce9; height: 60px" class="u-button-style u-hover-palette-1-light-1 u-btn-1" type="submit" value="Gem ændringer" onclick="alert('Ændringer er blevet gemt!')">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <button class="u-dialog-close-button u-icon u-text-grey-40 u-icon-1" onclick="window.location.reload(false)">
+            <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" style="" viewBox="0 0 16 16">
+                <use xlink:href="#svg-797b" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+            </svg>
+            <svg class="u-svg-content" id="svg-797b" version="1.1"
+                 viewBox="0 0 16 16" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px"><rect height="16" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -3.3138 8.0002)" width="2" x="7" y="0"></rect>
+                <rect height="2" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -3.3138 8.0002)" width="16" x="0"
+                      y="7"></rect></svg>
+        </button>
+    </div>
+</div>
+</body>
+<script>
+    function reloadAfterModal() {
+        window.location.reload(true);
+    }
+</script>
+<!--Style-->
+<style>
+    .u-section-4 {
+        min-height: 100px;
+    }
+
+    .u-section-4 .u-dialog-1 {
+        width: 800px;
+        min-height: 50px;
+        margin: 6px auto;
+    }
+
+    .u-section-4 .u-container-layout-1 {
+        padding: 30px;
+    }
+
+    .u-section-4 .u-form-1 {
+        height: 18px;
+        margin: 0;
+    }
+
+    .u-section-4 .u-form-group-4 {
+        margin-left: 0;
+    }
+
+    .u-section-4 .u-form-group-5 {
+        margin-left: 0;
+    }
+
+    .u-section-4 .u-form-group-6 {
+        margin-left: 0;
+    }
+
+    .u-section-4 .u-btn-1 {
+        border-style: none;
+    }
+
+    .u-section-4 .u-icon-1 {
+        width: 20px;
+        height: 20px;
+    }
+
+    @media (max-width: 1199px) {
+        .u-section-4 .u-form-1 {
+            margin-right: initial;
+            margin-left: initial;
+        }
+    }
+
+    @media (max-width: 991px) {
+        .u-section-4 .u-dialog-1 {
+            width: 720px;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .u-section-4 .u-dialog-1 {
+            width: 540px;
+        }
+
+        .u-section-4 .u-container-layout-1 {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    }
+
+    @media (max-width: 575px) {
+        .u-section-4 .u-dialog-1 {
+            width: 340px;
+        }
+    }</style>
+
+
+
+</html>
