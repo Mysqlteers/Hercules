@@ -32,9 +32,10 @@
 </head>
 <body class="u-body">
 <header th:replace="fragments/header :: header"></header>
-<a href="/createCase">
-    <button class="u-btn u-button-style u-btn-1" style="position: absolute; right: 10px">Opret ny sag</button>
-</a>
+<!--<a href="/createCase">-->
+    <button onclick="window.location.href='/createCase'" class="u-btn u-button-style u-btn-1" style="position: absolute; right: 10px">Opret ny sag</button>
+<!--</a>-->
+<!--<div th:replace="modals/case-modal :: case-modal(null)"></div>-->
 
 
     <section class="u-clearfix u-section-1" id="sec-444b">
