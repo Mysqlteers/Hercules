@@ -88,8 +88,9 @@
                               <colgroup>
                                   <col width="18.1%">
                                   <col width="27.2%">
-                                  <col width="37.3%">
+                                  <col width="27.3%">
                                   <col width="17.4%">
+                                  <col width="10.0%">
                               </colgroup>
                               <thead class="u-palette-4-base u-table-header u-table-header-1">
                               <tr style="height: 35px;">
@@ -97,14 +98,27 @@
                                   <th class="u-border-1 u-border-palette-4-base u-table-cell">Navn</th>
                                   <th class="u-border-1 u-border-palette-4-base u-table-cell">Email</th>
                                   <th class="u-border-1 u-border-palette-4-base u-table-cell">Telefonnummer</th>
+                                  <th class="u-border-1 u-border-palette-4-base u-table-cell"></th>
                               </tr>
                               </thead>
                               <tbody class="u-table-body">
                               <tr th:each="person: ${contactlist}" style="height: 78px;">
-                                  <td th:text="${person.getPosition()}" class="u-border-1 u-border-grey-30 u-first-column u-grey-5 u-table-cell u-table-cell-5">putstillingher</td>
+                                  <td th:text="${person.getPosition()}" class="u-border-1 u-border-grey-30 u-first-column u-grey-5 u-table-cell u-table-cell-5"></td>
                                   <td th:text="${person.getFirstName()} + ' ' + ${person.getLastName()}" class="u-border-1 u-border-grey-30 u-table-cell"></td>
                                   <td th:text="${person.getEmail()}" class="u-border-1 u-border-grey-30 u-table-cell"></td>
                                   <td th:text="${person.getPhone()}" class="u-border-1 u-border-grey-30 u-table-cell"></td>
+                                  <td class="u-border-1 u-border-grey-30 u-table-cell">
+                                      <a th:href="@{'/deletePerson/' + ${person.getPersonId()} + '/' + ${viewCase.getCaseId()}}">
+                                          <button type="button" onclick = "return confirm('Er du sikker?')"style="background-color: crimson; color: white">
+                                              Slet
+                                          </button>
+                                      </a>
+                                      <a th:href="@{'/editPerson/'+${person.getPersonId()}}">
+                                          <button type="button">
+                                              Rediger
+                                          </button>
+                                      </a>
+                                  </td>
                               </tr>
                               </tbody>
                           </table>

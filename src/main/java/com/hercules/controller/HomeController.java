@@ -104,4 +104,10 @@ public class HomeController {
         caseService.deleteById(caseId);
         return "redirect:/";
     }
+
+    @GetMapping("/deletePerson/{personId}/{caseId}")
+    public String deletePerson(@PathVariable Long personId, @PathVariable Long caseId) {
+        personService.deleteById(personId);
+        return "redirect:/caseDetails/" + caseId;
+    }
 }
