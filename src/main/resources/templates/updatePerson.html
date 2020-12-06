@@ -12,7 +12,7 @@
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
 </head>
 <body>
-<section class="u-align-center u-clearfix u-section-1" id="sec-8dfd">
+<section class="u-align-left u-clearfix u-section-1" id="sec-8dfd">
     <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
         <h2 class="u-text u-text-1">Ændring af kontaktperson</h2>
         <div class="u-form u-form-1">
@@ -25,19 +25,19 @@
                 </div>
                 <div class="u-form-group u-form-message">
                     <label for="firstName">Fornavn</label>
-                    <input type="text" placeholder="Fornavn" rows="4" cols="50" th:value="${person.firstName}" id="firstName" name="firstName" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+                    <input type="text" placeholder="Fornavn" th:value="${person.firstName}" id="firstName" name="firstName" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
                 </div>
                 <div class="u-form-group u-form-message">
                     <label for="lastName">Efternavn</label>
-                    <input type="text" placeholder="Efternavn" rows="4" cols="50" th:value="${person.lastName}" id="lastName" name="lastName" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" >
+                    <input type="text" placeholder="Efternavn" th:value="${person.lastName}" id="lastName" name="lastName" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" >
                 </div>
                 <div class="u-form-group u-form-message">
                     <label for="email">Email</label>
-                    <input type="text" placeholder="Email" rows="4" cols="50" id="email" th:value="${person.email}" name="email" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" >
+                    <input type="text" placeholder="Email" id="email" th:value="${person.email}" name="email" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" >
                 </div>
                 <div class="u-form-group u-form-message">
                     <label for="phone">Telefon nummer</label>
-                    <input type="text" placeholder="Telefon nummer" rows="4" cols="50" id="phone" th:value="${person.phone}" name="phone" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+                    <input type="text" placeholder="Telefon nummer" id="phone" th:value="${person.phone}" name="phone" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
                 </div>
                 <div class="u-align-center u-form-group">
                     <input style="background-color: #adcce9; height: 60px" class="u-button-style u-hover-palette-1-light-1 u-btn-1" type="submit" value="Gem ændringer">
