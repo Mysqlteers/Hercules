@@ -31,12 +31,33 @@ public class S3File {
     @JsonBackReference
     private Task task;
 
+    public S3File(String location, boolean isAfterPicture) {
+        this.location = location;
+        this.isAfterPicture = isAfterPicture;
+    }
+
+    public String imageUrl()
+    {
+        return S3Loader.getInstance().getS3ObjectUrl(location);
+    }
+    public S3File() {
+    }
+
+
     public Long getFileLocationId() {
         return fileLocationId;
     }
 
     public void setFileLocationId(Long fileLocationId) {
         this.fileLocationId = fileLocationId;
+    }
+
+    public boolean isAfterPicture() {
+        return isAfterPicture;
+    }
+
+    public void setAfterPicture(boolean afterPicture) {
+        isAfterPicture = afterPicture;
     }
 
     public String getLocation() {
@@ -47,9 +68,13 @@ public class S3File {
         this.location = location;
     }
 
+    public String getDescription() {
+        return description;
+    }
 
-
-
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public Task getTask() {
         return task;
@@ -57,20 +82,5 @@ public class S3File {
 
     public void setTask(Task task) {
         this.task = task;
-    }
-
-    public S3File(String location, boolean isAfterPicture) {
-        this.location = location;
-        this.isAfterPicture = isAfterPicture;
-    }
-
-    public String imageUrl()
-    {
-        return S3Loader.getInstance().getS3ObjectUrl(location);
-    }
-
-
-
-    public S3File() {
     }
 }
