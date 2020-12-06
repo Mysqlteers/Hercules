@@ -54,14 +54,20 @@ public class HomeController {
 
     @GetMapping("/caseDetails/{caseId}")
     public String caseDetails(@PathVariable("caseId") long caseId, Model model){
-        model.addAttribute("viewCase", caseService.findById(caseId).get());
+        if(caseService.findById(caseId).isPresent()) {
+            model.addAttribute("viewCase", caseService.findById(caseId).get());
 
-        if (contactService.findContactByCaseId(caseId).isPresent()) {
-            Contact contact = contactService.findContactByCaseId(caseId).get();
-            model.addAttribute("contactlist", personService.findAllByContactOrderByPositionAscFirstNameAsc(contact));
+            if (contactService.findContactByCaseId(caseId).isPresent()) {
+                Contact contact = contactService.findContactByCaseId(caseId).get();
+                model.addAttribute("contactlist", personService.findAllByContactOrderByPositionAscFirstNameAsc(contact));
+            } else {
+                model.addAttribute("contactlist", new HashSet<Person>());
+            }
+            return "caseDetails";
         } else {
-            model.addAttribute("contactlist", new HashSet<Person>());
+            model.addAttribute("errorCode", 0);
+            return "genericErrorPage";
         }
-        return "caseDetails";
+
     }
 }
