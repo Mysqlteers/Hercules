@@ -17,13 +17,13 @@ import org.apache.commons.io.IOUtils;
 
 public class S3Loader {
 
-    private S3Loader instance;
+    private static S3Loader instance;
 
-    Regions region = Regions.EU_CENTRAL_1;               // required
-    String accessKey = "AKIA4MEKDBVSKP76B52M";             // required
-    String secretAccessKey= "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";       // required
-    String bucketName= "hercules-storage-bucket";            // required
-    AmazonS3 s3Client;
+    private Regions region = Regions.EU_CENTRAL_1;               // required
+    private String accessKey = "AKIA4MEKDBVSKP76B52M";             // required
+    private String secretAccessKey= "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";       // required
+    private String bucketName= "hercules-storage-bucket";            // required
+    private AmazonS3 s3Client;
 
     /**
      * Creates the aws client credentials, for interaction between application and aws s3 bucket
@@ -40,7 +40,7 @@ public class S3Loader {
     }
 
 
-    public S3Loader getInstance()
+    public static S3Loader getInstance()
     {
         if (instance==null)
             instance =  new S3Loader();
@@ -73,6 +73,19 @@ public class S3Loader {
         }
 
         return file;
+    }
+
+
+    public  String getS3ObjectUrl(String s3ObjectName) {
+        String url ="";
+        try {
+             url = s3Client.getUrl(bucketName, s3ObjectName).toExternalForm();
+        }
+        catch (Exception e){e.printStackTrace();}
+        finally {
+        }
+
+        return url;
     }
 
 

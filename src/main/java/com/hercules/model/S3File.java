@@ -1,6 +1,7 @@
 package com.hercules.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.hercules.service.utility.S3Loader;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -55,6 +56,13 @@ public class S3File {
         this.location = location;
         this.isAfterPicture = isAfterPicture;
     }
+
+    public String imageUrl()
+    {
+        return S3Loader.getInstance().getS3ObjectUrl(location);
+    }
+
+
 
     public S3File() {
     }
