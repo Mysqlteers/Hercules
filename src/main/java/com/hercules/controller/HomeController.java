@@ -19,5 +19,7 @@ import java.util.Set;
 @Controller
 public class HomeController
 {
+    @Autowired
+    TaskService taskService;
 
 }

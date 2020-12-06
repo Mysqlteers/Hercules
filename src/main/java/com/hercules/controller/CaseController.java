@@ -1,11 +1,14 @@
 package com.hercules.controller;
 
+import com.hercules.model.Task;
 import com.hercules.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -49,6 +52,19 @@ public class CaseController
         model.addAttribute("mainTask", taskService.findByTaskId((long) taskId).get());
 
         return "timeline";
+    }
+
+    @GetMapping ("/expandView{taskId}")
+    public String expandView(@PathVariable("taskId") int i,  Model model){
+
+        model.addAttribute("testTask", taskService.findByTaskId((long)i).get());
+        return "timeline";
+    }
+
+    @PostMapping("/updateTask")
+    public String updateTask(@ModelAttribute Task task){
+        taskService.save(task);
+        return "redirect:/expandView"+;
     }
 
 
