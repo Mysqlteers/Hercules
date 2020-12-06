@@ -1,5 +1,6 @@
 package com.hercules.service.springdatajpa;
 
+import com.hercules.model.Contact;
 import com.hercules.model.Person;
 import com.hercules.repository.PersonRepository;
 import com.hercules.service.PersonService;
@@ -7,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -43,5 +45,10 @@ public class PersonJPA implements PersonService {
     @Override
     public Optional<Person> findPersonByPhone(String phone) {
         return pr.findPersonByPhone(phone);
+    }
+
+    @Override
+    public List<Person> findAllByContactOrderByPositionAscFirstNameAsc(Contact contact) {
+        return pr.findAllByContactOrderByPositionAscFirstNameAsc(contact);
     }
 }

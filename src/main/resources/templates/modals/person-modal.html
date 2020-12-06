@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html style="font-size: 16px;" xmlns:th="http://www.thymeleaf.org" th:fragment="person-modal(person)">
+<html style="font-size: 16px;" xmlns:th="http://www.thymeleaf.org" th:fragment="person-modal(modalCaseId)">
 <head>
     <link rel="stylesheet" href="../../static/css/Sager.css" media="screen">
-    <link href="@{/css/create-case-modal.css}" rel="stylesheet">
-    <link href="@{/css/nicepage.css}"  rel="stylesheet">
+    <link th:href="@{/css/create-case-modal.css}" rel="stylesheet">
+    <link th:href="@{/css/nicepage.css}" rel="stylesheet">
     <script class="u-script" th:src="@{/js/jquery.js}" type="text/javascript"></script>
     <script class="u-script" th:src="@{/js/nicepage.js}" type="text/javascript"></script>
     <meta content="Nicepage 3.0.9, nicepage.com" name="generator">
@@ -13,42 +13,34 @@
 <body>
 <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
     <!--        modal button -->
-    <a class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#'+${contactlist?.getContactId()}" th:text="Opdater"></a>
-<!--    <a th:unless="${person != null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#sec-7902'" th:text="Ny"></a>-->
+    <a class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#sec-7902'" th:text="'Opret kontaktperson'"></a>
 </div>
-<!--</section>-->
 
-<!--modal -->
-
-<div class="u-black u-clearfix u-container-style u-dialog-block u-opacity u-opacity-70 u-valign-middle u-section-4" th:id="${person?.getPersonId()} ?: 'sec-7902'" >
+<div class="u-black u-clearfix u-container-style u-dialog-block u-opacity u-opacity-70 u-valign-middle u-section-4" th:id="'sec-7902'" >
     <div class="u-container-style u-dialog u-white u-dialog-1">
         <div class="u-container-layout u-container-layout-1">
             <div class="u-expanded-width u-form u-form-1">
-                <form th:action="'/updatePerson/'+${viewCase.getCaseId()}" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" method="post"
+                <form th:action="'/createPerson'" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" method="post"
                       name="form" source="custom" style="padding: 10px" id="formId">
-                    <input type="number" hidden name="contactId" value="person.getContactId">
-                    <div class="u-form-group u-form-name">
-                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="personId" placeholder="Personnummer"
-                               required type="text" th:value="${person?.getPersonId()} ?: ${null}" readonly>
-                    </div>
+                    <input type="text" hidden name="caseId" th:value="${modalCaseId}">
                     <div class="u-form-group u-form-message">
-                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="position" th:value="${person?.getPosition()} ?: 'none'" placeholder="Stilling">
+                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="position"  placeholder="Stilling">
                     </div>
                     <div class="u-form-email u-form-group">
-                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="firstName" th:value="${person?.getFirstName()  ?: ''}" placeholder="Fornavn">
+                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="firstName"  placeholder="Fornavn">
                     </div>
                     <div class="u-form-group u-form-message">
-                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="lastName" th:value="${person?.getLastName()} ?: ''" placeholder="Efternavn">
+                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="lastName" placeholder="Efternavn">
                     </div>
                     <div class="u-form-group u-form-message">
-                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="email" th:value="${person?.getEmail()} ?: ''" placeholder="Email">
+                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="email"  placeholder="Email">
                     </div>
                     <div class="u-form-group u-form-message">
-                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="phone" th:value="${person?.getPhone()} ?: ''" placeholder="Telefonnummer">
+                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="phone" placeholder="Telefonnummer">
                     </div>
 
                     <div class="u-align-left u-form-group u-form-submit">
-                        <input style="background-color: #adcce9; height: 60px" class="u-button-style u-hover-palette-1-light-1 u-btn-1" type="submit" value="Gem ændringer" onclick="alert('Ændringer er blevet gemt!')">
+                        <input style="background-color: #adcce9; height: 60px" class="u-button-style u-hover-palette-1-light-1 u-btn-1" type="submit" value="Gem person">
                     </div>
                 </form>
             </div>
