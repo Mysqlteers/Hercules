@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -21,9 +20,9 @@ public class Task {
 
 
     @OneToMany(mappedBy = "task")
-    @Column(name = "before_pictures")
+    @Column(name = "pictures")
     @JsonManagedReference
-    private Set<S3File> beforePictures = new HashSet<>();
+    private Set<S3File> pictures = new HashSet<>();
 
     private String task_start_date;
 
@@ -57,13 +56,13 @@ public class Task {
             name = "new name";
         }
 
-        if (pictures != null)
+        if (pictures != null){
             for (S3File s3 : pictures) {
                 s3.setTask(this);
             }
-        this.beforePictures = pictures;
-            this.name = name;
-
+        }
+        this.pictures = pictures;
+        this.name = name;
         this.task_start_date = task_start_date;
         if (task_start_date == null) {
             this.task_start_date = LocalDate.now().toString();
@@ -71,7 +70,7 @@ public class Task {
 
         this.deadline = deadline;
         if (deadline == null) {
-            deadline = LocalDate.now().toString();
+            this.deadline = LocalDate.now().toString();
         }
         this.est_time = est_time;
         this.subtasks = subtask;
@@ -115,11 +114,25 @@ public class Task {
             int doneTasks = 0;
 
             for (Task task: getSubtasksAsList()) {
-                if (task.getDone())
+                if (task.isDone())
                     doneTasks++;
             }
             return doneTasks/totalTasks*100;
         }
+    }
+
+    public List<Task> getSubtasksAsList() {
+        List<Task> result = new ArrayList<>(subtasks);
+        return result;
+    }
+
+    public List<S3File> getPicturesAsList() {
+        List<S3File> result = new ArrayList<>(pictures);
+        return result;
+    }
+
+    public void addPicture(String location, String description) {
+
     }
 
 
@@ -127,20 +140,21 @@ public class Task {
         return done;
     }
 
+
     public Long getTaskId() {
         return taskId;
     }
 
-    public void setTaskId(Long task_id) {
-        this.taskId = task_id;
+    public void setTaskId(Long taskId) {
+        this.taskId = taskId;
     }
 
-    public Set<S3File> getBeforePictures() {
-        return beforePictures;
+    public Set<S3File> getPictures() {
+        return pictures;
     }
 
-    public void setBeforePictures(Set<S3File> beforePicture) {
-        this.beforePictures = beforePicture;
+    public void setPictures(Set<S3File> pictures) {
+        this.pictures = pictures;
     }
 
     public String getTask_start_date() {
@@ -167,16 +181,20 @@ public class Task {
         this.est_time = est_time;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Set<Task> getSubtasks() {
         return subtasks;
     }
-    public List<Task> getSubtasksAsList() {
-        List<Task> result = new ArrayList<>(subtasks);
-        return result;
-    }
 
-    public void setSubtasks(Set<Task> subtask) {
-        this.subtasks = subtask;
+    public void setSubtasks(Set<Task> subtasks) {
+        this.subtasks = subtasks;
     }
 
     public Task getSuperTask() {
@@ -187,20 +205,8 @@ public class Task {
         this.superTask = superTask;
     }
 
-    public boolean getDone() {
-        return done;
-    }
-
     public void setDone(boolean done) {
         this.done = done;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
 }

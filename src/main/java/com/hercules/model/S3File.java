@@ -23,6 +23,9 @@ public class S3File {
     @Column(name = "location")
     private String location;
 
+    @Column(name = "description")
+    private String description;
+
     @ManyToOne()
     @JoinColumn(name = "task_id")
     @JsonBackReference
@@ -43,6 +46,10 @@ public class S3File {
     public void setLocation(String location) {
         this.location = location;
     }
+
+
+
+
 
     public Task getTask() {
         return task;
