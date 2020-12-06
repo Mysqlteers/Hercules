@@ -25,7 +25,7 @@
                       style="padding: 10px">
                     <div class="u-form-group u-form-name">
                         <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="caseId" placeholder="Sags nr"
-                               required type="text" th:value="${case?.getCaseId()} ?: ${null}" readonly>
+                               required hidden type="text" th:value="${case?.getCaseId()} ?: ${null}" readonly>
                     </div>
                     <div class="u-form-email u-form-group">
                         <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"name="location" th:value="${case?.getLocation()  ?: ''}" placeholder="Adresse">

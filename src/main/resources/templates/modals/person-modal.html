@@ -13,8 +13,8 @@
 <body>
 <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
     <!--        modal button -->
-    <a th:if="${person != null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#'+${person?.getPersonId()}" th:text="Opdater"></a>
-    <a th:unless="${person != null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#sec-7902'" th:text="Ny"></a>
+    <a class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#'+${contactlist?.getContactId()}" th:text="Opdater"></a>
+<!--    <a th:unless="${person != null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#sec-7902'" th:text="Ny"></a>-->
 </div>
 <!--</section>-->
 

@@ -109,11 +109,11 @@
                                   <td th:text="${person.getPhone()}" class="u-border-1 u-border-grey-30 u-table-cell"></td>
                                   <td class="u-border-1 u-border-grey-30 u-table-cell">
                                       <a th:href="@{'/deletePerson/' + ${person.getPersonId()} + '/' + ${viewCase.getCaseId()}}">
-                                          <button type="button" onclick = "return confirm('Er du sikker?')"style="background-color: crimson; color: white">
+                                          <button type="button" onclick = "return confirm('Er du sikker?')" style="background-color: crimson; color: white">
                                               Slet
                                           </button>
                                       </a>
-                                      <a th:href="@{'/editPerson/'+${person.getPersonId()}}">
+                                      <a th:href="@{'/updatePerson/'+${person.getPersonId()}}">
                                           <button type="button">
                                               Rediger
                                           </button>
@@ -123,7 +123,7 @@
                               </tbody>
                           </table>
                       </div>
-                    <section th:replace="modals/person-modal.html :: person-modal(${null})"></section>
+<!--                    <section th:replace="modals/person-modal.html :: person-modal(${null})"></section>-->
                     <a th:href="@{'/createContact/'+${viewCase.getCaseId()}}" class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-1">Tilføj ny kontakt</a>
                     <a th:href="@{'/deleteCase/'+${viewCase.getCaseId()}}" class="u-btn u-button-style u-hover-palette-1-dark-1 u-btn-1" style="background-color: crimson; " onclick ="return confirm('Er du sikker på at slette sagen?')">Slet sag</a>
                   </div>
