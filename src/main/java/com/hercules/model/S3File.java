@@ -26,15 +26,13 @@ public class S3File {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "task_id")
-    @JsonBackReference
     private Task task;
 
-    public S3File(String location, boolean isAfterPicture, Task owner) {
+    public S3File(String location, boolean isAfterPicture) {
         this.location = location;
         this.isAfterPicture = isAfterPicture;
-        this.task = owner;
     }
 
     public S3File() {

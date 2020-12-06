@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.util.HashSet;
 
@@ -19,16 +20,16 @@ public class TaskTest {
     @Test
     void canCreateTaskObject() {
         HashSet<Task> subtasks = new HashSet<>();
-        HashSet<S3File> files = new HashSet<>();
+//        HashSet<S3File> files = new HashSet<>();
 
         Task subtask_1 = new Task("task1");
 
         subtask_1.setDeadline(LocalDate.now().plusDays(10).toString());
         subtasks.add(subtask_1);
 
-        Task task = new Task("test super task",files, "2020/12/10", "2020/12/20", "", subtasks, false);
-        files.add(new S3File("before-after-pictures/test_pic.jpg", true, task));
+        Task task = new Task("test super task",null, "2020/12/10", "2020/12/20", "", subtasks, false);
 
+        task.addPicture("before-after-pictures/test_pic.jpg", "", true);
 
         ts.save(task);
 

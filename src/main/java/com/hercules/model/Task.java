@@ -19,9 +19,7 @@ public class Task {
     private Long taskId;
 
 
-    @OneToMany(mappedBy = "task")
-    @Column(name = "pictures")
-    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "task")
     private Set<S3File> pictures = new HashSet<>();
 
     private String task_start_date;
@@ -43,7 +41,6 @@ public class Task {
     @JoinColumn(name = "parent_task_id")
     private Task superTask;
 
-
     private boolean done;
 
     /**
@@ -56,12 +53,17 @@ public class Task {
             name = "new name";
         }
 
+        this.pictures = pictures;
         if (pictures != null){
             for (S3File s3 : pictures) {
                 s3.setTask(this);
             }
+
         }
-        this.pictures = pictures;
+        else {
+            this.pictures = new HashSet<>();
+        }
+
         this.name = name;
         this.task_start_date = task_start_date;
         if (task_start_date == null) {
@@ -131,8 +133,11 @@ public class Task {
         return result;
     }
 
-    public void addPicture(String location, String description) {
-
+    public void addPicture(String location, String description, boolean isAfter) {
+        S3File file = new S3File(location, isAfter);
+        file.setDescription(description);
+        file.setTask(this);
+        pictures.add(file);
     }
 
 
