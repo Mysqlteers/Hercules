@@ -7,7 +7,7 @@ import com.sun.istack.NotNull;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "file_locations")
+@Table(name = "pictures")
 public class S3File {
 
     @Id
@@ -31,16 +31,18 @@ public class S3File {
     @JsonBackReference
     private Task task;
 
-    public S3File(String location, boolean isAfterPicture) {
+    public S3File(String location, boolean isAfterPicture, Task owner) {
         this.location = location;
         this.isAfterPicture = isAfterPicture;
+        this.task = owner;
+    }
+
+    public S3File() {
     }
 
     public String imageUrl()
     {
         return S3Loader.getInstance().getS3ObjectUrl(location);
-    }
-    public S3File() {
     }
 
 
