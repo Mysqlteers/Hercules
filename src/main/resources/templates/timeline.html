@@ -11,22 +11,30 @@
             > </div>
 
 <!--            todo add month slider -->
-            <scriptx th:src="@{/js/timeline.js}"></scriptx>
+            <script th:src="@{/js/timeline.js}"></script>
             <link rel="stylesheet" th:href="@{/css/timeline.css}">
             <ul class="chart-values">
                 <li th:attr="data-period=${day}" th:each="day : ${dates}"
                     th:text="${day.getDayOfWeek().name()}+'  '+${day.getDayOfMonth()}"></li>
             </ul>
             <ul class="chart-bars">
-                <!--            todo replace with listoftask in -->
                 <li data-color="#00BCD4" th:attr="data-duration=${task.task_start_date}+'/'+${task?.deadline},
                 data-estimated_time=${task.est_time},
-                data-percentage_done=${task.getPercentageDone}"
+                data-percentage_done=${task.getPercentageDone()},
+                data-href=${'#'+task.getTaskId()}"
                     th:each="task: ${mainTask?.getSubtasksAsList()}"
                     th:text="${task?.name}+' '+${task.getPercentageDone().toString()}+'%'"
                 >
+<!--                    todo add button element -->
                 </li>
             </ul>
+        </div>
+    </div>
+
+
+    <div th:each="task: ${mainTask?.getSubtasksAsList()}">
+        <div th:replace="/modals/taskModal.html :: taskModal(${task})">
+
         </div>
     </div>
 </section>

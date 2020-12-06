@@ -22,4 +22,11 @@ public class HomeController
     @Autowired
     TaskService taskService;
 
+    @GetMapping("")
+    public String get(Model model)
+    {
+        model.addAttribute("testTask", taskService.findByTaskId((long)1).get());
+        return "index";
+    }
+
 }

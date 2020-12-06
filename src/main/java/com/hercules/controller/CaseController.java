@@ -48,23 +48,18 @@ public class CaseController
             startDate = startDate.plusDays(1);
         }
 
+        System.out.println("subtask amount  ="+taskService.findByTaskId((long) taskId).get().getSubtasksAsList().size());
         model.addAttribute("dates", datesList);
         model.addAttribute("mainTask", taskService.findByTaskId((long) taskId).get());
+        model.addAttribute("subtasks", taskService.findByTaskId((long) taskId).get().getSubtasksAsList());
 
-        return "timeline";
-    }
-
-    @GetMapping ("/expandView{taskId}")
-    public String expandView(@PathVariable("taskId") int i,  Model model){
-
-        model.addAttribute("testTask", taskService.findByTaskId((long)i).get());
         return "timeline";
     }
 
     @PostMapping("/updateTask")
     public String updateTask(@ModelAttribute Task task){
         taskService.save(task);
-        return "redirect:/expandView"+;
+        return "redirect:timeline/"+task.getTaskId()+"/"+LocalDate.now().getMonthValue()+"/"+LocalDate.now().getYear();
     }
 
 

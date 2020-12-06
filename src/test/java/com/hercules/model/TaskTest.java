@@ -23,6 +23,7 @@ public class TaskTest {
 //        HashSet<S3File> files = new HashSet<>();
 
         Task subtask_1 = new Task("task1");
+        subtask_1.addPicture("before-after-pictures/test_pic.jpg", "", false);
 
         subtask_1.setDeadline(LocalDate.now().plusDays(10).toString());
         subtasks.add(subtask_1);

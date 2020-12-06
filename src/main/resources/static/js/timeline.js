@@ -10,6 +10,7 @@ function createChart(e) {
     const tasks = document.querySelectorAll(".chart-bars li");
     const dayElements = [...days]
     let daysArray = new Array()
+
     days.forEach(dayElement => {
         daysArray.push(dayElement.dataset.period)
     })
@@ -20,6 +21,7 @@ function createChart(e) {
     let endDay = duration[1];
     let left = 0,
     width = 0;
+        console.log("children  " +el.childElementCount)
 
 
     if (!daysArray.includes(startDay) || !daysArray.includes(endDay)) {
@@ -60,7 +62,22 @@ function createChart(e) {
     if (e.type === "load") {
     el.style.backgroundColor = el.dataset.color;
     el.style.opacity = 1;
-}
+
+
+
+
+    //add a tag with class="u-btn u-button-style u-dialog-link u-btn-1"
+        // href="# TaskId()"
+        let child =  document.createElement("a");
+        child.setAttribute('class', "u-btn u-button-style u-dialog-link u-btn-1")
+        child.setAttribute('href', el.dataset.href)
+        width-=40;
+        child.style.left = `${left}px`;
+        child.style.width = `${width}px`;
+        el.appendChild(child)
+
+
+    }
 });
 }
 
