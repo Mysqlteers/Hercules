@@ -19,29 +19,5 @@ import java.util.Set;
 @Controller
 public class HomeController
 {
-    @Autowired
-    TaskService taskService;
-    @GetMapping
-    public String index(Model model) {
-
-
-        model.addAttribute("mainTask", taskService.findByTaskId((long) 1).get());
-
-
-        String start = "2020-12-01";
-        String end = "2020-12-28";
-        LocalDate startDate = LocalDate.parse(start);
-        LocalDate endDate = LocalDate.parse(end);
-        List<LocalDate> datesList = new ArrayList<>();
-        while (!startDate.isAfter(endDate)) {
-            datesList.add(startDate);
-            startDate = startDate.plusDays(1);
-        }
-
-
-        model.addAttribute("dates", datesList);
-
-        return "timeline";
-    }
 
 }

@@ -1,17 +1,9 @@
-:root {
-    --white: #fff;
-    --divider: lightgrey;
-    --body: #f5f7f8;
-}
+
 
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-}
-
-ul {
-    list-style: none;
 }
 
 a {
@@ -22,10 +14,18 @@ a {
 
 .chart-wrapper {
 
-    font-size: 16px;
+    --white: #fff;
+    --divider: lightgrey;
+
+    overflow:hidden;
+    overflow-x:scroll;
+    overflow: scroll;
+    font-size: 12px;
     font-family: sans-serif;
-    padding-top: 40px;
-    /*max-width: 1150px;*/
+    padding: 40px;
+    max-width: 1150px;
+    max-height: 800px;
+    min-height: 800px;
 
     margin: 0 auto;
 }
@@ -38,13 +38,20 @@ a {
     display: flex;
     margin-bottom: 20px;
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1rem;
+}
+
+.chart-wrapper .ul
+{
+    list-style-type: list-item;
 }
 
 .chart-wrapper .chart-values li {
+    list-style-type: none;
     flex: 1;
-    min-width: 80px;
+    min-width: 140px;
     text-align: center;
+    border-right: 1px solid var(--divider);
 }
 
 .chart-wrapper .chart-values li:not(:last-child) {
@@ -55,8 +62,7 @@ a {
     content: '';
     position: absolute;
     right: 0;
-    height: 510px;
-    border-right: 1px solid var(--divider);
+    height: 1800px;
 }
 
 /* CHART-BARS

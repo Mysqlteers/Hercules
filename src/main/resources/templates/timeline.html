@@ -6,22 +6,28 @@
 </head>
 <section th:fragment="timeline(listOfDates, listOfTasks)">
     <div class="chart-wrapper">
-        <script th:src="@{/js/timeline.js}"></script>
-        <link rel="stylesheet" th:href="@{/css/timeline.css}">
-        <ul class="chart-values">
-            <li th:each="day : ${dates}" th:text="${day}"></li>
-        </ul>
-        <ul class="chart-bars">
-<!--            todo replace with listoftask in -->
-            <li th:each="task: ${mainTask?.getSubtasksAsList()}" data-color="#00BCD4"
-                th:attr="data-duration=${task.task_start_date}+'½/'+${task?.deadline},
-                data-estimated_time=${task.est_time}"
-<!--                data-percent_done=${task.getDonePercentage}"-->
-                th:text="${task?.name}"
-            >
+        <div class="timeline-header">
+            <div th:text="${dates[0].getMonth().value}"
+            > </div>
 
-            </li>
-        </ul>
+<!--            todo add month slider -->
+            <script th:src="@{/js/timeline.js}"></script>
+            <link rel="stylesheet" th:href="@{/css/timeline.css}">
+            <ul class="chart-values">
+                <li th:attr="data-period=${day}" th:each="day : ${dates}"
+                    th:text="${day.getDayOfWeek().name()}+'  '+${day.getDayOfMonth()}"></li>
+            </ul>
+            <ul class="chart-bars">
+                <!--            todo replace with listoftask in -->
+                <li data-color="#00BCD4" th:attr="data-duration=${task.task_start_date}+'/'+${task?.deadline},
+                data-estimated_time=${task.est_time},
+                data-percentage_done=${task.getPercentageDone}"
+                    th:each="task: ${mainTask?.getSubtasksAsList()}"
+                    th:text="${task?.name}+' '+${task.getPercentageDone().toString()}+'%'"
+                >
+                </li>
+            </ul>
+        </div>
     </div>
 </section>
 

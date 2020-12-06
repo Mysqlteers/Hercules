@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -24,15 +25,15 @@ public class TaskTest {
 
         Task subtask_1 = new Task("task1");
 
-        subtask_1.setEst_time("10-days");
+        subtask_1.setDeadline(LocalDate.now().plusDays(10).toString());
         subtask_1.setBeforePictures(files);
 
         Task subtask_2 = new Task("task2");
-        subtask_2.setEst_time("1-day");
+        subtask_2.setDeadline(LocalDate.now().plusDays(5).toString());
 
 
         Task subtask_3 = new Task("task3");
-        subtask_3.setEst_time("4-days");
+        subtask_3.setDeadline(LocalDate.now().plusDays(40).toString());
 
         subtasks.add(subtask_1);
         subtasks.add(subtask_2);

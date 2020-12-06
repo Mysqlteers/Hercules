@@ -71,7 +71,7 @@ public class Task {
 
         this.deadline = deadline;
         if (deadline == null) {
-            deadline = LocalDate.now().plusDays(1).toString();
+            deadline = LocalDate.now().toString();
         }
         this.est_time = est_time;
         this.subtasks = subtask;
@@ -85,15 +85,49 @@ public class Task {
     {
         this.name = name;
         task_start_date = LocalDate.now().toString();
-        deadline = LocalDate.now().plusDays(1).toString();
+        deadline = LocalDate.now().toString();
     }
 
     public Task() {
         task_start_date = LocalDate.now().toString();
-        deadline = LocalDate.now().plusDays(1).toString();
-        task_start_date = LocalDate.now().toString();
-        deadline = LocalDate.now().plusDays(1).toString();
+        deadline = LocalDate.now().toString();
+        name = "ny opgave";
     }
+
+
+    /**
+     * calculate how done a task is.
+     * todo make unit test
+     * @return how many percent done the task is, ie. from 0 to 100
+     */
+    public double getPercentageDone()
+    {
+        if (done){
+            return 100;
+        }
+        else {
+            ArrayList<Task> subtasks = (ArrayList<Task>) getSubtasksAsList();
+
+            if (subtasks.isEmpty())
+                return 0;
+
+            int totalTasks = subtasks.size();
+            int doneTasks = 0;
+
+            for (Task task: getSubtasksAsList()) {
+                if (task.getDone())
+                    doneTasks++;
+            }
+            return doneTasks/totalTasks*100;
+        }
+    }
+
+
+
+
+
+
+
 
     public Long getTaskId() {
         return taskId;

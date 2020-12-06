@@ -1,5 +1,6 @@
 /**
- * This script handles the generation of the timeline
+ * This script handles the generation of the timeline.
+ * gets the list elements representing days, and the ones representing tasks.
  *
   * @param e
  */
@@ -7,36 +8,56 @@
 function createChart(e) {
     const days = document.querySelectorAll(".chart-values li");
     const tasks = document.querySelectorAll(".chart-bars li");
-    const daysArray = [...days];
+    const dayElements = [...days]
+    let daysArray = new Array()
+    days.forEach(dayElement => {
+        daysArray.push(dayElement.dataset.period)
+    })
 
     tasks.forEach(el => {
-        console.log(el)
     const duration = el.dataset.duration.split("/");
-    const startDay = duration[0];
-    const endDay = duration[1];
+    let startDay = duration[0];
+    let endDay = duration[1];
     let left = 0,
     width = 0;
 
-    if (startDay.endsWith("½")) {
-    const filteredArray = daysArray.filter(day => day.textContent == startDay.slice(0, -1));
-    left = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth / 2;
-} else {
-    const filteredArray = daysArray.filter(day => day.textContent == startDay);
-    left = filteredArray[0].offsetLeft;
-}
 
-    if (endDay.endsWith("½")) {
-    const filteredArray = daysArray.filter(day => day.textContent == endDay.slice(0, -1));
-    width = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth / 2 - left;
-} else {
-    const filteredArray = daysArray.filter(day => day.textContent == endDay);
+    if (!daysArray.includes(startDay) || !daysArray.includes(endDay)) {
+
+        //task is before
+        if(startDay<daysArray[0] && endDay<daysArray[0]) {
+            return;
+        }
+        //task is after
+        else if(startDay>daysArray[daysArray.length-1] && endDay>daysArray[daysArray.length-1]) {
+            return;
+        }
+        //endday is inclued, but not startday
+        else if (daysArray.includes(endDay) && !daysArray.includes(startDay)) {
+            startDay = daysArray[0];
+        }
+        //startday is included but not endday
+        else if (daysArray.includes(startDay) && !daysArray.includes(endDay)) {
+            endDay = daysArray[daysArray.length - 1]
+        }
+
+
+
+    }
+
+    //find element where day == startday
+    let filteredArray = dayElements.filter(day => day.dataset.period === startDay);
+    left = filteredArray[0].offsetLeft;
+
+    //find element where day == startday
+    filteredArray = dayElements.filter(day => day.dataset.period === endDay);
     width = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth - left;
-}
+
 
     // apply css
     el.style.left = `${left}px`;
     el.style.width = `${width}px`;
-    if (e.type == "load") {
+    if (e.type === "load") {
     el.style.backgroundColor = el.dataset.color;
     el.style.opacity = 1;
 }
