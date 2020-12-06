@@ -13,7 +13,7 @@
 <body>
     <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
 <!--        modal button -->
-        <a th:if="${case != null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#'+${case?.getCaseId()}" th:text="Opdater"></a>
+        <a th:if="${case != null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#'+${case?.getCaseId()}" th:text="'Opdater sag'"></a>
         <a th:unless="${case != null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#sec-7902'" th:text="'Opret sag'"></a>
     </div>
 <!--modal -->

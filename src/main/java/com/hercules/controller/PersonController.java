@@ -2,7 +2,6 @@ package com.hercules.controller;
 
 import com.hercules.model.Contact;
 import com.hercules.model.Person;
-import com.hercules.service.CaseService;
 import com.hercules.service.ContactService;
 import com.hercules.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +13,6 @@ import java.util.HashSet;
 
 @Controller
 public class PersonController {
-    @Autowired
-    CaseService caseService;
 
     @Autowired
     ContactService contactService;
