@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 @Entity
 @Table(name = "contacts")
@@ -29,7 +28,7 @@ public class Contact {
 
     public Contact(Long caseId) {
         this.caseId = caseId;
-        this.persons = new TreeSet<>();
+        this.persons = new HashSet<>();
     }
 
     public Long getContactId() {
