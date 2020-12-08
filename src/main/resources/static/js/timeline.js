@@ -21,8 +21,6 @@ function createChart(e) {
     let endDay = duration[1];
     let left = 0;
     width = 0;
-        // console.log("children  " +el.childElementCount)
-
 
     if (!daysArray.includes(startDay) || !daysArray.includes(endDay)) {
 
@@ -70,17 +68,13 @@ function createChart(e) {
         child.style.left = `${left}px`;
         child.style.width = `${width}px`;
         child.style.display = "none";
-        if (el.childElementCount<=1) {
+        if (el.childElementCount<=0) {
             el.appendChild(child)
             el.onclick = function() {
                 console.log("clicked")
                 child.click()}
 
         }
-        else {
-            console.log(el.childElementCount)
-        }
-        // href="# TaskId()"
 
 });
 }
@@ -88,19 +82,4 @@ function createChart(e) {
 
 window.addEventListener("mousemove", createChart)
 window.addEventListener("load", createChart);
-window.addEventListener("click", delayedCreate );
 window.addEventListener("resize", createChart);
-
-
-async function delayedCreate() {
-    await wait(2000);
-    createChart()
-}
-
-function wait(time) {
-    return new Promise(resolve => {
-        setTimeout(() => {
-           createChart();
-        }, time);
-    });
-}
