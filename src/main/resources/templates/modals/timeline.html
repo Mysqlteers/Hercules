@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<section th:fragment="timeline(listOfDates, listOfTasks)">
+<section th:fragment="timeline(dates, mainTask)">
     <div class="chart-wrapper">
         <div class="timeline-header">
             <div th:text="${dates[0].getMonth().value}"

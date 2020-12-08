@@ -1,162 +1,183 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta charset="utf-8">
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <meta name="page_type" content="np-template-header-footer-from-plugin">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <meta content="np-template-header-footer-from-plugin" name="page_type">
     <title>Detaljeret visning</title>
-      <link rel="stylesheet" th:href="@{/css/caseDetail.css}" media="screen" type="text/css">
-    <link rel="stylesheet" th:href="@{/css/nicepage.css}" media="screen" type="text/css">
-    <script class="u-script" type="text/javascript" th:src="@{/js/jquery.js}" defer=""></script>
-    <script class="u-script" type="text/javascript" th:src="@{/js/nicepage.js}" defer=""></script>
-    <meta name="generator" content="Nicepage 3.0.9, nicepage.com">
-    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
+    <link media="screen" rel="stylesheet" th:href="@{/css/caseDetail.css}" type="text/css">
+    <link media="screen" rel="stylesheet" th:href="@{/css/nicepage.css}" type="text/css">
+    <script class="u-script" defer="" th:src="@{/js/jquery.js}" type="text/javascript"></script>
+    <script class="u-script" defer="" th:src="@{/js/nicepage.js}" type="text/javascript"></script>
+    <meta content="Nicepage 3.0.9, nicepage.com" name="generator">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" id="u-theme-google-font"
+          rel="stylesheet">
 
-    <meta property="og:title" content="caseDetails">
-    <meta property="og:type" content="website">
-    <meta name="theme-color" content="#478ac9">
-  </head>
-  <body id="caseDetailBody" th:onload="'javascript:setBodyBackground(' + ${viewCase.getStatus()} + ')'" class="u-body">
-  <header th:replace="fragments/header :: header" th:remove="tag"></header>
+    <meta content="caseDetails" property="og:title">
+    <meta content="website" property="og:type">
+    <meta content="#478ac9" name="theme-color">
+</head>
+<body class="u-body" id="caseDetailBody" th:onload="'javascript:setBodyBackground(' + ${viewCase.getStatus()} + ')'">
+<header th:remove="tag" th:replace="fragments/header :: header"></header>
 
 <!--  Here is main body-->
-    <section class="u-align-center u-clearfix u-section-1" id="sec-db45">
-      <div class="u-clearfix u-sheet u-valign-top u-sheet-1">
+<section class="u-align-center u-clearfix u-section-1" id="sec-db45">
+    <div class="u-clearfix u-sheet u-valign-top u-sheet-1">
         <div class="u-expanded-width u-tabs u-tabs-1">
-          <ul class="u-tab-list u-unstyled" role="tablist">
-            <li class="u-tab-item" role="presentation">
-              <a class="active u-active-white u-button-style u-tab-link u-tab-link-1" id="link-tab-0da5" href="#tab-0da5" role="tab" aria-controls="tab-0da5" aria-selected="true">Oplysninger</a>
-            </li>
-            <li class="u-tab-item" role="presentation">
-              <a class="u-active-white u-button-style u-tab-link u-tab-link-2" id="link-tab-2917" href="#tab-2917" role="tab" aria-controls="tab-2917" aria-selected="false">Opgaver</a>
-            </li>
-            <li class="u-tab-item" role="presentation">
-              <a class="u-active-white u-button-style u-tab-link u-tab-link-3" id="link-tab-6664" href="#tab-6664" role="tab" aria-controls="tab-6664" aria-selected="false">Byggeplan</a>
-            </li>
-            <li class="u-tab-item" role="presentation">
-              <a class="u-active-white u-button-style u-tab-link u-tab-link-4" id="link-tab-fa3a" href="#tab-fa3a" role="tab" aria-controls="tab-fa3a" aria-selected="false">Ansatte</a>
-            </li>
-            <li class="u-tab-item" role="presentation">
-              <a class="u-active-white u-button-style u-tab-link u-tab-link-5" id="link-tab-c7b8" href="#tab-c7b8" role="tab" aria-controls="tab-c7b8" aria-selected="false">Affald<br>
-              </a>
-            </li>
-          </ul>
-          <div class="u-tab-content">
-            <div class="u-container-style u-tab-active u-tab-pane u-white u-tab-pane-1" id="tab-0da5" role="tabpanel" aria-labelledby="link-tab-0da5">
-              <div class="u-container-layout u-container-layout-1">
-<!--                table div-->
-                <div>
-                    <div style="float:right">
-                        <button th:replace="modals/case-modal.html :: case-modal(${viewCase})"></button>
+            <ul class="u-tab-list u-unstyled" role="tablist">
+                <li class="u-tab-item" role="presentation">
+                    <a aria-controls="tab-0da5" aria-selected="true"
+                       class="active u-active-white u-button-style u-tab-link u-tab-link-1" href="#tab-0da5" id="link-tab-0da5" role="tab">Oplysninger</a>
+                </li>
+                <li class="u-tab-item" role="presentation">
+                    <a aria-controls="tab-2917" aria-selected="false" class="u-active-white u-button-style u-tab-link u-tab-link-2"
+                       href="#tab-2917" id="link-tab-2917" role="tab">Opgaver</a>
+                </li>
+                <li class="u-tab-item" role="presentation">
+                    <a aria-controls="tab-6664" aria-selected="false" class="u-active-white u-button-style u-tab-link u-tab-link-3"
+                       href="#tab-6664" id="link-tab-6664" role="tab">Byggeplan</a>
+                </li>
+                <li class="u-tab-item" role="presentation">
+                    <a aria-controls="tab-fa3a" aria-selected="false" class="u-active-white u-button-style u-tab-link u-tab-link-4"
+                       href="#tab-fa3a" id="link-tab-fa3a" role="tab">Ansatte</a>
+                </li>
+                <li class="u-tab-item" role="presentation">
+                    <a aria-controls="tab-c7b8" aria-selected="false" class="u-active-white u-button-style u-tab-link u-tab-link-5"
+                       href="#tab-c7b8" id="link-tab-c7b8" role="tab">Affald<br>
+                    </a>
+                </li>
+            </ul>
+
+
+            <div class="u-tab-content">
+
+                <div aria-labelledby="link-tab-0da5" class="u-container-style u-tab-active u-tab-pane u-white u-tab-pane-1"
+                     id="tab-0da5" role="tabpanel">
+                    <div class="u-container-layout u-container-layout-1">
+                        <!--                table div-->
+                        <div>
+                            <div style="float:right">
+                                <button th:replace="modals/case-modal.html :: case-modal(${viewCase})"></button>
+                            </div>
+                            <table>
+                                <tbody>
+                                <tr>
+                                    <td style="width: 150px; display: inline-block">Sagsnummer:</td>
+                                    <td th:text="${viewCase.getCaseId()}"></td>
+                                </tr>
+                                <tr style="height: 15px"></tr>
+                                <tr>
+                                    <td>Adresse:</td>
+                                    <td th:text="${viewCase.getLocation()}"></td>
+                                </tr>
+                                <tr style="height: 15px"></tr>
+                                <tr>
+                                    <td>Beskrivelse:</td>
+                                    <td th:text="${viewCase.getDescription()}"></td>
+                                </tr>
+                                <tr style="height: 15px"></tr>
+                                <tr>
+                                    <td>Start dato</td>
+                                    <td th:text="${viewCase.getCaseStartDate()}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <h3>Kontaktliste</h3>
+                        </div>
+                        <div class="u-clearfix u-sheet u-sheet-1">
+                            <div class="u-table u-table-responsive u-table-1">
+                                <table class="u-table-entity">
+                                    <colgroup>
+                                        <col width="18.1%">
+                                        <col width="27.2%">
+                                        <col width="27.3%">
+                                        <col width="17.4%">
+                                        <col width="10.0%">
+                                    </colgroup>
+                                    <thead class="u-palette-4-base u-table-header u-table-header-1">
+                                    <tr style="height: 35px;">
+                                        <th class="u-border-1 u-border-palette-4-base u-table-cell">Stilling</th>
+                                        <th class="u-border-1 u-border-palette-4-base u-table-cell">Navn</th>
+                                        <th class="u-border-1 u-border-palette-4-base u-table-cell">Email</th>
+                                        <th class="u-border-1 u-border-palette-4-base u-table-cell">Telefonnummer</th>
+                                        <th class="u-border-1 u-border-palette-4-base u-table-cell"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="u-table-body">
+                                    <tr style="height: 78px;" th:each="person: ${contactlist}">
+                                        <td class="u-border-1 u-border-grey-30 u-first-column u-grey-5 u-table-cell u-table-cell-5"
+                                            th:text="${person.getPosition()}"></td>
+                                        <td class="u-border-1 u-border-grey-30 u-table-cell"
+                                            th:text="${person.getFirstName()} + ' ' + ${person.getLastName()}"></td>
+                                        <td class="u-border-1 u-border-grey-30 u-table-cell"
+                                            th:text="${person.getEmail()}"></td>
+                                        <td class="u-border-1 u-border-grey-30 u-table-cell"
+                                            th:text="${person.getPhone()}"></td>
+                                        <td class="u-border-1 u-border-grey-30 u-table-cell">
+                                            <a th:href="@{'/deletePerson/' + ${person.getPersonId()} + '/' + ${viewCase.getCaseId()}}">
+                                                <button onclick="return confirm('Er du sikker?')" style="background-color: crimson; color: white"
+                                                        type="button">
+                                                    Slet
+                                                </button>
+                                            </a>
+                                            <a th:href="@{'/updatePerson/'+${person.getPersonId()}}">
+                                                <button type="button">
+                                                    Rediger
+                                                </button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div>
+                                    <button th:replace="modals/person-modal.html :: person-modal(${viewCase.getCaseId()})"></button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  <table>
-                    <tbody>
-                    <tr>
-                      <td style="width: 150px; display: inline-block">Sagsnummer:</td>
-                      <td th:text="${viewCase.getCaseId()}"></td>
-                    </tr>
-                    <tr style="height: 15px"></tr>
-                    <tr>
-                      <td>Adresse:</td>
-                      <td th:text="${viewCase.getLocation()}"></td>
-                    </tr>
-                    <tr style="height: 15px"></tr>
-                    <tr>
-                      <td>Beskrivelse:</td>
-                      <td th:text="${viewCase.getDescription()}"></td>
-                    </tr>
-                    <tr style="height: 15px"></tr>
-                    <tr>
-                      <td>Start dato</td>
-                      <td th:text="${viewCase.getCaseStartDate()}"></td>
-                    </tr>
-                    </tbody>
-                  </table>
-                    <h3>Kontaktliste</h3>
                 </div>
-                <div class="u-clearfix u-sheet u-sheet-1">
-                  <div class="u-table u-table-responsive u-table-1">
-                      <table class="u-table-entity">
-                          <colgroup>
-                              <col width="18.1%">
-                              <col width="27.2%">
-                              <col width="27.3%">
-                              <col width="17.4%">
-                              <col width="10.0%">
-                          </colgroup>
-                          <thead class="u-palette-4-base u-table-header u-table-header-1">
-                          <tr style="height: 35px;">
-                              <th class="u-border-1 u-border-palette-4-base u-table-cell">Stilling</th>
-                              <th class="u-border-1 u-border-palette-4-base u-table-cell">Navn</th>
-                              <th class="u-border-1 u-border-palette-4-base u-table-cell">Email</th>
-                              <th class="u-border-1 u-border-palette-4-base u-table-cell">Telefonnummer</th>
-                              <th class="u-border-1 u-border-palette-4-base u-table-cell"></th>
-                          </tr>
-                          </thead>
-                          <tbody class="u-table-body">
-                          <tr th:each="person: ${contactlist}" style="height: 78px;">
-                              <td th:text="${person.getPosition()}" class="u-border-1 u-border-grey-30 u-first-column u-grey-5 u-table-cell u-table-cell-5"></td>
-                              <td th:text="${person.getFirstName()} + ' ' + ${person.getLastName()}" class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                              <td th:text="${person.getEmail()}" class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                              <td th:text="${person.getPhone()}" class="u-border-1 u-border-grey-30 u-table-cell"></td>
-                              <td class="u-border-1 u-border-grey-30 u-table-cell">
-                                  <a th:href="@{'/deletePerson/' + ${person.getPersonId()} + '/' + ${viewCase.getCaseId()}}">
-                                      <button type="button" onclick = "return confirm('Er du sikker?')" style="background-color: crimson; color: white">
-                                          Slet
-                                      </button>
-                                  </a>
-                                  <a th:href="@{'/updatePerson/'+${person.getPersonId()}}">
-                                      <button type="button">
-                                          Rediger
-                                      </button>
-                                  </a>
-                              </td>
-                          </tr>
-                          </tbody>
-                      </table>
-                      <div>
-                          <button th:replace="modals/person-modal.html :: person-modal(${viewCase.getCaseId()})"></button>
-                      </div>
-                      </div>
+
+                <div aria-labelledby="link-tab-2917" class="u-container-style u-tab-pane u-white u-tab-pane-2" id="tab-2917"
+                     role="tabpanel">
+                    <div class="u-container-layout u-container-layout-2">
+                        <div th:insert="/modals/timeline.html :: timeline(dates, mainTask)"></div>
+                    </div>
                 </div>
-              </div>
+                <div aria-labelledby="link-tab-6664" class="u-container-style u-tab-pane u-white u-tab-pane-3" id="tab-6664"
+                     role="tabpanel">
+                    <div class="u-container-layout u-container-layout-3"></div>
+                </div>
+                <div aria-labelledby="link-tab-fa3a" class="u-container-style u-tab-pane u-white u-tab-pane-4" id="tab-fa3a"
+                     role="tabpanel">
+                    <div class="u-container-layout u-container-layout-4"></div>
+                </div>
+                <div aria-labelledby="link-tab-c7b8" class="u-container-style u-tab-pane u-white u-tab-pane-5" id="tab-c7b8"
+                     role="tabpanel">
+                    <div class="u-container-layout u-container-layout-5"></div>
+                </div>
             </div>
 
-            <div class="u-container-style u-tab-pane u-white u-tab-pane-2" id="tab-2917" role="tabpanel" aria-labelledby="link-tab-2917">
-              <div class="u-container-layout u-container-layout-2">
-                <h4 class="u-text u-text-default u-text-1">Be The First To Review This Product!</h4>
-                <p class="u-text u-text-default u-text-2">Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
-                <a href="" class="u-btn u-button-style u-btn-1">write product review</a>
-              </div>
-            </div>
-            <div class="u-container-style u-tab-pane u-white u-tab-pane-3" id="tab-6664" role="tabpanel" aria-labelledby="link-tab-6664">
-              <div class="u-container-layout u-container-layout-3"></div>
-            </div>
-            <div class="u-container-style u-tab-pane u-white u-tab-pane-4" id="tab-fa3a" role="tabpanel" aria-labelledby="link-tab-fa3a">
-              <div class="u-container-layout u-container-layout-4"></div>
-            </div>
-            <div class="u-container-style u-tab-pane u-white u-tab-pane-5" id="tab-c7b8" role="tabpanel" aria-labelledby="link-tab-c7b8">
-              <div class="u-container-layout u-container-layout-5"></div>
-            </div>
-          </div>
+
         </div>
-      </div>
-    </section>
-  <div style="position: absolute; bottom: 5%; right: 5%">
-      <a th:href="@{'/deleteCase/'+${viewCase.getCaseId()}}" class="u-btn u-button-style u-hover-palette-1-dark-1 u-btn-1" style="background-color: crimson; " onclick ="return confirm('Er du sikker på, at du vil slette sagen?')">Slet sag</a>
-  </div>
-  </body>
-  <script>
-      function setBodyBackground(status) {
-          if (status == 0) {
-              document.body.style.backgroundColor = "lightskyblue"
-          } else if (status == 1) {
-              document.body.style.backgroundColor = "lightgreen"
-          } else {
-              document.body.style.backgroundColor = "darkgrey"
-          }
-      }
-  </script>
+    </div>
+</section>
+<div style="position: absolute; bottom: 5%; right: 5%">
+    <a class="u-btn u-button-style u-hover-palette-1-dark-1 u-btn-1" onclick="return confirm('Er du sikker på, at du vil slette sagen?')"
+       style="background-color: crimson; " th:href="@{'/deleteCase/'+${viewCase.getCaseId()}}">Slet
+        sag</a>
+</div>
+</body>
+<script>
+    function setBodyBackground(status) {
+        if (status == 0) {
+            document.body.style.backgroundColor = "lightskyblue"
+        } else if (status == 1) {
+            document.body.style.backgroundColor = "lightgreen"
+        } else {
+            document.body.style.backgroundColor = "darkgrey"
+        }
+    }
+</script>
 </html>

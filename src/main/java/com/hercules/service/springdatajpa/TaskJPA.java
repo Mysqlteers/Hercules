@@ -44,4 +44,13 @@ public class TaskJPA implements TaskService {
     public Optional<Task> findByTaskId(Long taskId) {
         return taskRepository.findByTaskId(taskId);
     }
+
+
+    public TaskRepository getTaskRepository() {
+        return taskRepository;
+    }
+
+    public void setTaskRepository(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
+    }
 }

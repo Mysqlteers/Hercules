@@ -12,7 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tasks")
-public class Task {
+public class Task implements Taskable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "task_id")
@@ -98,6 +98,12 @@ public class Task {
     }
 
 
+
+    @Override
+    public void addTask(Taskable task) {
+        subtasks.add((Task)task);
+    }
+
     /**
      * calculate how done a task is.
      * todo make unit test
@@ -109,7 +115,7 @@ public class Task {
             return 100;
         }
         else {
-            ArrayList<Task> subtasks = (ArrayList<Task>) getSubtasksAsList();
+            ArrayList<Taskable> subtasks = (ArrayList<Taskable>) getSubtasksAsList();
 
             if (subtasks.isEmpty())
                 return 0;
@@ -117,7 +123,7 @@ public class Task {
             int totalTasks = subtasks.size();
             int doneTasks = 0;
 
-            for (Task task: getSubtasksAsList()) {
+            for (Taskable task: getSubtasksAsList()) {
                 if (task.isDone())
                     doneTasks++;
             }
@@ -125,8 +131,10 @@ public class Task {
         }
     }
 
-    public List<Task> getSubtasksAsList() {
-        List<Task> result = new ArrayList<>(subtasks);
+
+    @Override
+    public List<Taskable> getSubtasksAsList() {
+        List<Taskable> result = new ArrayList<>(subtasks);
         return result;
     }
 
@@ -147,49 +155,61 @@ public class Task {
         return done;
     }
 
-
-    public Long getTaskId() {
-        return taskId;
-    }
-
-    public void setTaskId(Long taskId) {
-        this.taskId = taskId;
-    }
-
     public Set<S3File> getPictures() {
         return pictures;
-    }
-
-    public void setPictures(Set<S3File> pictures) {
-        this.pictures = pictures;
-    }
-
-    public String getTask_start_date() {
-        return task_start_date;
-    }
-
-    public void setTask_start_date(String task_start_date) {
-        this.task_start_date = task_start_date;
-    }
-
-    public String getDeadline() {
-        return deadline;
-    }
-
-    public void setDeadline(String deadline) {
-        this.deadline = deadline;
     }
 
     public String getEst_time() {
         return est_time;
     }
 
-    public void setEst_time(String est_time) {
-        this.est_time = est_time;
+    public String getDeadline() {
+        return deadline;
+    }
+
+    @Override
+    public Long getId() {
+        return getTaskId();
+    }
+
+    @Override
+    public String getStartDate() {
+        return getTask_start_date();
+    }
+
+    public Long getTaskId() {
+        return taskId;
+    }
+
+    public String getTask_start_date() {
+        return task_start_date;
     }
 
     public String getName() {
         return name;
+    }
+
+
+
+    public void setTaskId(Long taskId) {
+
+        this.taskId = taskId;
+    }
+
+    public void setPictures(Set<S3File> pictures) {
+        this.pictures = pictures;
+    }
+
+    public void setTask_start_date(String task_start_date) {
+        this.task_start_date = task_start_date;
+    }
+
+    public void setDeadline(String deadline) {
+        this.deadline = deadline;
+    }
+
+    public void setEst_time(String est_time) {
+        this.est_time = est_time;
     }
 
     public void setName(String name) {

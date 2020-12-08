@@ -7,10 +7,7 @@ import com.hercules.service.CaseService;
 import com.hercules.service.ContactService;
 import com.hercules.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.hercules.model.Task;
 import com.hercules.service.TaskService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -113,6 +110,23 @@ public class CaseController {
             } else {
                 model.addAttribute("contactlist", new HashSet<Person>());
             }
+
+
+
+            //Adding
+            LocalDate startDate = LocalDate.now().minusDays(7);
+            LocalDate endDate = LocalDate.now().plusMonths(1).minusDays(7);
+            List<LocalDate> datesList = new ArrayList<>();
+            while (!startDate.isAfter(endDate)) {
+                datesList.add(startDate);
+                startDate = startDate.plusDays(1);
+            }
+            model.addAttribute("dates", datesList);
+
+            model.addAttribute("mainTask", caseService.findById((long) caseId).get());
+
+
+
             return "caseDetails";
         } else {
             model.addAttribute("errorCode", 0);
