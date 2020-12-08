@@ -27,6 +27,12 @@ public class Case implements Taskable {
     @Column(name = "case_start_date")
     private String caseStartDate;
 
+
+
+
+
+
+
     public String getDescription() {
         return description;
     }

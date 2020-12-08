@@ -31,7 +31,7 @@ class CaseJPATest {
     @Order(1)
     void canSaveAndFindByLocation() {
         Case newCase = new Case("Nedriv væg", 1, location);
-        Task subtask_1 = new Task("task1");
+        Task subtask_1 = new Task("task2");
         subtask_1.addPicture("before-after-pictures/test_pic.jpg", "", false);
         newCase.addTask(subtask_1);
         cs.save(newCase);

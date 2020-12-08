@@ -53,6 +53,7 @@ public class CaseController {
         }
         if (taskService.findByTaskId((long) taskId).isPresent()) {
             model.addAttribute("superTask", taskService.findByTaskId((long) taskId).get());
+            model.addAttribute("dates", datesList);
         }
         return "modals/timeline";
     }

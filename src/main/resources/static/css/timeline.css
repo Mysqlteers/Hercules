@@ -62,7 +62,7 @@ a {
     content: '';
     position: absolute;
     right: 0;
-    height: 1800px;
+    height: 1400px;
 }
 
 /* CHART-BARS
@@ -73,7 +73,7 @@ a {
     margin-bottom: 15px;
     font-size: 16px;
     border-radius: 20px;
-    padding: 10px 20px;
+    padding: 10px 0px;
     max-height: 80px;
     width: 0;
     opacity: 0;

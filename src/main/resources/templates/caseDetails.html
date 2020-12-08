@@ -134,7 +134,20 @@
 <!--  Tab page for timeline              -->
                 <div aria-labelledby="link-tab-2917" class="u-container-style u-tab-pane u-white u-tab-pane-2" id="tab-2917"
                      role="tabpanel">
-                    <div class="u-container-layout u-container-layout-2">
+                    <div class="u-container-layout u-container-layout-2" style=" padding: 0; display: flex">
+                        <form action="/handleTask" method="POST">
+                            <input  type="hidden" name="taskId"  th:value="${null}">
+                            <input type="hidden" name="pictures" th:value="${null}">
+                            <input type="hidden" name="superTaskId" th:value="${null}">
+                            <input type="hidden" name="CaseId"th:value="${viewCase?.getCaseId()}">
+                            <input hidden name="isDone" value="false">
+                            <input hidden name="deadline"  value="">
+                            <input hidden name="description" value="">
+                            <input hidden name="est_time" value="">
+                            <input hidden name="task_start_date" value="">
+                            <input hidden name="name" value="ny opgave">
+                            <input style="background-color: #adcce9; height: 60px" class="u-button-style u-hover-palette-1-light-1 u-btn-1" name="create" type="submit" value="Ny"/>
+                        </form>
                         <div th:replace="/modals/timeline.html :: timeline(${dates}, ${mainTask})"></div>
                     </div>
                 </div>

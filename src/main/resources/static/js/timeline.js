@@ -19,7 +19,7 @@ function createChart(e) {
     const duration = el.dataset.duration.split("/");
     let startDay = duration[0];
     let endDay = duration[1];
-    let left = -el.parentElement.offsetWidth;
+    let left = 0;
     width = 0;
         // console.log("children  " +el.childElementCount)
 
@@ -63,9 +63,6 @@ function createChart(e) {
     el.style.opacity = '1';
 
 
-
-
-    //add a tag with class="u-btn u-button-style u-dialog-link u-btn-1"
         let child =  document.createElement("a");
         child.setAttribute('class', "u-btn u-button-style u-dialog-link u-btn-1")
         child.setAttribute('href', el.dataset.href)
@@ -73,9 +70,17 @@ function createChart(e) {
         child.style.left = `${left}px`;
         child.style.width = `${width}px`;
         child.style.display = "none";
-        el.appendChild(child)
+        if (el.childElementCount<=1) {
+            el.appendChild(child)
+            el.onclick = function() {
+                console.log("clicked")
+                child.click()}
+
+        }
+        else {
+            console.log(el.childElementCount)
+        }
         // href="# TaskId()"
-        el.onclick = function() {child.click()}
 
 });
 }

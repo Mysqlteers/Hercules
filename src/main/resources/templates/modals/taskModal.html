@@ -18,18 +18,19 @@
 
                 <!-- Start of modal form -->
                 <form action="/handleTask" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" style="padding: 10px" source="custom" name="form">
-                    <input  type="hidden" name="taskId" th:value="${task?.getTaskId()}">
-                    <input type="hidden" name="pictures" th:value="${task?.getPictures()} ?: ${null}">
-                    <input type="hidden" name="subtasks" th:value="${task?.getSubtasks()} ?: ${null}">
+                    <input  type="hidden" name="taskId" th:value="${task?.getTaskId()} ?: ''">
+                    <input type="hidden" name="pictures" th:value="${task?.getPictures()} ?: ''">
+                    <input type="hidden" name="superTaskId" th:value="${task?.getSuperTask()?.getId()}">
+                    <input type="hidden" name="CaseId" th:value="${null}">
                 <!-- start dato -->
                     <div class="u-form-group u-form-name u-form-partition-factor-2">
                         <label for="start">Start dato</label>
-                        <input placeholder="Start Dato" id="start" name="task_start_date" th:value="${task?.getStartDate()}  ?: ${null}" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+                        <input type="text" placeholder="Start Dato" id="start" name="task_start_date" th:value="${task?.getStartDate()}  ?: ${null}" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
                     </div>
                 <!-- slut dato -->
                     <div class="u-form-group u-form-partition-factor-2 u-form-group-2">
                         <label for="end">Slut Dato</label>
-                        <input type="datetime" id="end" placeholder="Slut Dato" name="deadline" th:value="${task?.getDeadline()}  ?: ${null}" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+                        <input type="text" id="end" placeholder="Slut Dato" name="deadline" th:value="${task?.getDeadline()}  ?: ${null}" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
                     </div>
                 <!-- navn -->
                     <div class="u-form-email u-form-group">
@@ -51,8 +52,8 @@
                 <!-- done todo getter for done -->
                     <div class="u-form-checkbox u-form-group u-form-partition-factor-2 u-form-group-6">
                         <label for="done">Færdig</label>
-                        <input type="hidden"   th:class="'isDone'+${task?.getTaskId()} ?: 'case'" name="done" th:value="${task?.done}  ?: ${false}">
-                        <input type="checkbox" id="done" th:class="'isDone'+${task?.getTaskId()} ?: 'case'" name="done" th:checked="${task?.done}  ?: ${false}" onclick="isDone(this)">
+                        <input type="hidden"   th:class="'isDone'+${task?.getTaskId()} ?: 'case'" name="isDone" th:value="${task?.isDone()}  ?: ${false}">
+                        <input type="checkbox" id="done" th:class="'isDone'+${task?.getTaskId()} ?: 'case'" name="done" th:checked="${task?.isDone()}  ?: ${false}" onclick="isDone(this)">
                     </div>
                 <!-- submit knap -->
                     <div class="u-align-left u-form-group u-form-submit">

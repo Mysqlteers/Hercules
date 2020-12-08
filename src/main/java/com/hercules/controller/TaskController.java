@@ -1,7 +1,9 @@
 package com.hercules.controller;
 
+import com.hercules.model.Case;
 import com.hercules.model.S3File;
 import com.hercules.model.Task;
+import com.hercules.service.CaseService;
 import com.hercules.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -18,14 +20,18 @@ public class TaskController {
     @Autowired
     TaskService taskService;
 
+    @Autowired
+    CaseService caseService;
 
     @PostMapping(value="/handleTask", params={"delete=Slet"} )
     public String deleteTask(@RequestParam(value = "taskId") long id)
     {
-
         Task task = taskService.findByTaskId(id).get();
         taskService.deleteById(id);
-        return "redirect:/timeline/"+task.getSuperTask().getTaskId()+"/"+ LocalDate.now().getMonthValue()+"/"+LocalDate.now().getYear();
+        if (task.getSuperTask()!=null)
+            return "redirect:/timeline/"+task.getSuperTask().getTaskId()+"/"+ LocalDate.now().getMonthValue()+"/"+LocalDate.now().getYear();
+        else
+            return "redirect:/caseDetails/"+task.getCase().getCaseId();
     }
 
 
@@ -33,40 +39,47 @@ public class TaskController {
     public String CreateTask(@RequestParam Map<String, String> params){
 
 
-        Task superTask = taskService.findByTaskId(Long.parseLong(params.get("taskId"))).get();//new Task(params.get("name"), null,  params.get("task_start_date"),  params.get("deadline"),  params.get("est_time"), null, done);
+        params.entrySet().forEach(p ->{
+            System.out.println(p);
+        });
 
         Task task = new Task();
-
-        try {
-            if (params.get("isDone").equals("true"))
-                task.setDone(true);
-            else
-                task.setDone(false);
-        }catch (Exception e){}
-
         task.setName(params.get("name")+"- ny opgave");
         task.setTask_start_date(LocalDate.now().toString());
-        task.setDeadline(params.get(LocalDate.now().toString()));
-        task.setEst_time(params.get("1 dag"));
-        task.setDescription("under opgave til opgave "+params.get("name"));
-        task.setSuperTask(superTask);
+        task.setDeadline(LocalDate.now().toString());
 
+        if (!params.get("taskId").isEmpty()) {
+            System.out.println("with supertask");
+            try {
+                Task superTask = taskService.findByTaskId(Long.parseLong(params.get("taskId"))).get();
+                superTask.addTask(task);
+                taskService.save(superTask);
+            }catch (Exception e){e.printStackTrace();}
+        }
+        else {
+            try {
+                Case Case = caseService.findById(Long.parseLong(params.get("CaseId"))).get();
+                Case.addTask(task);
+                caseService.save(Case);
+            } catch (Exception e) {e.printStackTrace();}
+        }
 
-        taskService.save(task);
-        return "redirect:/timeline/"+task.getSuperTask().getTaskId()+"/"+ LocalDate.now().getMonthValue()+"/"+LocalDate.now().getYear();
+        if (task.getSuperTask()!=null)
+            return "redirect:/timeline/"+task.getSuperTask().getTaskId()+"/"+ LocalDate.now().getMonthValue()+"/"+LocalDate.now().getYear();
+        else
+            return "redirect:/caseDetails/"+params.get("CaseId");
     }
 
     @PostMapping(value="/handleTask", params={"update=Gem"})
     public String updateTask(@RequestParam Map<String, String> params){
 
-        Task task = taskService.findByTaskId(Long.parseLong(params.get("taskId"))).get();//new Task(params.get("name"), null,  params.get("task_start_date"),  params.get("deadline"),  params.get("est_time"), null, done);
-
+        Task task = taskService.findByTaskId(Long.parseLong(params.get("taskId"))).get();
         try {
             if (params.get("isDone").equals("true"))
                 task.setDone(true);
             else
                 task.setDone(false);
-        }catch (Exception e){}
+        }catch (Exception e){e.printStackTrace();}
         task.setName(params.get("name"));
         task.setTask_start_date(params.get("task_start_date"));
         task.setDeadline(params.get("deadline"));
@@ -74,6 +87,9 @@ public class TaskController {
         task.setDescription(params.get("description"));
 
         taskService.save(task);
-        return "redirect:/timeline/"+task.getSuperTask().getTaskId()+"/"+ LocalDate.now().getMonthValue()+"/"+LocalDate.now().getYear();
+        if (task.getSuperTask()!=null)
+            return "redirect:/timeline/"+task.getSuperTask().getTaskId()+"/"+ LocalDate.now().getMonthValue()+"/"+LocalDate.now().getYear();
+        else
+            return "redirect:/caseDetails/"+task.getCase().getCaseId();
     }
 }
