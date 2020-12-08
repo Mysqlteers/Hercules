@@ -1,0 +1,78 @@
+package com.hercules.service.springdatajpa;
+
+import com.hercules.model.Contact;
+import com.hercules.model.Employee;
+import com.hercules.service.ContactService;
+import com.hercules.service.EmployeeService;
+import org.junit.jupiter.api.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.lang.reflect.Method;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+@SpringBootTest
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+class EmployeeJPATest {
+    @Autowired
+    ContactService cs;
+
+    @Autowired
+    EmployeeService es;
+
+    private String TESTPHONE = "tilfældigt nummer";
+    private Long TESTCASEID = (long) 9999999;
+
+    @Test
+    @Order(1)
+    void canSaveAndFindById() {
+        Contact testContact = new Contact();
+        testContact.setCaseId(TESTCASEID);
+        cs.save(testContact);
+
+        Employee employee = new Employee();
+        employee.setFirstName("Bob");
+        employee.setPhone(TESTPHONE);
+        employee.getContacts().add(testContact);
+
+        es.save(employee);
+        assertTrue(es.findEmployeeByPhone(TESTPHONE).isPresent());
+    }
+
+    @Test
+    @Order(2)
+    void canFindEmployeesAllOrdered() {
+        assertTrue(es.findAllByOrderByPositionAscNameAsc().size() >= 1);
+    }
+
+    @Test
+    @Order(3)
+    void canFindById() {
+        Employee employee = es.findEmployeeByPhone(TESTPHONE).get();
+        Employee otherEmployee = es.findById(employee.getEmployeeId()).get();
+
+        assertEquals(employee.getPhone(), otherEmployee.getPhone());
+    }
+
+    @Test
+    @Order(4)
+    void canUpdateEmployee() {
+        String newFirstName = "Hans";
+        Employee employee = es.findEmployeeByPhone(TESTPHONE).get();
+        employee.setFirstName(newFirstName);
+        Employee newEmployee = es.save(employee);
+
+        assertEquals(employee.getFirstName(), newEmployee.getFirstName());
+        assertNotEquals(employee.getEmployeeId(), newEmployee.getEmployeeId());
+    }
+
+    @Test
+    @Order(5)
+    void canDeleteEmployee() {
+        int sizeBefore = es.findAllByOrderByPositionAscNameAsc().size();
+        es.deleteById(es.findEmployeeByPhone(TESTPHONE).get().getEmployeeId());
+        cs.deleteById(cs.findContactByCaseId(TESTCASEID).get().getContactId());
+        assertTrue(sizeBefore > es.findAllByOrderByPositionAscNameAsc().size());
+    }
+}
