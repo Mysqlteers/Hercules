@@ -62,22 +62,6 @@ public class Employee {
         return contacts;
     }
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "employeeId=" + employeeId +
-                ", contacts=" + contacts +
-                ", pictureLocation='" + pictureLocation + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", position='" + position + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", certificates='" + certificates + '\'' +
-                ", wage=" + wage +
-                '}';
-    }
-
     public void setContacts(Set<Contact> contacts) {
         this.contacts = contacts;
     }
