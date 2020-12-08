@@ -28,6 +28,7 @@ public class Employee {
     private String email;
     private String phone;
     private String certificates;
+    private double wage;
 
     public String imageURL() {
         return S3Loader.getInstance().getS3ObjectUrl(pictureLocation);
@@ -36,7 +37,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(Long employeeId, Set<Contact> contacts, String pictureLocation, String firstName, String lastName, String position, String email, String phone, String certificates) {
+    public Employee(Long employeeId, Set<Contact> contacts, String pictureLocation, String firstName, String lastName, String position, String email, String phone, String certificates, double wage) {
         this.employeeId = employeeId;
         this.contacts = contacts;
         this.pictureLocation = pictureLocation;
@@ -46,6 +47,7 @@ public class Employee {
         this.email = email;
         this.phone = phone;
         this.certificates = certificates;
+        this.wage = wage;
     }
 
     public Long getEmployeeId() {
@@ -118,5 +120,13 @@ public class Employee {
 
     public void setCertificates(String certificates) {
         this.certificates = certificates;
+    }
+
+    public double getWage() {
+        return wage;
+    }
+
+    public void setWage(double wage) {
+        this.wage = wage;
     }
 }
