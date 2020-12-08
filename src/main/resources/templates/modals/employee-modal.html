@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;" xmlns:th="http://www.thymeleaf.org" th:fragment="employee-modal(employee)">
+<head>
+    <link rel="stylesheet" href="../../static/css/Sager.css" media="screen">
+    <link th:href="@{/css/create-case-modal.css}" rel="stylesheet">
+    <link th:href="@{/css/nicepage.css}"  rel="stylesheet">
+    <script class="u-script" th:src="@{/js/jquery.js}" type="text/javascript"></script>
+    <script class="u-script" th:src="@{/js/nicepage.js}" type="text/javascript"></script>
+    <meta content="Nicepage 3.0.9, nicepage.com" name="generator">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" id="u-theme-google-font"
+          rel="stylesheet">
+</head>
+<body>
+    <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+<!--        modal button -->
+        <a th:if="${employee != null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#'+${employee?.getEmployeeId()}" th:text="'Opdatér'"></a>
+        <a th:unless="${employee != null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#sec-7902'" th:text="'Opret ansat'"></a>
+    </div>
+<!--modal -->
+<div class="u-black u-clearfix u-container-style u-dialog-block u-opacity u-opacity-70 u-valign-middle u-section-4" th:id="${employee?.getEmployeeId()} ?: 'sec-7902'" >
+    <div class="u-container-style u-dialog u-white u-dialog-1">
+        <div class="u-container-layout u-container-layout-1">
+            <div class="u-expanded-width u-form u-form-1">
+                 <form action="/updateEmployee" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" method="post"
+                      style="padding: 10px">
+                    <div class="u-form-group u-form-name">
+                        <input name="employeeId" placeholder="Ansat nr"
+                               required hidden type="text" th:value="${employee?.getEmployeeId()} ?: ${null}" readonly>
+                    </div>
+                    <div class="u-form-email u-form-group">
+                        <label for="">Stilling</label>
+                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="position" th:value="${employee?.getPosition()  ?: ''}" placeholder="Stilling">
+                    </div>
+                    <div class="u-form-group u-form-message">
+                        <label for="">Billede</label>
+                        <input type="file" th:enctype="multipart/form-data" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="pictureLocation" th:value="${employee?.getPictureLocation()} ?: ''" placeholder="Billede URL">
+                    </div>
+                    <div class="u-form-date u-form-group u-form-partition-factor-2 u-form-group-5">
+                        <label for="">Fornavn</label>
+                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"  name="firstName" placeholder="Fornavn"
+                               type="text" th:value="${employee?.getFirstName()} ?: ''">
+                    </div>
+                     <div class="u-form-date u-form-group u-form-partition-factor-2 u-form-group-5">
+                         <label for="">Efternavn</label>
+                         <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"  name="lastName" placeholder="Efternavn"
+                                type="text" th:value="${employee?.getLastName()} ?: ''">
+                     </div>
+                     <div class="u-form-date u-form-group u-form-partition-factor-2 u-form-group-5">
+                         <label for="">Certifikater</label>
+                         <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"  name="certificates" placeholder="Certifikater"
+                                type="text" th:value="${employee?.getCertificates()} ?: ''">
+                     </div>
+                     <div class="u-form-date u-form-group u-form-partition-factor-2 u-form-group-5">
+                         <label for="">Telefon nr.</label>
+                         <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"  name="phone" placeholder="Telefon nr."
+                                type="text" th:value="${employee?.getPhone()} ?: ''">
+                     </div>
+                     <div class="u-form-date u-form-group u-form-partition-factor-2 u-form-group-5">
+                         <label for="">Email</label>
+                         <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"  name="email" placeholder="Email"
+                                type="text" th:value="${employee?.getEmail()} ?: ''">
+                     </div>
+                     <div class="u-form-date u-form-group u-form-partition-factor-2 u-form-group-5">
+                         <label for="">Timeløn</label>
+                         <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"  name="wage" placeholder="Timeløn"
+                                type="number" th:value="${employee?.getWage()} ?: 0">
+                     </div>
+                    <div class="u-align-left u-form-group u-form-submit">
+                        <input style="background-color: #adcce9; height: 60px" class="u-button-style u-hover-palette-1-light-1 u-btn-1" type="submit" value="Gem" onclick="alert('Ansat er blevet gemt!')">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <button class="u-dialog-close-button u-icon u-text-grey-40 u-icon-1">
+            <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" style="" viewBox="0 0 16 16">
+                <use xlink:href="#svg-797b" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+            </svg>
+            <svg class="u-svg-content" id="svg-797b" version="1.1"
+                 viewBox="0 0 16 16" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px"><rect height="16" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -3.3138 8.0002)" width="2" x="7" y="0"></rect>
+                <rect height="2" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -3.3138 8.0002)" width="16" x="0"
+                      y="7"></rect></svg>
+        </button>
+    </div>
+</div>
+</body>
+<script>
+    function reloadAfterModal() {
+        window.location.reload(true);
+    }
+</script>
+<!--Style-->
+<style>
+    .u-section-4 {
+    min-height: 100px;
+}
+
+.u-section-4 .u-dialog-1 {
+    width: 800px;
+    min-height: 50px;
+    margin: 6px auto;
+}
+
+.u-section-4 .u-container-layout-1 {
+    padding: 30px;
+}
+
+.u-section-4 .u-form-1 {
+    height: 18px;
+    margin: 0;
+}
+
+.u-section-4 .u-form-group-4 {
+    margin-left: 0;
+}
+
+.u-section-4 .u-form-group-5 {
+    margin-left: 0;
+}
+
+.u-section-4 .u-form-group-6 {
+    margin-left: 0;
+}
+
+.u-section-4 .u-btn-1 {
+    border-style: none;
+}
+
+.u-section-4 .u-icon-1 {
+    width: 20px;
+    height: 20px;
+}
+
+@media (max-width: 1199px) {
+    .u-section-4 .u-form-1 {
+        margin-right: initial;
+        margin-left: initial;
+    }
+}
+
+@media (max-width: 991px) {
+    .u-section-4 .u-dialog-1 {
+        width: 720px;
+    }
+}
+
+@media (max-width: 767px) {
+    .u-section-4 .u-dialog-1 {
+        width: 540px;
+    }
+
+    .u-section-4 .u-container-layout-1 {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+@media (max-width: 575px) {
+    .u-section-4 .u-dialog-1 {
+        width: 340px;
+    }
+}</style>
+
+
+
+</html>
