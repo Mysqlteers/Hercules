@@ -7,17 +7,25 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.lang.reflect.Method;
+import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class CaseTest {
+class CaseTest
+{
+
+
+
     @Test
     @Order(1)
     public void canCreateCaseObject(){
+        Task subtask_1 = new Task("task1");
         Case newCase = new Case();
+        newCase.addTask(subtask_1);
+
         assertNotNull(newCase);
     }
 

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+
+<html style="font-size: 16px;" xmlns:th="http://www.thymeleaf.org" th:fragment="taskModal(task)">
+
+
+<head>
+    <link th:href="@{/css/taskModal.css}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" id="u-theme-google-font"
+          rel="stylesheet">
+</head>
+
+<!-- MODAL -->
+
+<section class="u-black u-clearfix u-container-style u-dialog-block u-opacity u-opacity-70 u-section-4" th:id="${task?.getTaskId()} ?: 'sec-1393'">
+    <div class="u-container-style u-dialog u-white u-dialog-1">
+        <div class="u-container-layout u-container-layout-1">
+            <div class="u-form u-form-1">
+
+                <!-- Start of modal form -->
+                <form action="/handleTask" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" style="padding: 10px" source="custom" name="form">
+                    <input  type="hidden" name="taskId" th:value="${task?.getTaskId()} ?: ''">
+                    <input type="hidden" name="pictures" th:value="${task?.getPictures()} ?: ''">
+                    <input type="hidden" name="superTaskId" th:value="${task?.getSuperTask()?.getId()}">
+                    <input type="hidden" name="CaseId" th:value="${null}">
+                <!-- start dato -->
+                    <div class="u-form-group u-form-name u-form-partition-factor-2">
+                        <label for="start">Start dato</label>
+                        <input type="text" placeholder="Start Dato" id="start" name="task_start_date" th:value="${task?.getStartDate()}  ?: ${null}" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+                    </div>
+                <!-- slut dato -->
+                    <div class="u-form-group u-form-partition-factor-2 u-form-group-2">
+                        <label for="end">Slut Dato</label>
+                        <input type="text" id="end" placeholder="Slut Dato" name="deadline" th:value="${task?.getDeadline()}  ?: ${null}" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+                    </div>
+                <!-- navn -->
+                    <div class="u-form-email u-form-group">
+                        <label for="name">Navn</label>
+                        <input placeholder="Navn" id="name" name="name" th:value="${task?.getName()}  ?: 'Opgave'" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+                    </div>
+
+                <!-- beskrivelse todo tilføj description til model -->
+                    <div class="u-form-group u-form-message">
+                        <label for="description">Beskrivelse</label>
+                        <input placeholder="" id="description" name="description" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" th:value="${task?.getDescription()}">
+                    </div>
+
+                 <!-- est. tid -->
+                    <div class="u-form-group u-form-partition-factor-2 u-form-group-5">
+                        <label for="est">Estimeret tid</label>
+                        <input type="text" id="est" placeholder="Estimeret Tid" name="est_time" th:value="${task?.getEst_time()}  ?: ${null}" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+                    </div>
+                <!-- done todo getter for done -->
+                    <div class="u-form-checkbox u-form-group u-form-partition-factor-2 u-form-group-6">
+                        <label for="done">Færdig</label>
+                        <input type="hidden"   th:class="'isDone'+${task?.getTaskId()} ?: 'case'" name="isDone" th:value="${task?.isDone()}  ?: ${false}">
+                        <input type="checkbox" id="done" th:class="'isDone'+${task?.getTaskId()} ?: 'case'" name="done" th:checked="${task?.isDone()}  ?: ${false}" onclick="isDone(this)">
+                    </div>
+                <!-- submit knap -->
+                    <div class="u-align-left u-form-group u-form-submit">
+                        <input style="background-color: #adcce9; height: 60px" class="u-button-style u-hover-palette-1-light-1 u-btn-1" name="update" type="submit" value="Gem"/>
+                        <input style="background-color: #adcce9; height: 60px" class="u-button-style u-hover-palette-1-light-1 u-btn-1" name="delete" type="submit" value="Slet"/>
+                        <input style="background-color: #adcce9; height: 60px" class="u-button-style u-hover-palette-1-light-1 u-btn-1" name="create" type="submit" value="Ny"/>
+                    </div>
+
+                    <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
+                    <div class="u-form-send-error u-form-send-message"> Unable to send your message. Please fix errors then try again. </div>
+
+                </form>
+                <!--End of modal form -->
+            </div>
+
+            <!-- Billede slider til FØR billeder -->
+            <div class="u-carousel u-gallery u-layout-carousel u-lightbox u-no-transition u-show-text-always u-gallery-1" data-interval="5000" data-u-ride="carousel" id="carousel-b010" style="top: 29vh">
+                <ol class="u-absolute-hcenter u-carousel-indicators u-carousel-indicators-1">
+                    <li th:each="item : ${task.getPicturesAsList()}" data-u-target="#carousel-8c57" th:attr="data-u-slide-to=${itemStat.count}" class="u-active u-grey-70 u-shape-circle" style="width: 10px; height: 10px;"></li>
+                </ol>
+
+                <div class="u-carousel-inner u-gallery-inner" role="listbox">
+
+                    <div  th:if="${task.getPicturesAsList().size()<1}" class="u-active u-carousel-item u-gallery-item">
+                        <div class="u-back-slide">
+                            <img class="u-back-image u-expanded" th:src="@{/images/default-image.jpg}" alt="intet billede">
+                        </div>
+                        <div class="u-over-slide u-over-slide-1">
+                            <h3 class="u-gallery-heading">Før</h3>
+                            <p class="u-gallery-text" >ingen billeder endnu</p>
+                        </div>
+                    </div>
+
+                    <div th:each="picture : ${task.getPicturesAsList()}" th:if="${!picture.isAfterPicture()}" class="u-active u-carousel-item u-gallery-item">
+                        <div class="u-back-slide">
+                            <img class="u-back-image u-expanded" th:src="${picture.imageUrl()}" alt="Før">
+                        </div>
+                        <div class="u-over-slide u-over-slide-1">
+                            <h3 class="u-gallery-heading">Før</h3>
+                            <p class="u-gallery-text" th:text="${picture.getDescription()}"></p>
+                        </div>
+                    </div>
+                </div>
+              <span aria-hidden="true">
+                <svg viewBox="0 0 451.846 451.847"><path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
+L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
+c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></svg>
+              </span>
+                    <span class="sr-only">
+                <svg viewBox="0 0 451.846 451.847"><path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
+L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
+c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></svg>
+              </span>
+                </a>
+            </div>
+
+            <!-- Billede slider til EFTER billeder -->
+            <div class="u-carousel u-gallery u-layout-carousel u-lightbox u-no-transition u-show-text-always u-gallery-2" data-interval="5000" data-u-ride="carousel" id="carousel-8c57" style="top: 29vh">
+                <ol class="u-absolute-hcenter u-carousel-indicators u-carousel-indicators-2">
+                    <li th:each="item : ${task.getPicturesAsList()}" data-u-target="#carousel-8c57" th:attr="data-u-slide-to=${itemStat.count}" class="u-active u-grey-70 u-shape-circle" style="width: 10px; height: 10px;"></li>
+                </ol>
+
+
+                <div  th:if="${task.getPicturesAsList().size()<1}" class="u-active u-carousel-item u-gallery-item">
+                    <div class="u-back-slide">
+                        <img class="u-back-image u-expanded" th:src="@{/images/default-image.jpg}" alt="intet billede">
+                    </div>
+                    <div class="u-over-slide u-over-slide-1">
+                        <h3 class="u-gallery-heading">Efter</h3>
+                        <p class="u-gallery-text" >ingen billeder endnu</p>
+                    </div>
+                </div>
+
+                <div th:each="picture : ${task.getPicturesAsList()}" th:if="${picture.isAfterPicture()}" class="u-active u-carousel-item u-gallery-item">
+                    <div class="u-back-slide">
+                        <img class="u-back-image u-expanded" th:src="${picture.imageUrl()}" alt="Før">
+                    </div>
+                    <div class="u-over-slide u-over-slide-1">
+                        <h3 class="u-gallery-heading">Før</h3>
+                        <p class="u-gallery-text" th:text="${picture.getDescription()}"></p>
+                    </div>
+                </div>
+
+                </div>
+
+            </div>
+            </div>
+            <button class="u-dialog-close-button u-icon u-text-grey-40 u-icon-1">
+            <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" style="">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-b800"></use></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-b800">
+                <rect x="7" y="0" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -3.3138 8.0002)" width="2" height="16"></rect>
+                <rect x="0" y="7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -3.3138 8.0002)" width="16" height="2"></rect>
+            </svg>
+            </button>
+    </div>
+
+</section>
+
+<script>
+    function isDone(el) {
+        const inputs = document.querySelectorAll(el.class);
+        inputs.forEach(input=>{
+            if (input!=el)
+            {
+                input.value=el.checked();
+            }
+        })
+    }
+</script>
+<style>
+
+        .u-section-4 {
+    min-height: 1154px;
+}
+.u-section-4 .u-dialog-1 {
+    width: 1004px;
+    min-height: 903px;
+    height: auto;
+    margin: 25px auto 60px calc(((100% - 1140px) / 2));
+}
+
+.u-section-4 .u-container-layout-1 {
+    padding: 30px;
+}
+
+.u-section-4 .u-form-1 {
+    height: 520px;
+    margin: 25px 644px 0 0;
+}
+
+.u-section-4 .u-form-group-2 {
+    margin-left: 0;
+}
+
+.u-section-4 .u-form-group-5 {
+    margin-left: 0;
+}
+
+.u-section-4 .u-form-group-6 {
+    margin-left: 0;
+}
+
+.u-section-4 .u-btn-1 {
+    border-style: none;
+}
+
+.u-section-4 .u-gallery-1 {
+    width: 617px;
+    height: 354px;
+    margin: -510px auto 0 300px;
+}
+
+.u-section-4 .u-carousel-indicators-1 {
+    position: absolute;
+    bottom: 10px;
+}
+
+.u-section-4 .u-over-slide-1 {
+    min-height: 100px;
+    padding: 10px;
+}
+
+.u-section-4 .u-over-slide-2 {
+    min-height: 100px;
+    padding: 10px;
+}
+
+.u-section-4 .u-carousel-control-1 {
+    position: absolute;
+    left: 10px;
+    width: 40px;
+    height: 40px;
+}
+
+.u-section-4 .u-carousel-control-2 {
+    position: absolute;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+}
+
+.u-section-4 .u-gallery-2 {
+    width: 617px;
+    height: 369px;
+    margin: 0 auto 0 300px;
+}
+
+.u-section-4 .u-carousel-indicators-2 {
+    position: absolute;
+    bottom: 10px;
+}
+
+.u-section-4 .u-over-slide-3 {
+    min-height: 100px;
+    padding: 10px;
+}
+
+.u-section-4 .u-over-slide-4 {
+    min-height: 100px;
+    padding: 10px;
+}
+
+.u-section-4 .u-carousel-control-3 {
+    position: absolute;
+    left: 10px;
+    width: 40px;
+    height: 40px;
+}
+
+.u-section-4 .u-carousel-control-4 {
+    position: absolute;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+}
+
+.u-section-4 .u-btn-2 {
+    margin: -207px auto 0 10px;
+}
+
+.u-section-4 .u-btn-3 {
+    margin: 10px auto 0 10px;
+}
+
+.u-section-4 .u-btn-4 {
+    margin: 20px auto 0 10px;
+}
+
+.u-section-4 .u-btn-5 {
+    margin: 20px auto 0 10px;
+}
+
+.u-section-4 .u-icon-1 {
+    width: 20px;
+    height: 20px;
+}
+
+@media (max-width: 1199px) {
+    .u-section-4 .u-dialog-1 {
+        width: 940px;
+        margin-left: calc(((100% - 940px) / 2));
+    }
+
+    .u-section-4 .u-form-1 {
+        margin-right: 580px;
+    }
+
+    .u-section-4 .u-gallery-1 {
+        margin-left: 263px;
+    }
+
+    .u-section-4 .u-gallery-2 {
+        margin-left: 263px;
+    }
+
+    .u-section-4 .u-btn-2 {
+        margin-top: -207px;
+        margin-left: 0;
+    }
+
+    .u-section-4 .u-btn-3 {
+        margin-left: 0;
+    }
+
+    .u-section-4 .u-btn-4 {
+        margin-left: 0;
+    }
+
+    .u-section-4 .u-btn-5 {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 991px) {
+    .u-section-4 .u-dialog-1 {
+        width: 720px;
+        margin-left: calc(((100% - 720px) / 2));
+    }
+
+    .u-section-4 .u-form-1 {
+        margin-right: 360px;
+    }
+
+    .u-section-4 .u-gallery-1 {
+        margin-left: 43px;
+    }
+
+    .u-section-4 .u-gallery-2 {
+        margin-left: 43px;
+    }
+}
+
+@media (max-width: 767px) {
+    .u-section-4 .u-dialog-1 {
+        width: 540px;
+        margin-left: calc(((100% - 540px) / 2));
+    }
+
+    .u-section-4 .u-container-layout-1 {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .u-section-4 .u-form-1 {
+        margin-right: 220px;
+    }
+
+    .u-section-4 .u-gallery-1 {
+        width: 520px;
+        margin-left: 0;
+    }
+
+    .u-section-4 .u-gallery-2 {
+        width: 520px;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 575px) {
+    .u-section-4 .u-dialog-1 {
+        width: 340px;
+        margin-left: calc(((100% - 340px) / 2));
+    }
+
+    .u-section-4 .u-form-1 {
+        margin-right: 20px;
+    }
+
+    .u-section-4 .u-gallery-1 {
+        width: 320px;
+    }
+
+    .u-section-4 .u-gallery-2 {
+        width: 320px;
+    }
+}</style>
+
+
+
+</html>
