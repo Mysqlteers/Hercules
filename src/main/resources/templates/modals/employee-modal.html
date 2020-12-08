@@ -21,7 +21,8 @@
     <div class="u-container-style u-dialog u-white u-dialog-1">
         <div class="u-container-layout u-container-layout-1">
             <div class="u-expanded-width u-form u-form-1">
-                 <form action="/updateEmployee" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" method="post"
+                 <form enctype="multipart/form-data"
+                         action="/updateEmployee" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" method="post"
                       style="padding: 10px">
                     <div class="u-form-group u-form-name">
                         <input name="employeeId" placeholder="Ansat nr"
@@ -33,7 +34,10 @@
                     </div>
                     <div class="u-form-group u-form-message">
                         <label for="">Billede</label>
-                        <input type="file" th:enctype="multipart/form-data" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="pictureLocation" th:value="${employee?.getPictureLocation()} ?: ''" placeholder="Billede URL">
+                        <input type="file"
+                               class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"
+                               name="file" th:value="${employee?.getPictureLocation()} ?: ''"
+                               placeholder="Billede URL">
                     </div>
                     <div class="u-form-date u-form-group u-form-partition-factor-2 u-form-group-5">
                         <label for="">Fornavn</label>
@@ -83,11 +87,7 @@
     </div>
 </div>
 </body>
-<script>
-    function reloadAfterModal() {
-        window.location.reload(true);
-    }
-</script>
+
 <!--Style-->
 <style>
     .u-section-4 {
@@ -159,7 +159,10 @@
         width: 340px;
     }
 }</style>
-
-
+<script>
+    function filechooser(e) {
+        e.target.value && (s.addFiles(e.target.files, e), e.target.value = "")
+    }
+</script>
 
 </html>

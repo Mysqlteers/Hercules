@@ -94,7 +94,7 @@ public class S3Loader {
      * @param filepath the path on your local computer to the desired file.
      * @param fileName the name S3 bucket should save, with using / will create a subfolder
      */
-    public void uploadImage(String filepath, String fileName) {
+    public void uploadImage(File filepath, String fileName) {
         try {
             BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKey, secretAccessKey);
             AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
@@ -102,7 +102,7 @@ public class S3Loader {
                     .withRegion(region)
                     .build();
 
-            PutObjectRequest request = new PutObjectRequest(bucketName, fileName, new File(filepath));
+            PutObjectRequest request = new PutObjectRequest(bucketName, fileName, filepath);
             ObjectMetadata metadata = new ObjectMetadata();
             metadata.setContentType("image/jpg");
             request.setMetadata(metadata);
