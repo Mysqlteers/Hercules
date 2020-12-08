@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="page_type" content="np-template-header-footer-from-plugin">
+    <link rel="stylesheet" th:href="@{/css/nicepage.css}" media="screen" type="text/css">
+    <script class="u-script" type="text/javascript" th:src="@{/js/jquery.js}" defer=""></script>
+    <script class="u-script" type="text/javascript" th:src="@{/js/nicepage.js}" defer=""></script>
+    <meta name="generator" content="Nicepage 3.0.9, nicepage.com">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
+    <meta property="og:title" content="caseDetails">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#478ac9">
+    <title>Fejl</title>
+</head>
+<body style="background-color: #f1c50e" class="u-body">
+<header th:replace="fragments/header :: header" th:remove="tag"></header>
+<h1>Ups, der skete en fejl</h1>
+<th:block th:switch="${errorCode}">
+    <div th:case="-1">
+<!--        Denne case burde aldrig ske-->
+        <h2>I'm afraid I can't let you do that, Dave</h2>
+    </div>
+    <div th:case="0">
+<!--        Case for søgning af caseId der ikke er i DB-->
+        <h2>Der findes ingen sag med det nummer i databasen</h2>
+    </div>
+</th:block>
+</body>
+</html>
