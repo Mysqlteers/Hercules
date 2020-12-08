@@ -2,9 +2,11 @@ package com.hercules.controller;
 
 import com.hercules.model.Case;
 import com.hercules.model.Contact;
+import com.hercules.model.Employee;
 import com.hercules.model.Person;
 import com.hercules.service.CaseService;
 import com.hercules.service.ContactService;
+import com.hercules.service.EmployeeService;
 import com.hercules.service.PersonService;
 import com.hercules.service.utility.S3Loader;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class CaseController {
 
     @Autowired
     PersonService personService;
+
+    @Autowired
+    EmployeeService employeeService;
 
     @GetMapping("/")
     public String index(Model model) {
@@ -62,14 +67,18 @@ public class CaseController {
             if (contactService.findContactByCaseId(caseId).isPresent()) {
                 Contact contact = contactService.findContactByCaseId(caseId).get();
                 model.addAttribute("contactlist", personService.findAllByContactOrderByPositionAscFirstNameAsc(contact));
+                model.addAttribute("employees", employeeService.findAllByContactsOrderByPositionAscFirstNameAsc(contact));
             } else {
                 model.addAttribute("contactlist", new HashSet<Person>());
+                model.addAttribute("employee", new HashSet<Employee>());
             }
             return "caseDetails";
         } else {
             model.addAttribute("errorCode", 0);
             return "genericErrorPage";
         }
+
+
 
     }
 }

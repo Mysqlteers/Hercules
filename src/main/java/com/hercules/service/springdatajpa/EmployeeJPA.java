@@ -1,5 +1,6 @@
 package com.hercules.service.springdatajpa;
 
+import com.hercules.model.Contact;
 import com.hercules.model.Employee;
 import com.hercules.repository.EmployeeRepository;
 import com.hercules.service.EmployeeService;
@@ -44,6 +45,11 @@ public class EmployeeJPA implements EmployeeService {
     @Override
     public List<Employee> findAllByOrderByPositionAscFirstNameAsc() {
         return er.findAllByOrderByPositionAscFirstNameAsc();
+    }
+
+    @Override
+    public List<Employee> findAllByContactsOrderByPositionAscFirstNameAsc(Contact contact) {
+        return er.findAllByContactsOrderByPositionAscFirstNameAsc(contact);
     }
 
     @Override
