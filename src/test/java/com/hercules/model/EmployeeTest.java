@@ -33,8 +33,8 @@ class EmployeeTest {
         Employee employee = new Employee();
         S3Loader loader = S3Loader.getInstance();
         loader.uploadImage("C:/Users/emiln/Desktop/image.jpg",
-                          "/employee-pictures/test_employee_pic.jpg");
-        employee.setPictureLocation("employee-pictures/test_employee_pic.jpg");
+                          "employee-pictures/test_employee_pic");
+        employee.setPictureLocation("employee-pictures/test_employee_pic");
         System.out.println("Employee.imageURL = " + employee.imageURL());
     }
 }
