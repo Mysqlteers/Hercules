@@ -28,17 +28,21 @@
                                required hidden type="text" th:value="${case?.getCaseId()} ?: ${null}" readonly>
                     </div>
                     <div class="u-form-email u-form-group">
+                        <label for="">Adresse</label>
                         <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"name="location" th:value="${case?.getLocation()  ?: ''}" placeholder="Adresse">
                     </div>
                     <div class="u-form-group u-form-message">
+                        <label for="">Beskrivelse</label>
                         <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="description" th:value="${case?.getDescription()} ?: ''" placeholder="Beskrivelse">
                     </div>
                     <div class="u-form-date u-form-group u-form-partition-factor-2 u-form-group-5">
+                        <label for="">Start dato</label>
                         <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"  name="caseStartDate" placeholder="Start dato"
                                type="date" th:value="${case?.getCaseStartDate()} ?: ''">
                     </div>
                     <div class="u-form-group u-form-select u-form-group-6">
                         <div class="u-form-select-wrapper" th:if="${case?.getStatus() == 0}">
+                            <label for="">Status</label>
                             <select class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"
                                     name="status">
                                 <option value="0" selected>Igangværende</option>

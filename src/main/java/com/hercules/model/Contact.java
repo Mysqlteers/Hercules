@@ -16,19 +16,31 @@ public class Contact {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "contact")
     @JsonManagedReference
     private Set<Person> persons;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "contact")
+    @JsonManagedReference
+    private Set<Employee> employees;
 
     public Contact() {
     }
 
-    public Contact(Long contactId, Long caseId, Set<Person> persons) {
+    public Contact(Long contactId, Long caseId, Set<Person> persons, Set<Employee> employees) {
         this.contactId = contactId;
         this.caseId = caseId;
         this.persons = persons;
+        this.employees = employees;
     }
 
     public Contact(Long caseId) {
         this.caseId = caseId;
         this.persons = new HashSet<>();
+    }
+
+    public Set<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(Set<Employee> employees) {
+        this.employees = employees;
     }
 
     public Long getContactId() {
