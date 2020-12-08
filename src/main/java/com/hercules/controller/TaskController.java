@@ -14,12 +14,12 @@ import java.util.Set;
 
 @Controller
 public class TaskController {
-    
+
     @Autowired
     TaskService taskService;
 
 
-    @PostMapping(value="/handleTask", params={"delete=slet"} )
+    @PostMapping(value="/handleTask", params={"delete=Slet"} )
     public String deleteTask(@RequestParam(value = "taskId") long id)
     {
 
@@ -29,7 +29,7 @@ public class TaskController {
     }
 
 
-    @PostMapping(value="/handleTask", params={"create=ny"} )
+    @PostMapping(value="/handleTask", params={"create=Ny"} )
     public String CreateTask(@RequestParam Map<String, String> params){
 
 
@@ -55,7 +55,7 @@ public class TaskController {
         return "redirect:/timeline/"+task.getSuperTask().getTaskId()+"/"+ LocalDate.now().getMonthValue()+"/"+LocalDate.now().getYear();
     }
 
-    @PostMapping(value="/handleTask", params={"update=gem"})
+    @PostMapping(value="/handleTask", params={"update=Gem"})
     public String updateTask(@RequestParam Map<String, String> params){
 
         Task task = taskService.findByTaskId(Long.parseLong(params.get("taskId"))).get();//new Task(params.get("name"), null,  params.get("task_start_date"),  params.get("deadline"),  params.get("est_time"), null, done);
