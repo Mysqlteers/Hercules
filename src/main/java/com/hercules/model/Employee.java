@@ -10,8 +10,7 @@ public class Employee {
     private Long employeeId;
     @ManyToOne @JoinColumn(name = "contact_id")
     private Contact contact;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
-    private  pictures;
+    private String picture;
     private String firstName;
     private String lastName;
     private String position;
@@ -23,10 +22,10 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(Long employeeId, Contact contact, Set<String> pictures, String firstName, String lastName, String position, String email, String phone, String certificates) {
+    public Employee(Long employeeId, Contact contact, String picture, String firstName, String lastName, String position, String email, String phone, String certificates) {
         this.employeeId = employeeId;
         this.contact = contact;
-        this.pictures = pictures;
+        this.picture = picture;
         this.firstName = firstName;
         this.lastName = lastName;
         this.position = position;
@@ -51,12 +50,12 @@ public class Employee {
         this.contact = contact;
     }
 
-    public Set<String> getPictures() {
-        return pictures;
+    public String getPicture() {
+        return picture;
     }
 
-    public void setPictures(Set<String> pictures) {
-        this.pictures = pictures;
+    public void setPictures(String picture) {
+        this.picture = picture;
     }
 
     public String getFirstName() {
