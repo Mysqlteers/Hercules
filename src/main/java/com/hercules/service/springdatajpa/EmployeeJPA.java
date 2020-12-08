@@ -5,6 +5,7 @@ import com.hercules.repository.EmployeeRepository;
 import com.hercules.service.EmployeeService;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -20,7 +21,9 @@ public class EmployeeJPA implements EmployeeService {
     @Override
     public Set<Employee> findAll() {
         //Skal aldrig bruges
-        return null;
+        Set<Employee> set = new HashSet<>();
+        er.findAll().forEach(set::add);
+        return set;
     }
 
     @Override
@@ -39,8 +42,8 @@ public class EmployeeJPA implements EmployeeService {
     }
 
     @Override
-    public List<Employee> findAllByOrderByPositionAscNameAsc() {
-        return er.findAllByOrderByPositionAscNameAsc();
+    public List<Employee> findAllByOrderByPositionAscFirstNameAsc() {
+        return er.findAllByOrderByPositionAscFirstNameAsc();
     }
 
     @Override

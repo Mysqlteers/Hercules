@@ -12,7 +12,7 @@ import java.util.Set;
 public class Employee {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "employee_id")
     private Long employeeId;
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.MERGE})
     @JoinTable(
             name = "employee_case",
             joinColumns = {@JoinColumn(name = "employee_id")},

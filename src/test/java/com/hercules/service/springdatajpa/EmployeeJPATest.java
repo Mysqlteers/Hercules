@@ -29,21 +29,25 @@ class EmployeeJPATest {
     void canSaveAndFindById() {
         Contact testContact = new Contact();
         testContact.setCaseId(TESTCASEID);
-        cs.save(testContact);
+        testContact = cs.save(testContact);
 
         Employee employee = new Employee();
         employee.setFirstName("Bob");
         employee.setPhone(TESTPHONE);
+
+        testContact.getEmployees().add(employee);
         employee.getContacts().add(testContact);
 
+
         es.save(employee);
+        cs.save(testContact);
         assertTrue(es.findEmployeeByPhone(TESTPHONE).isPresent());
     }
 
     @Test
     @Order(2)
     void canFindEmployeesAllOrdered() {
-        assertTrue(es.findAllByOrderByPositionAscNameAsc().size() >= 1);
+        assertTrue(es.findAllByOrderByPositionAscFirstNameAsc().size() >= 1);
     }
 
     @Test
@@ -64,15 +68,15 @@ class EmployeeJPATest {
         Employee newEmployee = es.save(employee);
 
         assertEquals(employee.getFirstName(), newEmployee.getFirstName());
-        assertNotEquals(employee.getEmployeeId(), newEmployee.getEmployeeId());
+        assertEquals(employee.getEmployeeId(), newEmployee.getEmployeeId());
     }
 
     @Test
     @Order(5)
     void canDeleteEmployee() {
-        int sizeBefore = es.findAllByOrderByPositionAscNameAsc().size();
+        int sizeBefore = es.findAll().size();
         es.deleteById(es.findEmployeeByPhone(TESTPHONE).get().getEmployeeId());
         cs.deleteById(cs.findContactByCaseId(TESTCASEID).get().getContactId());
-        assertTrue(sizeBefore > es.findAllByOrderByPositionAscNameAsc().size());
+        assertTrue(sizeBefore > es.findAll().size());
     }
 }
