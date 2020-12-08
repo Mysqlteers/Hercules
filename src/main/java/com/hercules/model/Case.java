@@ -6,6 +6,8 @@ import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "cases")
@@ -21,6 +23,10 @@ public class Case {
 
     @Column(name = "case_start_date")
     private String caseStartDate;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "superCase")
+    Set<Document> documents = new HashSet<>();
+
 
     public String getDescription() {
         return description;
@@ -52,6 +58,19 @@ public class Case {
     }
 
     public Case() {
+    }
+
+    public void addDocument(Case superCase, String documentName, String location){
+        Document newDoc = new Document(this,documentName, location);
+        documents.add(newDoc);
+    }
+
+    public Set<Document> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(Set<Document> documents) {
+        this.documents = documents;
     }
 
     public String getCaseStartDate() {

@@ -1,0 +1,22 @@
+package com.hercules.controller;
+
+import com.hercules.service.DocumentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class DokumentController {
+
+    @Autowired
+    DocumentService documentService;
+
+
+    @GetMapping("/dokumenter")
+    public String dokumenterHomer(Model model){
+        model.addAttribute("documents",documentService.findAll());
+        return "dokumenterHome";
+    }
+
+}

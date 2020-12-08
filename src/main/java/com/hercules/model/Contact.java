@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "contacts")
-public class Contact {
+public class Contact extends Document {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "contact_id")
     private Long contactId;
     @Column(name = "case_id")

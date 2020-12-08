@@ -33,6 +33,7 @@ public class Person {
         this.email = email;
     }
 
+
     public String getPosition() {
         return position;
     }
