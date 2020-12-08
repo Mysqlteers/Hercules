@@ -14,14 +14,12 @@ public class TaskJPATest {
     @Autowired
     TaskService taskService;
 
-    Long testTaskId = (long) 34;
 
     @Test
     void canSaveAndCanFindByTaskId() {
         Task newTask = new Task();
-        newTask.setTaskId(testTaskId);
         taskService.save(newTask);
-        assert(taskService.findByTaskId(testTaskId).isPresent());
+        assert(taskService.findByTaskId(newTask.getTaskId()).isPresent());
     }
 
 }
