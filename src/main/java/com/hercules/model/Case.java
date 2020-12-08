@@ -5,6 +5,7 @@ import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -20,8 +21,8 @@ public class Case implements Taskable {
 
     private String location;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "superTask")
-    private Set<Task> subtasks;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Case")
+    private Set<Task> subtasks = new HashSet<>();
 
     @Column(name = "case_start_date")
     private String caseStartDate;
@@ -95,14 +96,15 @@ public class Case implements Taskable {
     }
 
     @Override
-    public List<Taskable> getSubtasksAsList() {
-        List<Taskable> result = new ArrayList<>(subtasks);
+    public List<Task> getSubtasksAsList() {
+        List<Task> result = new ArrayList<>(subtasks);
         return result;
     }
 
     @Override
-    public void addTask(Taskable task) {
-        subtasks.add((Task)task);
+    public void addTask(Task task) {
+        task.setCase(this);
+        subtasks.add(task);
     }
 
     @Override

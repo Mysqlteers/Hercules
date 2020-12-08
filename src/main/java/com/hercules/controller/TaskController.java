@@ -37,11 +37,12 @@ public class TaskController {
 
         Task task = new Task();
 
-        System.out.println("Is done"+params.get("isDone"));
-        if (params.get("isDone").equals("true"))
-            task.setDone(true);
-        else
-            task.setDone(false);
+        try {
+            if (params.get("isDone").equals("true"))
+                task.setDone(true);
+            else
+                task.setDone(false);
+        }catch (Exception e){}
 
         task.setName(params.get("name")+"- ny opgave");
         task.setTask_start_date(LocalDate.now().toString());
@@ -60,12 +61,12 @@ public class TaskController {
 
         Task task = taskService.findByTaskId(Long.parseLong(params.get("taskId"))).get();//new Task(params.get("name"), null,  params.get("task_start_date"),  params.get("deadline"),  params.get("est_time"), null, done);
 
-        System.out.println("Is done"+params.get("isDone"));
-        if (params.get("isDone").equals("true"))
-            task.setDone(true);
-        else
-            task.setDone(false);
-
+        try {
+            if (params.get("isDone").equals("true"))
+                task.setDone(true);
+            else
+                task.setDone(false);
+        }catch (Exception e){}
         task.setName(params.get("name"));
         task.setTask_start_date(params.get("task_start_date"));
         task.setDeadline(params.get("deadline"));

@@ -74,10 +74,16 @@ a {
     font-size: 16px;
     border-radius: 20px;
     padding: 10px 20px;
+    max-height: 80px;
     width: 0;
     opacity: 0;
     transition: all 0.65s linear 0.2s;
 }
+
+.chart-wrapper .chart-bars li a {
+    position: relative;
+}
+
 
 @media screen and (max-width: 600px) {
     .chart-wrapper .chart-bars li {

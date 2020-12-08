@@ -1,6 +1,7 @@
 package com.hercules.service.springdatajpa;
 
 import com.hercules.model.Case;
+import com.hercules.model.Task;
 import com.hercules.service.CaseService;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -25,15 +26,18 @@ class CaseJPATest {
     void canFindAll() {
         assertTrue(cs.findAll().size() >= 1);
     }
-/*
+
     @Test
     @Order(1)
     void canSaveAndFindByLocation() {
-//        Case newCase = new Case("Nedriv væg", 1, location);
-//        cs.save(newCase);
-//        assertTrue(cs.findByLocation(location).isPresent());
+        Case newCase = new Case("Nedriv væg", 1, location);
+        Task subtask_1 = new Task("task1");
+        subtask_1.addPicture("before-after-pictures/test_pic.jpg", "", false);
+        newCase.addTask(subtask_1);
+        cs.save(newCase);
+        assertTrue(cs.findById(newCase.getId()).isPresent());
     }
-*/
+
     @Test
     @Order(5)
     void canDeleteById() {

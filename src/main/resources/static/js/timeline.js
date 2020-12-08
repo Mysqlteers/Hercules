@@ -19,9 +19,9 @@ function createChart(e) {
     const duration = el.dataset.duration.split("/");
     let startDay = duration[0];
     let endDay = duration[1];
-    let left = 0,
+    let left = -el.parentElement.offsetWidth;
     width = 0;
-        console.log("children  " +el.childElementCount)
+        // console.log("children  " +el.childElementCount)
 
 
     if (!daysArray.includes(startDay) || !daysArray.includes(endDay)) {
@@ -59,27 +59,43 @@ function createChart(e) {
     // apply css
     el.style.left = `${left}px`;
     el.style.width = `${width}px`;
-    if (e.type === "load") {
     el.style.backgroundColor = el.dataset.color;
-    el.style.opacity = 1;
+    el.style.opacity = '1';
 
 
 
 
     //add a tag with class="u-btn u-button-style u-dialog-link u-btn-1"
-        // href="# TaskId()"
         let child =  document.createElement("a");
         child.setAttribute('class', "u-btn u-button-style u-dialog-link u-btn-1")
         child.setAttribute('href', el.dataset.href)
-        width-=40;
+        width-=30;
         child.style.left = `${left}px`;
         child.style.width = `${width}px`;
+        child.style.display = "none";
         el.appendChild(child)
+        // href="# TaskId()"
+        el.onclick = function() {child.click()}
 
-
-    }
 });
 }
 
-    window.addEventListener("load", createChart);
-    window.addEventListener("resize", createChart);
+
+window.addEventListener("mousemove", createChart)
+window.addEventListener("load", createChart);
+window.addEventListener("click", delayedCreate );
+window.addEventListener("resize", createChart);
+
+
+async function delayedCreate() {
+    await wait(2000);
+    createChart()
+}
+
+function wait(time) {
+    return new Promise(resolve => {
+        setTimeout(() => {
+           createChart();
+        }, time);
+    });
+}

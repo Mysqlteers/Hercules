@@ -51,13 +51,10 @@ public class CaseController {
             datesList.add(startDate);
             startDate = startDate.plusDays(1);
         }
-
-        System.out.println("subtask amount  ="+taskService.findByTaskId((long) taskId).get().getSubtasksAsList().size());
-        model.addAttribute("dates", datesList);
-        model.addAttribute("mainTask", taskService.findByTaskId((long) taskId).get());
-        model.addAttribute("subtasks", taskService.findByTaskId((long) taskId).get().getSubtasksAsList());
-
-        return "timeline";
+        if (taskService.findByTaskId((long) taskId).isPresent()) {
+            model.addAttribute("superTask", taskService.findByTaskId((long) taskId).get());
+        }
+        return "modals/timeline";
     }
 
 

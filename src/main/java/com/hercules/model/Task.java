@@ -43,6 +43,10 @@ public class Task implements Taskable{
     @JoinColumn(name = "parent_task_id")
     private Task superTask;
 
+    @ManyToOne
+    @JoinColumn(name = "case_id")
+    private Case Case;
+
     private boolean done;
 
     /**
@@ -100,13 +104,13 @@ public class Task implements Taskable{
 
 
     @Override
-    public void addTask(Taskable task) {
-        subtasks.add((Task)task);
+    public void addTask(Task task) {
+        task.setSuperTask(this);
+        subtasks.add(task);
     }
 
     /**
      * calculate how done a task is.
-     * todo make unit test
      * @return how many percent done the task is, ie. from 0 to 100
      */
     public double getPercentageDone()
@@ -115,26 +119,26 @@ public class Task implements Taskable{
             return 100;
         }
         else {
-            ArrayList<Taskable> subtasks = (ArrayList<Taskable>) getSubtasksAsList();
+            ArrayList<Task> subtasks = (ArrayList<Task>) getSubtasksAsList();
 
             if (subtasks.isEmpty())
                 return 0;
 
-            int totalTasks = subtasks.size();
-            int doneTasks = 0;
+            double totalTasks = subtasks.size();
+            double doneTasks = 0;
 
             for (Taskable task: getSubtasksAsList()) {
                 if (task.isDone())
                     doneTasks++;
             }
-            return doneTasks/totalTasks*100;
+            return (doneTasks/totalTasks)*100;
         }
     }
 
 
     @Override
-    public List<Taskable> getSubtasksAsList() {
-        List<Taskable> result = new ArrayList<>(subtasks);
+    public List<Task> getSubtasksAsList() {
+        List<Task> result = new ArrayList<>(subtasks);
         return result;
     }
 
@@ -163,6 +167,7 @@ public class Task implements Taskable{
         return est_time;
     }
 
+    @Override
     public String getDeadline() {
         return deadline;
     }
@@ -189,7 +194,13 @@ public class Task implements Taskable{
         return name;
     }
 
+    public Case getCase() {
+        return Case;
+    }
 
+    public void setCase(Case aCase) {
+        Case = aCase;
+    }
 
     public void setTaskId(Long taskId) {
 

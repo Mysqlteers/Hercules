@@ -5,10 +5,10 @@ import java.util.Set;
 
 public interface Taskable {
 
-    public List<Taskable> getSubtasksAsList();
+    public List<Task> getSubtasksAsList();
 
 
-    public void addTask(Taskable task);
+    public void addTask(Task task);
 
     public double getPercentageDone();
 

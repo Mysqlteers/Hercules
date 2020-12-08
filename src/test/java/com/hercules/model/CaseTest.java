@@ -22,10 +22,7 @@ class CaseTest
     @Test
     @Order(1)
     public void canCreateCaseObject(){
-        HashSet<Task> subtasks = new HashSet<>();
         Task subtask_1 = new Task("task1");
-        subtask_1.addPicture("before-after-pictures/test_pic.jpg", "", false);
-
         Case newCase = new Case();
         newCase.addTask(subtask_1);
 
