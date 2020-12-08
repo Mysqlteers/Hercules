@@ -32,6 +32,7 @@
   </head>
   <body class="u-body">
   <header th:replace="fragments/header :: header"></header>
+  <button th:replace="modals/employee-modal.html :: employee-modal(${null})"></button>
   <section class="u-align-center u-clearfix u-section-1" id="sec-a4df">
       <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-expanded-width u-table u-table-responsive u-table-1">
@@ -60,7 +61,7 @@
             <tbody class="u-table-body">
               <tr style="height: 75px;" th:each="employee:${employees}">
                 <td class="u-border-1 u-border-grey-30 u-first-column u-grey-5 u-table-cell u-table-cell-8" th:text="${employee.getPosition()}">Stilling1</td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell u-align-center"><img style="border-radius: 50%" width="100px" height="100px" th:src="${'https://thispersondoesnotexist.com/image'}" alt=""></td>
+                <td class="u-border-1 u-border-grey-30 u-table-cell u-align-center"><img style="border-radius: 50%" width="100px" height="100px" th:src="${employee.imageURL()}" alt=""></td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${employee.getFirstName()} + ' ' + ${employee.getLastName()}">Navn1</td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${employee.getCertificates()}">Certifikater1</td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${employee.getPhone()}">Telefon1</td>
@@ -68,11 +69,11 @@
                 <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${employee.getWage()}">Timeløn1</td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell">
                   <a th:href="@{'/deleteEmployee/' + ${employee.getEmployeeId()}}">
-                    <button onclick="return confirm('Er du sikker på, at du vil slette denne ansatte?')" style="background-color: crimson; color: white">
+                    <button class="u-btn u-button-style u-btn-1" onclick="return confirm('Er du sikker på, at du vil slette denne ansatte?')" style="background-color: crimson; color: white; width: 122.133px">
                       Slet
                     </button>
                   </a>
-                  <button>rediger</button>
+                  <button th:replace="modals/employee-modal.html :: employee-modal(${employee})"></button>
                 </td>
               </tr>
             </tbody>
