@@ -27,10 +27,12 @@ public class Task {
     private String deadline;
 
     private String est_time;
-    
+
     private String name;
 
-//    used as a supertask
+    private String description;
+
+    //    used as a supertask
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "superTask")
     private Set<Task> subtasks;
@@ -196,6 +198,14 @@ public class Task {
 
     public Set<Task> getSubtasks() {
         return subtasks;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setSubtasks(Set<Task> subtasks) {
