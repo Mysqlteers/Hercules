@@ -1,4 +1,4 @@
-/*package com.hercules.model;
+package com.hercules.model;
 
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -26,4 +26,4 @@ class PersonTest {
         newPerson.setPhone(newPhone);
         assertEquals(newPerson.getPhone(), newPhone);
     }
-}*/
+}
