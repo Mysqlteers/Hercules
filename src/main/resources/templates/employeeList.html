@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="page_type" content="np-template-header-footer-from-plugin">
+    <title>Ansatte</title>
+    <link rel="stylesheet" th:href="@{/css/employeeList.css}" media="screen" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/nicepage.css}" media="screen" type="text/css">
+    <script class="u-script" type="text/javascript" th:src="@{/js/jquery.js}" defer=""></script>
+    <script class="u-script" type="text/javascript" th:src="@{/js/nicepage.js}" defer=""></script>
+    <meta name="generator" content="Nicepage 3.0.9, nicepage.com">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
+    
+    
+    <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": "",
+		"url": "index.html",
+		"logo": "images/default-logo.png"
+}</script>
+    <meta property="og:title" content="employeeList">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#478ac9">
+    <link rel="canonical" href="index.html">
+    <meta property="og:url" content="index.html">
+  </head>
+  <body class="u-body">
+  <header th:replace="fragments/header :: header"></header>
+  <section class="u-align-center u-clearfix u-section-1" id="sec-a4df">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-expanded-width u-table u-table-responsive u-table-1">
+          <table class="u-table-entity u-table-entity-1">
+            <colgroup>
+              <col width="11.7%">
+              <col width="13.6%">
+              <col width="17.5%">
+              <col width="14.3%">
+              <col width="14.3%">
+              <col width="14.600000000000014%">
+              <col width="14.000000000000014%">
+            </colgroup>
+            <thead class="u-palette-4-base u-table-header u-table-header-1">
+              <tr style="height: 21px;">
+                <th class="u-border-1 u-border-palette-4-base u-table-cell">Stilling</th>
+                <th class="u-border-1 u-border-palette-4-base u-table-cell">Billede</th>
+                <th class="u-border-1 u-border-palette-4-base u-table-cell">Navn</th>
+                <th class="u-border-1 u-border-palette-4-base u-table-cell">Certifikater</th>
+                <th class="u-border-1 u-border-palette-4-base u-table-cell">Telefon</th>
+                <th class="u-border-1 u-border-palette-4-base u-table-cell">Email</th>
+                <th class="u-border-1 u-border-palette-4-base u-table-cell">Timeløn</th>
+                <th class="u-border-1 u-border-palette-4-base u-table-cell"></th>
+              </tr>
+            </thead>
+            <tbody class="u-table-body">
+              <tr style="height: 75px;" th:each="employee:${employees}">
+                <td class="u-border-1 u-border-grey-30 u-first-column u-grey-5 u-table-cell u-table-cell-8" th:text="${employee.getPosition()}">Stilling1</td>
+                <td class="u-border-1 u-border-grey-30 u-table-cell u-align-center"><img style="border-radius: 50%" width="100px" height="100px" th:src="${'https://thispersondoesnotexist.com/image'}" alt=""></td>
+                <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${employee.getFirstName()} + ' ' + ${employee.getLastName()}">Navn1</td>
+                <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${employee.getCertificates()}">Certifikater1</td>
+                <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${employee.getPhone()}">Telefon1</td>
+                <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${employee.getEmail()}">Email1</td>
+                <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${employee.getWage()}">Timeløn1</td>
+                <td class="u-border-1 u-border-grey-30 u-table-cell">
+                  <a th:href="@{'/deleteEmployee/' + ${employee.getEmployeeId()}}">
+                    <button onclick="return confirm('Er du sikker på, at du vil slette denne ansatte?')" style="background-color: crimson; color: white">
+                      Slet
+                    </button>
+                  </a>
+                  <button>rediger</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
