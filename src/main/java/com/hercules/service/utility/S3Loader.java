@@ -92,7 +92,7 @@ public class S3Loader {
     /**
      *This function upload a picture
      * @param filepath the path on your local computer to the desired file.
-     * @param fileName the name S3 bucket should save, with using / will create a subfolder
+     * @param fileName the name S3 bucket should save, with using iii/ will create a subfolder, with the name iii
      */
     public void uploadImage(String filepath, String fileName) {
         try {
