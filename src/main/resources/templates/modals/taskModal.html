@@ -70,7 +70,7 @@
             </div>
 
             <!-- Billede slider til FØR billeder -->
-            <div class="u-carousel u-gallery u-layout-carousel u-lightbox u-no-transition u-show-text-always u-gallery-1" data-interval="5000" data-u-ride="carousel" id="carousel-b010" style="top: 29vh">
+            <div class="u-carousel u-gallery u-layout-carousel u-lightbox u-no-transition u-show-text-always u-gallery-1" data-interval="5000" data-u-ride="carousel" id="carousel-b010" style="bottom: 8vh">
                 <ol class="u-absolute-hcenter u-carousel-indicators u-carousel-indicators-1">
                     <li th:each="item : ${task.getPicturesAsList()}" data-u-target="#carousel-8c57" th:attr="data-u-slide-to=${itemStat.count}" class="u-active u-grey-70 u-shape-circle" style="width: 10px; height: 10px;"></li>
                 </ol>
@@ -111,7 +111,7 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
             </div>
 
             <!-- Billede slider til EFTER billeder -->
-            <div class="u-carousel u-gallery u-layout-carousel u-lightbox u-no-transition u-show-text-always u-gallery-2" data-interval="5000" data-u-ride="carousel" id="carousel-8c57" style="top: 29vh">
+            <div class="u-carousel u-gallery u-layout-carousel u-lightbox u-no-transition u-show-text-always u-gallery-2" data-interval="5000" data-u-ride="carousel" id="carousel-8c57" style="bottom: 7vh">
                 <ol class="u-absolute-hcenter u-carousel-indicators u-carousel-indicators-2">
                     <li th:each="item : ${task.getPicturesAsList()}" data-u-target="#carousel-8c57" th:attr="data-u-slide-to=${itemStat.count}" class="u-active u-grey-70 u-shape-circle" style="width: 10px; height: 10px;"></li>
                 </ol>
