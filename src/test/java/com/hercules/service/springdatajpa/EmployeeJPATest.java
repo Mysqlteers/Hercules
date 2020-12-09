@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class EmployeeJPATest {
+    //tests repo
     @Autowired
     ContactService cs;
 

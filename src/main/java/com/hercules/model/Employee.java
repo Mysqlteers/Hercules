@@ -1,6 +1,8 @@
 package com.hercules.model;
 
+import com.hercules.service.utility.S3Loader;
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -8,30 +10,43 @@ import java.util.Set;
 public class Employee {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "employee_id")
     private Long employeeId;
-    @ManyToOne @JoinColumn(name = "contact_id")
-    private Contact contact;
-    private String picture;
+    @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "employee_case",
+            joinColumns = {@JoinColumn(name = "employee_id")},
+            inverseJoinColumns = {@JoinColumn(name = "contact_id")}
+    )
+    Set<Contact> contacts = new HashSet<>();
+    private String pictureLocation;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
     private String position;
     private String email;
     private String phone;
     private String certificates;
+    private double wage;
 
+    public String imageURL() {
+        //get full link of picture
+        return S3Loader.getInstance().getS3ObjectUrl(pictureLocation);
+    }
 
     public Employee() {
     }
 
-    public Employee(Long employeeId, Contact contact, String picture, String firstName, String lastName, String position, String email, String phone, String certificates) {
+    public Employee(Long employeeId, Set<Contact> contacts, String pictureLocation, String firstName, String lastName, String position, String email, String phone, String certificates, double wage) {
         this.employeeId = employeeId;
-        this.contact = contact;
-        this.picture = picture;
+        this.contacts = contacts;
+        this.pictureLocation = pictureLocation;
         this.firstName = firstName;
         this.lastName = lastName;
         this.position = position;
         this.email = email;
         this.phone = phone;
         this.certificates = certificates;
+        this.wage = wage;
     }
 
     public Long getEmployeeId() {
@@ -42,20 +57,20 @@ public class Employee {
         this.employeeId = employeeId;
     }
 
-    public Contact getContact() {
-        return contact;
+    public Set<Contact> getContacts() {
+        return contacts;
     }
 
-    public void setContact(Contact contact) {
-        this.contact = contact;
+    public void setContacts(Set<Contact> contacts) {
+        this.contacts = contacts;
     }
 
-    public String getPicture() {
-        return picture;
+    public String getPictureLocation() {
+        return pictureLocation;
     }
 
-    public void setPictures(String picture) {
-        this.picture = picture;
+    public void setPictureLocation(String pictures) {
+        this.pictureLocation = pictures;
     }
 
     public String getFirstName() {
@@ -104,5 +119,13 @@ public class Employee {
 
     public void setCertificates(String certificates) {
         this.certificates = certificates;
+    }
+
+    public double getWage() {
+        return wage;
+    }
+
+    public void setWage(double wage) {
+        this.wage = wage;
     }
 }
