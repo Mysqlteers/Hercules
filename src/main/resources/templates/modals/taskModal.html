@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 
-<html style="font-size: 16px;" xmlns:th="http://www.thymeleaf.org" th:fragment="taskModal(task)">
-
-
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="taskModal(task)">
 
 <head>
     <link th:href="@{/css/taskModal.css}" rel="stylesheet">
+    <link media="screen" rel="stylesheet" th:href="@{/css/caseDetails.css}" type="text/css">
+    <link media="screen" rel="stylesheet" th:href="@{/css/nicepage.css}" type="text/css">
+    <script class="u-script" defer="" th:src="@{/js/jquery.js}" type="text/javascript"></script>
+    <script class="u-script" defer="" th:src="@{/js/nicepage.js}" type="text/javascript"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" id="u-theme-google-font"
           rel="stylesheet">
 </head>
 
 <!-- MODAL -->
-
+<body>
+<div>
 <div class="u-black u-clearfix u-container-style u-dialog-block u-opacity u-opacity-70 u-section-4" th:id="${task?.getTaskId()} ?: 'sec-1393'">
     <div class="u-container-style u-dialog u-white u-dialog-1">
         <div class="u-container-layout u-container-layout-1">
@@ -153,6 +156,7 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
     </div>
 
 </div>
+</body>
 
 <script>
     function isDone(el) {
