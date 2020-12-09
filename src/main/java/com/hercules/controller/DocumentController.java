@@ -20,9 +20,9 @@ public class DocumentController {
 
     private S3Loader s3Loader = S3Loader.getInstance();
 
-    @GetMapping("/dokumenter")
-    public String dokumenterHomer(Model model){
-        model.addAttribute("case",caseService.findById((long)1).get());
+    @GetMapping("/dokumenter{id}")
+    public String dokumenterHomer(@PathVariable("id") long id, Model model){
+        model.addAttribute("case",caseService.findById(id));
         return "dokumenterHome";
     }
     
@@ -38,22 +38,24 @@ public class DocumentController {
         myCase.removeDocument(myDoc);
         caseService.save(myCase);
         model.addAttribute("case",myCase);
-        return "dokumenterHome";
+        return "redirect:/dokumenter"+myCase.getCaseId();
 
     }
 
     @PostMapping("/addDocument")
     public String addDocument(Model model, @RequestParam(name = "file") MultipartFile file, @RequestParam("navn") String name,  @RequestParam("caseId") long caseId) throws IOException {
         Case myCase = caseService.findById(caseId).get();
-        String fileType = s3Loader.multipartFileToFile(file,"temppicture").getName().split(".")[s3Loader.multipartFileToFile(file,"someName").getName().split(".").length-1];
-        s3Loader.uploadImage(S3Loader.multipartFileToFile(file, "temppicture"), "documents/"+name+"."+fileType);
+
+        s3Loader.uploadFile(file, "documents/"+name);
+
         Document myDoc = new Document();
         myDoc.setDocumentName(name);
         myDoc.setLocation("documents/"+name);
+
         myCase.addDocument(myDoc);
         caseService.save(myCase);
         model.addAttribute("case",myCase);
-        return "dokumenterHome";
+        return "redirect:/dokumenter"+myCase.getCaseId();
 
     }
 }

@@ -53,7 +53,7 @@
     <div class="u-container-style u-dialog u-palette-5-light-3 u-dialog-1">
         <div class="u-container-layout u-valign-top u-container-layout-1">
             <h3 class="u-text u-text-default u-text-1">Tilføj Dokument</h3>
-            <div class="u-expanded-width u-form u-form-1">
+            <div class="u-expanded-width u-form u-form-1" style="display: list-item">
 
                 <form action="/addDocument" method="POST" enctype="multipart/form-data" class="u-clearfix u-form-horizontal u-form-spacing-10 u-inner-form" style="padding: 10px" source="custom" name="form">
                     <div class="u-form-email u-form-group u-form-group-1">
@@ -62,20 +62,18 @@
                                class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"
                                name="file"
                                placeholder="Fil Lokation">
-                        <input hidden name="caseId" th:value="${case.getCaseId()}">
+                        <input type="hidden"  name="caseId" th:value="${case.getCaseId()}">
                     </div>
 
                     <div class="u-form-email u-form-group u-form-group-1">
                         <label class="u-form-control-hidden u-label">Navn</label>
-                        <input type="text"
-                               class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"
-                               name="navn"
-                               placeholder="Navn">
+                        <input name="navn" type="text" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" placeholder="Navn">
                     </div>
 
                     <div class="u-align-left u-form-group u-form-submit u-form-group-2">
                         <input type="submit" value="submit">
                     </div>
+
                     <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
                     <div class="u-form-send-error u-form-send-message"> Unable to send your message. Please fix errors then try again. </div>
                     <input type="hidden" value="" name="recaptchaResponse">

@@ -76,6 +76,7 @@ public class Case implements Taskable {
 
     public void removeDocument(Document document){
         documents.remove(document);
+
     }
 
     public List<Document> getDocumentsAsList(){

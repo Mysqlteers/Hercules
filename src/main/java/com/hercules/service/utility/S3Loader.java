@@ -7,14 +7,15 @@ import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.*;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+
+import java.awt.image.BufferedImage;
+import java.io.*;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.imageio.ImageIO;
 
 public class S3Loader {
 
@@ -92,7 +93,6 @@ public class S3Loader {
 
     /**
      *This function upload a picture
-     * @param filepath the path on your local computer to the desired file.
      * @param fileName the name S3 bucket should save, with using iii/ will create a subfolder, with the name iii
      */
     public void uploadImage(File file, String fileName) {
@@ -106,6 +106,7 @@ public class S3Loader {
             PutObjectRequest request = new PutObjectRequest(bucketName, fileName, file);
             ObjectMetadata metadata = new ObjectMetadata();
             metadata.setContentType("image/jpg");
+
             request.setMetadata(metadata);
             s3Client.putObject(request);
 
@@ -116,10 +117,34 @@ public class S3Loader {
         }
     }
 
+
+    /**
+     *This function upload a picture
+     * @param fileName the name S3 bucket should save, using iii/ will create a subfolder, with the name iii
+     */
+    public void uploadFile(MultipartFile file, String fileName) {
+        try {
+
+            InputStream inputStream = file.getInputStream();
+            ObjectMetadata meta = new ObjectMetadata();
+            s3Client.putObject(new PutObjectRequest(bucketName, fileName, inputStream, meta));
+            inputStream.close();
+
+
+        } catch (AmazonServiceException e) {
+            e.printStackTrace();
+        } catch (SdkClientException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     //convert multipartfile to normal file. Saves file in temp to get full file path
     public static File multipartFileToFile(MultipartFile multipartFile, String filename) throws IOException {
         File convFile = new File(System.getProperty("java.io.tmpdir")+"/"+filename);
-        multipartFile.transferTo(convFile);
+        System.out.println(convFile.getAbsolutePath());
         return convFile;
     }
 }
