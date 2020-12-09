@@ -115,10 +115,6 @@ public class CaseController {
                 model.addAttribute("contactlist", personService.findAllByContactOrderByPositionAscFirstNameAsc(contact));
                 model.addAttribute("allEmployees", employeeService.findAllByOrderByPositionAscFirstNameAsc());
                 model.addAttribute("attachedEmployees", employeeService.findAllByContacts_contactIdOrderByPositionAscFirstNameAsc(contact.getContactId()));
-                for (Employee e: employeeService.findAllByContacts_contactIdOrderByPositionAscFirstNameAsc(contact.getContactId())) {
-                    System.out.println("in each loop");
-                    System.out.println(e.toString());
-                }
             } else {
                 model.addAttribute("contactlist", new HashSet<Person>());
                 model.addAttribute("employee", new HashSet<Employee>());

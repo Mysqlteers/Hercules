@@ -89,4 +89,12 @@ public class EmployeeController {
         contactService.save(contact);
         return "redirect:/caseDetails/" + caseId;
     }
+
+    @GetMapping("/removeEmployeeFromCase/{employeeId}/{caseId}")
+    public String removeEmployeeFromCase(@PathVariable("employeeId") Long employeeId, @PathVariable("caseId") Long caseId) {
+        Contact contact = contactService.findContactByCaseId(caseId).get();
+        contact.removeEmployee(employeeService.findById(employeeId).get());
+        contactService.save(contact);
+        return "redirect:/caseDetails/" + caseId;
+    }
 }

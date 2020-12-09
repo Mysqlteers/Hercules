@@ -58,24 +58,26 @@
                             <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${employee.getEmail()}">Email1</td>
                             <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${employee.getWage()}">Timeløn1</td>
                             <td class="u-border-1 u-border-grey-30 u-table-cell">
-                                <input type="checkbox" id="employeeIds" name="employeeIds" th:value="${employee.getEmployeeId()}">
+                                <input style="transform: scale(2)" type="checkbox" id="employeeIds" name="employeeIds" th:value="${employee.getEmployeeId()}">
                             </td>
                         </tr>
                         </tbody>
                     </table>
-                    <input type="submit" value="Tilknyt valgte">
-                </form>
 
-                <button class="u-dialog-close-button u-icon u-text-grey-40 u-icon-1">
-                    <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" style="" viewBox="0 0 16 16">
-                        <use xlink:href="#svg-797b" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
-                    </svg>
-                    <svg class="u-svg-content" id="svg-797b" version="1.1"
-                         viewBox="0 0 16 16" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px"><rect height="16" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -3.3138 8.0002)" width="2" x="7" y="0"></rect>
-                        <rect height="2" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -3.3138 8.0002)" width="16" x="0"
-                              y="7"></rect></svg>
-                </button>
+
             </div>
+            <input type="submit" value="Tilknyt valgte" style="height: 45.6px; background-color: #478ac9; color: white; width: 122.133px">
+            </form>
+
+            <button class="u-dialog-close-button u-icon u-text-grey-40 u-icon-1">
+                <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" style="" viewBox="0 0 16 16">
+                    <use xlink:href="#svg-797b" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+                </svg>
+                <svg class="u-svg-content" id="svg-797b" version="1.1"
+                     viewBox="0 0 16 16" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px"><rect height="16" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -3.3138 8.0002)" width="2" x="7" y="0"></rect>
+                    <rect height="2" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -3.3138 8.0002)" width="16" x="0"
+                          y="7"></rect></svg>
+            </button>
         </div>
     </div>
 </div>

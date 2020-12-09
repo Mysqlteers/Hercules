@@ -24,6 +24,11 @@ public class Contact {
         employee.getContacts().add(this);
     }
 
+    public void removeEmployee(Employee employee) {
+        employees.remove(employee);
+        employee.getContacts().remove(this);
+    }
+
     public Contact() {
     }
 
