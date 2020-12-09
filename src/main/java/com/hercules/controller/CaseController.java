@@ -7,14 +7,58 @@ import com.hercules.service.CaseService;
 import com.hercules.service.ContactService;
 import com.hercules.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.hercules.service.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 @Controller
 public class CaseController {
+
+    @Autowired
+    TaskService taskService;
+
+
+    /**
+     * Method hanldes the creation of a timeline, by passing the days in a month as a list, as well as
+     *
+     * @param taskId the id of the required task
+     * @param month the month of the year
+     * @param year selected year
+     * @param model model for thymeleaf injection
+     * @return view of the timeline
+     */
+    @GetMapping("/timeline/{taskId}/{month}/{year}")
+    public String showTimeline(@PathVariable("taskId") int taskId,@PathVariable("month") int month, @PathVariable("year") int year, Model model) {
+
+        LocalDate startDate = LocalDate.now().minusDays(7);
+        LocalDate endDate = LocalDate.now().plusMonths(1).minusDays(7);
+
+        if ((month<12 || month<0) && (year>0))
+        {
+            LocalDate date = LocalDate.of(year, month, 1);
+            startDate = date;
+            endDate = date.withDayOfMonth(date.lengthOfMonth());
+        }
+        List<LocalDate> datesList = new ArrayList<>();
+        while (!startDate.isAfter(endDate)) {
+            datesList.add(startDate);
+            startDate = startDate.plusDays(1);
+        }
+        if (taskService.findByTaskId((long) taskId).isPresent()) {
+            model.addAttribute("superTask", taskService.findByTaskId((long) taskId).get());
+            model.addAttribute("dates", datesList);
+        }
+        return "modals/timeline";
+    }
+
+
     @Autowired
     CaseService caseService;
 
@@ -64,6 +108,23 @@ public class CaseController {
             } else {
                 model.addAttribute("contactlist", new HashSet<Person>());
             }
+
+
+
+            //Adding
+            LocalDate startDate = LocalDate.now().minusDays(7);
+            LocalDate endDate = LocalDate.now().plusMonths(1).minusDays(7);
+            List<LocalDate> datesList = new ArrayList<>();
+            while (!startDate.isAfter(endDate)) {
+                datesList.add(startDate);
+                startDate = startDate.plusDays(1);
+            }
+            model.addAttribute("dates", datesList);
+
+            model.addAttribute("mainTask", caseService.findById((long) caseId).get());
+
+
+
             return "caseDetails";
         } else {
             model.addAttribute("errorCode", 0);
