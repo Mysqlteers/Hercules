@@ -1,8 +1,6 @@
 package com.hercules.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.hercules.service.utility.S3Loader;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,7 +10,7 @@ import java.util.Set;
 public class Employee {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "employee_id")
     private Long employeeId;
-    @ManyToMany(cascade = {CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "employee_case",
             joinColumns = {@JoinColumn(name = "employee_id")},
@@ -31,6 +29,7 @@ public class Employee {
     private double wage;
 
     public String imageURL() {
+        //get full link of picture
         return S3Loader.getInstance().getS3ObjectUrl(pictureLocation);
     }
 

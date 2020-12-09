@@ -8,5 +8,6 @@ import java.util.Optional;
 
 public interface CaseRepository extends CrudRepository<Case, Long> {
     Optional<Case> findByLocation(String location);
+
     List<Case> findAllByOrderByStatusAscCaseIdAsc();
 }

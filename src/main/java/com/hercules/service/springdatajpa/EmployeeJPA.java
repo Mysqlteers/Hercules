@@ -42,6 +42,7 @@ public class EmployeeJPA implements EmployeeService {
         return er.findById(aLong);
     }
 
+    //below methods only for this object/table
     @Override
     public List<Employee> findAllByOrderByPositionAscFirstNameAsc() {
         return er.findAllByOrderByPositionAscFirstNameAsc();

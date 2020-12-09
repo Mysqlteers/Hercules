@@ -14,6 +14,7 @@ import java.io.OutputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 public class S3Loader {
 
@@ -94,7 +95,7 @@ public class S3Loader {
      * @param filepath the path on your local computer to the desired file.
      * @param fileName the name S3 bucket should save, with using iii/ will create a subfolder, with the name iii
      */
-    public void uploadImage(File filepath, String fileName) {
+    public void uploadImage(File file, String fileName) {
         try {
             BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKey, secretAccessKey);
             AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
@@ -102,7 +103,7 @@ public class S3Loader {
                     .withRegion(region)
                     .build();
 
-            PutObjectRequest request = new PutObjectRequest(bucketName, fileName, filepath);
+            PutObjectRequest request = new PutObjectRequest(bucketName, fileName, file);
             ObjectMetadata metadata = new ObjectMetadata();
             metadata.setContentType("image/jpg");
             request.setMetadata(metadata);
@@ -113,5 +114,12 @@ public class S3Loader {
         } catch (SdkClientException e) {
             e.printStackTrace();
         }
+    }
+
+    //convert multipartfile to normal file. Saves file in temp to get full file path
+    public static File multipartFileToFile(MultipartFile multipartFile, String filename) throws IOException {
+        File convFile = new File(System.getProperty("java.io.tmpdir")+"/"+filename);
+        multipartFile.transferTo(convFile);
+        return convFile;
     }
 }

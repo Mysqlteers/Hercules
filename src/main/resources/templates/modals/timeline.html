@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/nicepage.css}" rel="stylesheet">
+    <script class="u-script" th:src="@{/js/jquery.js}" type="text/javascript"></script>
+    <script class="u-script" th:src="@{/js/nicepage.js}" type="text/javascript"></script>
+</head>
+<section th:fragment="timeline(dates, mainTask)">
+    <div class="chart-wrapper" >
+        <div class="timeline-header">
+            <script th:src="@{/js/timeline.js}"></script>
+            <!--            todo add month slider -->
+            <link rel="stylesheet" th:href="@{/css/timeline.css}">
+            <ul class="chart-values">
+                <li th:attr="data-period=${day}" th:each="day : ${dates}"
+                    th:text="${day.getDayOfWeek().name()}+'  '+${day.getDayOfMonth()}"></li>
+            </ul>
+            <ul class="chart-bars" style="padding-left: 0px">
+                <li data-color="#00BCD4" th:attr="data-duration=${task?.getStartDate()}+'/'+${task?.getDeadline()},
+                data-percentage_done=${task?.getPercentageDone()},
+                data-href=${'#'+task?.getId()}"
+                    th:each="task: ${mainTask?.getSubtasksAsList() ?: superTask?.getSubtasksAsList()} "
+                    th:text="${task?.name}+' '+${task?.getPercentageDone().toString()}+'%'"
+                >
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div th:each="task: ${mainTask?.getSubtasksAsList() ?: superTask.getSubtasksAsList()}">
+        <div th:replace="/modals/taskModal.html :: taskModal(${task})">
+
+        </div>
+    </div>
+
+
+
+</section>
+
+</html>

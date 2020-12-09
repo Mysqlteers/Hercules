@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class EmployeeTest {
+    //test model
     @Test
     @Order(1)
     void canCreateEmployeeObject() {
