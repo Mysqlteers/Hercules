@@ -29,7 +29,12 @@ public class EmployeeController {
     }
 
     @PostMapping("/updateEmployee")
-    public String updateCase(@ModelAttribute Employee anEmployee) {
+    public String updateCase(@ModelAttribute Employee anEmployee, @RequestParam("file") MultipartFile multipartFile) throws IOException {
+        if (anEmployee.getEmployeeId() != null) {
+            Employee existingEmployee = employeeService.findById(anEmployee.getEmployeeId()).get();
+            anEmployee.setPictureLocation(existingEmployee.getPictureLocation());
+        }
+
         //the input forms put an empty string if no text but we need it to be null for thymeleaf to work
         if (anEmployee.getPosition().equals("")) {
             anEmployee.setPosition(null);
@@ -53,28 +58,15 @@ public class EmployeeController {
 
         anEmployee = employeeService.save(anEmployee);
 
-        if (anEmployee.getPictureLocation() != (null)) {
-//            //file path of picture to upload
-            String filepath = anEmployee.getPictureLocation();
-//            //file path of where to upload in s3 bucket
+        if (anEmployee.getPictureLocation() == (null)) {
+            //file path of where to upload in s3 bucket
             String fileName = "employee-pictures/" + anEmployee.getEmployeeId();
-//            System.out.println(multiFile.toString());
-//            System.out.println("files: " + filepath + "\n" + fileName);
-//
-//            URL url = getClass().getResource("tempFile.jpg");
-//            File newFile = new File("/src/tempFile.jpg");
-//            try (OutputStream os = new FileOutputStream(newFile)) {
-//                os.write(multiFile.getBytes());
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//
+
             anEmployee.setPictureLocation(fileName);
-            s3Loader.uploadImage(filepath, fileName);
+            s3Loader.uploadImage(S3Loader.multipartFileToFile(multipartFile, "temppicture"), fileName);
             anEmployee.setPictureLocation(anEmployee.imageURL());
         }
         employeeService.save(anEmployee);
-        System.out.println(anEmployee.getPictureLocation());
         return "redirect:/employees";
     }
 
