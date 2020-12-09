@@ -1,8 +1,11 @@
 package com.hercules.controller;
 
+import com.hercules.model.Contact;
 import com.hercules.model.Employee;
+import com.hercules.service.ContactService;
 import com.hercules.service.EmployeeService;
 import com.hercules.service.utility.S3Loader;
+import jdk.dynalink.linker.LinkerServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,12 +13,15 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
 
+    @Autowired
+    ContactService contactService;
     private S3Loader s3Loader = S3Loader.getInstance();
 
     @GetMapping("/employees")
@@ -71,5 +77,16 @@ public class EmployeeController {
     public String deleteEmployee(@PathVariable("employeeId") long employeeId) {
         employeeService.deleteById(employeeId);
         return "redirect:/employees";
+    }
+
+    @RequestMapping("/addEmployeesToCase/{caseId}")
+    public String addEmployeesToCase(@RequestParam("employeeIds") List<Long> pickedEmployees, @PathVariable("caseId") Long caseId) {
+        Contact contact = contactService.findContactByCaseId(caseId).get();
+        for (Long id: pickedEmployees) {
+            Employee e = employeeService.findById(id).get();
+            contact.addEmployee(e);
+        }
+        contactService.save(contact);
+        return "redirect:/caseDetails/" + caseId;
     }
 }
