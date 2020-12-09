@@ -111,6 +111,9 @@ public class CaseController {
                 Contact contact = contactService.findContactByCaseId(caseId).get();
                 model.addAttribute("contactlist", personService.findAllByContactOrderByPositionAscFirstNameAsc(contact));
                 model.addAttribute("employees", employeeService.findAllByContactsOrderByPositionAscFirstNameAsc(contact));
+                for (Employee e: employeeService.findAllByContactsOrderByPositionAscFirstNameAsc(contact)) {
+                    System.out.println(e.toString());
+                }
             } else {
                 model.addAttribute("contactlist", new HashSet<Person>());
                 model.addAttribute("employee", new HashSet<Employee>());

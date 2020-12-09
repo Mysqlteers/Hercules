@@ -10,6 +10,23 @@ import java.util.Set;
 public class Employee {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "employee_id")
     private Long employeeId;
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "employeeId=" + employeeId +
+                ", contacts=" + contacts +
+                ", pictureLocation='" + pictureLocation + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", position='" + position + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", certificates='" + certificates + '\'' +
+                ", wage=" + wage +
+                '}';
+    }
+
     @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "employee_case",

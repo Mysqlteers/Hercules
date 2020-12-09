@@ -19,6 +19,11 @@ public class Contact {
     @ManyToMany(mappedBy = "contacts", fetch = FetchType.EAGER)
     private Set<Employee> employees = new HashSet<>();
 
+    public void addEmployee(Employee employee) {
+        employees.add(employee);
+        employee.getContacts().add(this);
+    }
+
     public Contact() {
     }
 

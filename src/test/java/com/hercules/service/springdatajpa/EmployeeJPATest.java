@@ -78,4 +78,29 @@ class EmployeeJPATest {
         cs.deleteById(cs.findContactByCaseId(TESTCASEID).get().getContactId());
         assertTrue(sizeBefore > es.findAll().size());
     }
+
+    @Test
+    @Order(6)
+    void canAddEmployeeToContact() {
+        Contact contact = new Contact();
+        contact.setCaseId((long)2);
+        contact = cs.save(contact);
+
+        Employee employee = new Employee();
+        employee.setPosition("AAAAQ");
+        employee = es.save(employee);
+
+        contact.addEmployee(employee);
+        contact = cs.save(contact);
+//
+//        Employee employee = es.findById((long) 1).get();
+////        contact.getEmployees().add(employee);
+//        employee.getContacts().add(cs.findById((long) 1).get());
+////        cs.save(contact);
+//        es.save(employee);
+//
+////        Contact newContact = cs.findById((long) 1).get();
+////        System.out.println(newContact.getEmployees().toString());
+        assertTrue(true);
+    }
 }
