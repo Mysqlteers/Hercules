@@ -9,5 +9,4 @@ public interface CaseService extends CrudService<Case, Long>{
     Optional<Case> findByLocation(String location);
 
     List<Case> findAllByOrderByStatusAscCaseIdAsc();
-
 }
