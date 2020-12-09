@@ -16,8 +16,9 @@ public class Contact {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "contact")
     @JsonManagedReference
     private Set<Person> persons;
-    @ManyToMany(mappedBy = "contacts", fetch = FetchType.EAGER)
-    private Set<Employee> employees = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "contact")
+    @JsonManagedReference
+    private Set<Employee> employees;
 
     public Contact() {
     }
