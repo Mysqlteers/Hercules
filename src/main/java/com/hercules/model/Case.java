@@ -1,12 +1,17 @@
 package com.hercules.model;
 
 import net.bytebuddy.dynamic.loading.InjectionClassLoader;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -21,20 +26,32 @@ public class Case implements Taskable {
 
     private String location;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Case")
-    private Set<Task> subtasks = new HashSet<>();
-
     @Column(name = "case_start_date")
     private String caseStartDate;
 
+    /* ***********************************************************  Relational   ************************************************************ */
+
+    //subtasks from taskable
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Case")
+    private Set<Task> subtasks = new HashSet<>();
+
+    //documents
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "documentCase")
+    Set<Document> documents = new HashSet<>();
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)@Column(name = "document_owner_id")
+    private long documentOwnerId;
 
 
 
+    /* ***********************************************************  Constructors and methods  ************************************************************ */
 
+    public Case() {}
 
-
-    public String getDescription() {
-        return description;
+    public Case(String description, int status, String location) {
+        this.description = description;
+        this.status = status;
+        this.location = location;
     }
 
     public Case(Long caseId, String description, int status, String location, String caseStartDate) {
@@ -56,13 +73,19 @@ public class Case implements Taskable {
                 '}';
     }
 
-    public Case(String description, int status, String location) {
-        this.description = description;
-        this.status = status;
-        this.location = location;
+    public void addDocument(String documentName, String location){
+        Document newDoc = new Document(this, documentName, location);
+        documents.add(newDoc);
     }
 
-    public Case() {
+    /* ********************************************************   getters and setters   ********************************************************************* */
+
+    public Set<Document> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(Set<Document> documents) {
+        this.documents = documents;
     }
 
     public String getCaseStartDate() {
@@ -75,6 +98,10 @@ public class Case implements Taskable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public Long getCaseId() {
@@ -141,5 +168,14 @@ public class Case implements Taskable {
     @Override
     public String getStartDate() {
         return getCaseStartDate();
+    }
+
+
+    public Set<Task> getSubtasks() {
+        return subtasks;
+    }
+
+    public void setSubtasks(Set<Task> subtasks) {
+        this.subtasks = subtasks;
     }
 }

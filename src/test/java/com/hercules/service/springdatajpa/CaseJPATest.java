@@ -34,6 +34,7 @@ class CaseJPATest {
         Task subtask_1 = new Task("task2");
         subtask_1.addPicture("before-after-pictures/test_pic.jpg", "", false);
         newCase.addTask(subtask_1);
+        newCase.addDocument("testdoc", "before-after-pictures/test_pic.jpg" );
         cs.save(newCase);
         assertTrue(cs.findById(newCase.getId()).isPresent());
     }
