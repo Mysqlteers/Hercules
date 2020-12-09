@@ -9,63 +9,74 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" id="u-theme-google-font"
           rel="stylesheet">
     <meta charset="UTF-8">
+    <style>
+        .modal {
+            max-height: calc(100vh - 200px);
+            overflow-y: auto;
+
+        }
+    </style>
 </head>
 <body>
 <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
     <a th:href="'#sec-7903'" th:text="'Tilknyt ansat til sag'" class="u-btn u-button-style u-dialog-link u-btn-1"></a>
 </div>
 <div th:id="'sec-7903'" class="u-black u-clearfix u-container-style u-dialog-block u-opacity u-opacity-70 u-valign-middle u-section-4">
-    <div class="u-container-style u-dialog u-white u-dialog-1">
-        <form th:action="'/addEmployeesToCase/' + ${viewCase.getCaseId()}">
-            <table class="u-table-entity u-table-entity-1">
-                <colgroup>
-                    <col width="11.7%">
-                    <col width="13.6%">
-                    <col width="17.5%">
-                    <col width="14.3%">
-                    <col width="14.3%">
-                    <col width="14.600000000000014%">
-                    <col width="14.000000000000014%">
-                </colgroup>
-                <thead class="u-palette-4-base u-table-header u-table-header-1">
-                <tr style="height: 21px;">
-                    <th class="u-border-1 u-border-palette-4-base u-table-cell">Stilling</th>
-                    <th class="u-border-1 u-border-palette-4-base u-table-cell">Billede</th>
-                    <th class="u-border-1 u-border-palette-4-base u-table-cell">Navn</th>
-                    <th class="u-border-1 u-border-palette-4-base u-table-cell">Certifikater</th>
-                    <th class="u-border-1 u-border-palette-4-base u-table-cell">Telefon</th>
-                    <th class="u-border-1 u-border-palette-4-base u-table-cell">Email</th>
-                    <th class="u-border-1 u-border-palette-4-base u-table-cell">Timeløn</th>
-                    <th class="u-border-1 u-border-palette-4-base u-table-cell"></th>
-                </tr>
-                </thead>
-                <tbody class="u-table-body">
-                <tr style="height: 75px;" th:each="employee:${employees}">
-                    <td class="u-border-1 u-border-grey-30 u-first-column u-grey-5 u-table-cell u-table-cell-8" th:text="${employee.getPosition()}">Stilling1</td>
-                    <td class="u-border-1 u-border-grey-30 u-table-cell u-align-center"><img style="border-radius: 50%" width="100px" height="100px" th:src="${employee.getPictureLocation()}" alt=""></td>
-                    <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${employee.getFirstName()} + ' ' + ${employee.getLastName()}">Navn1</td>
-                    <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${employee.getCertificates()}">Certifikater1</td>
-                    <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${employee.getPhone()}">Telefon1</td>
-                    <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${employee.getEmail()}">Email1</td>
-                    <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${employee.getWage()}">Timeløn1</td>
-                    <td class="u-border-1 u-border-grey-30 u-table-cell">
-                        <input type="checkbox" id="employeeIds" name="employeeIds" th:value="${employee.getEmployeeId()}">
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <input type="submit" value="Tilknyt valgte">
-        </form>
+    <div class="u-container-style u-dialog u-white u-dialog-1" style="background-color: white">
+        <div class="u-container-layout u-container-layout-1">
+            <div class="modal u-expanded-width u-form u-form-1">
+                <form th:action="'/addEmployeesToCase/' + ${viewCase.getCaseId()}">
+                    <table class="u-table-entity u-table-entity-1">
+                        <colgroup>
+                            <col width="11.7%">
+                            <col width="13.6%">
+                            <col width="17.5%">
+                            <col width="14.3%">
+                            <col width="14.3%">
+                            <col width="14.600000000000014%">
+                            <col width="14.000000000000014%">
+                        </colgroup>
+                        <thead class="u-palette-4-base u-table-header u-table-header-1">
+                        <tr style="height: 21px;">
+                            <th class="u-border-1 u-border-palette-4-base u-table-cell">Stilling</th>
+                            <th class="u-border-1 u-border-palette-4-base u-table-cell">Billede</th>
+                            <th class="u-border-1 u-border-palette-4-base u-table-cell">Navn</th>
+                            <th class="u-border-1 u-border-palette-4-base u-table-cell">Certifikater</th>
+                            <th class="u-border-1 u-border-palette-4-base u-table-cell">Telefon</th>
+                            <th class="u-border-1 u-border-palette-4-base u-table-cell">Email</th>
+                            <th class="u-border-1 u-border-palette-4-base u-table-cell">Timeløn</th>
+                            <th class="u-border-1 u-border-palette-4-base u-table-cell"></th>
+                        </tr>
+                        </thead>
+                        <tbody class="u-table-body">
+                        <tr style="height: 75px;" th:each="employee:${employees}">
+                            <td class="u-border-1 u-border-grey-30 u-first-column u-grey-5 u-table-cell u-table-cell-8" th:text="${employee.getPosition()}">Stilling1</td>
+                            <td class="u-border-1 u-border-grey-30 u-table-cell u-align-center"><img style="border-radius: 50%" width="100px" height="100px" th:src="${employee.getPictureLocation()}" alt=""></td>
+                            <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${employee.getFirstName()} + ' ' + ${employee.getLastName()}">Navn1</td>
+                            <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${employee.getCertificates()}">Certifikater1</td>
+                            <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${employee.getPhone()}">Telefon1</td>
+                            <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${employee.getEmail()}">Email1</td>
+                            <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${employee.getWage()}">Timeløn1</td>
+                            <td class="u-border-1 u-border-grey-30 u-table-cell">
+                                <input type="checkbox" id="employeeIds" name="employeeIds" th:value="${employee.getEmployeeId()}">
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <input type="submit" value="Tilknyt valgte">
+                </form>
 
-        <button class="u-dialog-close-button u-icon u-text-grey-40 u-icon-1">
-            <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" style="" viewBox="0 0 16 16">
-                <use xlink:href="#svg-797b" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
-            </svg>
-            <svg class="u-svg-content" id="svg-797b" version="1.1"
-                 viewBox="0 0 16 16" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px"><rect height="16" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -3.3138 8.0002)" width="2" x="7" y="0"></rect>
-                <rect height="2" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -3.3138 8.0002)" width="16" x="0"
-                      y="7"></rect></svg>
-        </button>
+                <button class="u-dialog-close-button u-icon u-text-grey-40 u-icon-1">
+                    <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" style="" viewBox="0 0 16 16">
+                        <use xlink:href="#svg-797b" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+                    </svg>
+                    <svg class="u-svg-content" id="svg-797b" version="1.1"
+                         viewBox="0 0 16 16" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px"><rect height="16" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -3.3138 8.0002)" width="2" x="7" y="0"></rect>
+                        <rect height="2" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -3.3138 8.0002)" width="16" x="0"
+                              y="7"></rect></svg>
+                </button>
+            </div>
+        </div>
     </div>
 </div>
 </body>

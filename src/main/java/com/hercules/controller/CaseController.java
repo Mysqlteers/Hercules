@@ -92,6 +92,9 @@ public class CaseController {
             aCase.setCaseStartDate(null);
         }
         aCase = caseService.save(aCase);
+        if (contactService.findContactByCaseId(aCase.getCaseId()).isEmpty()) {
+            contactService.save(new Contact(aCase.getCaseId()));
+        }
 
         return "redirect:/caseDetails/" + aCase.getCaseId();
     }
