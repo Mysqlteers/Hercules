@@ -39,10 +39,6 @@ public class Case implements Taskable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "documentCase")
     Set<Document> documents = new HashSet<>();
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)@Column(name = "document_owner_id")
-    private long documentOwnerId;
-
-
 
     /* ***********************************************************  Constructors and methods  ************************************************************ */
 
@@ -73,9 +69,18 @@ public class Case implements Taskable {
                 '}';
     }
 
-    public void addDocument(String documentName, String location){
-        Document newDoc = new Document(this, documentName, location);
+    public void addDocument(Document newDoc){
+        newDoc.setDocumentCase(this);
         documents.add(newDoc);
+    }
+
+    public void removeDocument(Document document){
+        documents.remove(document);
+    }
+
+    public List<Document> getDocumentsAsList(){
+        ArrayList<Document> myList = new ArrayList<Document>(documents);
+        return myList;
     }
 
     /* ********************************************************   getters and setters   ********************************************************************* */

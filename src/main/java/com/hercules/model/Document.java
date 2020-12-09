@@ -35,7 +35,7 @@ public class Document {
     }
 
 
-    public String getUrl(String location) {
+    public String getUrl() {
         return S3Loader.getInstance().getS3ObjectUrl(location);
     }
 
