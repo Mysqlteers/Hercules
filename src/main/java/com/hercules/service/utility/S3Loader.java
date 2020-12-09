@@ -116,6 +116,7 @@ public class S3Loader {
         }
     }
 
+    //convert multipartfile to normal file. Saves file in temp to get full file path
     public static File multipartFileToFile(MultipartFile multipartFile, String filename) throws IOException {
         File convFile = new File(System.getProperty("java.io.tmpdir")+"/"+filename);
         multipartFile.transferTo(convFile);

@@ -26,7 +26,9 @@ public class EmployeeController {
 
     @PostMapping("/updateEmployee")
     public String updateCase(@ModelAttribute Employee anEmployee, @RequestParam("file") MultipartFile multipartFile) throws IOException {
+        //check if user is creating new employee or editing existing
         if (anEmployee.getEmployeeId() != null) {
+            //if exists, get picture from database
             Employee existingEmployee = employeeService.findById(anEmployee.getEmployeeId()).get();
             anEmployee.setPictureLocation(existingEmployee.getPictureLocation());
         }

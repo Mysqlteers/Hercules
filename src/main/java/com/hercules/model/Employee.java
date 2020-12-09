@@ -29,6 +29,7 @@ public class Employee {
     private double wage;
 
     public String imageURL() {
+        //get full link of picture
         return S3Loader.getInstance().getS3ObjectUrl(pictureLocation);
     }
 

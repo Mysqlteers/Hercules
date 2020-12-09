@@ -13,6 +13,7 @@
 <body>
     <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
 <!--        modal button -->
+<!--        checking if new or editing employee-->
         <a th:if="${employee != null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#'+${employee?.getEmployeeId()}" th:text="'Opdatér'"></a>
         <a th:unless="${employee != null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#sec-7902'" th:text="'Opret ansat'"></a>
     </div>

@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface EmployeeService extends CrudService<Employee, Long> {
     List<Employee> findAllByOrderByPositionAscFirstNameAsc();
-    Optional<Employee> findEmployeeByPhone(String phone);
+    Optional<Employee> findEmployeeByPhone(String phone); //only used in testing
 }
