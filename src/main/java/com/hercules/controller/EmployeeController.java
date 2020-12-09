@@ -29,7 +29,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/updateEmployee")
-    public String updateCase(@ModelAttribute Employee anEmployee, @RequestParam("file") MultipartFile multiFile) {
+    public String updateCase(@ModelAttribute Employee anEmployee) {
         //the input forms put an empty string if no text but we need it to be null for thymeleaf to work
         if (anEmployee.getPosition().equals("")) {
             anEmployee.setPosition(null);
@@ -53,11 +53,11 @@ public class EmployeeController {
 
         anEmployee = employeeService.save(anEmployee);
 
-//        if (anEmployee.getPictureLocation() == (null)) {
+        if (anEmployee.getPictureLocation() != (null)) {
 //            //file path of picture to upload
-//            String filepath = anEmployee.getPictureLocation();
+            String filepath = anEmployee.getPictureLocation();
 //            //file path of where to upload in s3 bucket
-//            String fileName = "employee-pictures/" + anEmployee.getEmployeeId();
+            String fileName = "employee-pictures/" + anEmployee.getEmployeeId();
 //            System.out.println(multiFile.toString());
 //            System.out.println("files: " + filepath + "\n" + fileName);
 //
@@ -69,11 +69,12 @@ public class EmployeeController {
 //                e.printStackTrace();
 //            }
 //
-//            anEmployee.setPictureLocation(fileName);
-//            s3Loader.uploadImage(newFile, fileName);
-//            anEmployee.setPictureLocation(anEmployee.imageURL());
-//        }
-
+            anEmployee.setPictureLocation(fileName);
+            s3Loader.uploadImage(filepath, fileName);
+            anEmployee.setPictureLocation(anEmployee.imageURL());
+        }
+        employeeService.save(anEmployee);
+        System.out.println(anEmployee.getPictureLocation());
         return "redirect:/employees";
     }
 

@@ -34,9 +34,9 @@
                     </div>
                     <div class="u-form-group u-form-message">
                         <label for="">Billede</label>
-                        <input type="file"
+                        <input type="text"
                                class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"
-                               name="file" th:value="${employee?.getPictureLocation()} ?: ''"
+                               name="pictureLocation" th:value="${employee?.getPictureLocation()} ?: ''"
                                placeholder="Billede URL">
                     </div>
                     <div class="u-form-date u-form-group u-form-partition-factor-2 u-form-group-5">
