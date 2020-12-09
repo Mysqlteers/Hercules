@@ -9,11 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.URL;
 
 @Controller
 public class EmployeeController {
@@ -48,7 +44,6 @@ public class EmployeeController {
         if (anEmployee.getPhone().equals("")) {
             anEmployee.setPhone(null);
         }
-
         if (anEmployee.getCertificates().equals("")) {
             anEmployee.setCertificates(null);
         }
@@ -57,11 +52,10 @@ public class EmployeeController {
         }
 
         anEmployee = employeeService.save(anEmployee);
+        //file path of where to upload in s3 bucket
+        String fileName = "employee-pictures/" + anEmployee.getEmployeeId();
 
-        if (anEmployee.getPictureLocation() == (null)) {
-            //file path of where to upload in s3 bucket
-            String fileName = "employee-pictures/" + anEmployee.getEmployeeId();
-
+        if (anEmployee.getPictureLocation() == (null) || !multipartFile.isEmpty()) {
             anEmployee.setPictureLocation(fileName);
             s3Loader.uploadImage(S3Loader.multipartFileToFile(multipartFile, "temppicture"), fileName);
             anEmployee.setPictureLocation(anEmployee.imageURL());

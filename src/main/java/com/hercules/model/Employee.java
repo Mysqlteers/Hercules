@@ -1,7 +1,6 @@
 package com.hercules.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.hercules.service.utility.S3Loader;
+    import com.hercules.service.utility.S3Loader;
 
 import javax.persistence.*;
 import java.util.HashSet;
