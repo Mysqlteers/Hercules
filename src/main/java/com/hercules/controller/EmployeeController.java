@@ -30,6 +30,7 @@ public class EmployeeController {
         if (anEmployee.getEmployeeId() != null) {
             //if exists, get picture from database
             Employee existingEmployee = employeeService.findById(anEmployee.getEmployeeId()).get();
+            anEmployee.setContacts(existingEmployee.getContacts());
             anEmployee.setPictureLocation(existingEmployee.getPictureLocation());
         }
 

@@ -37,6 +37,7 @@ public class Contact {
     public Contact(Long caseId) {
         this.caseId = caseId;
         this.persons = new HashSet<>();
+        this.employees = new HashSet<>();
     }
 
     public Set<Employee> getEmployees() {

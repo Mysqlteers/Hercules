@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface EmployeeRepository extends CrudRepository<Employee, Long> {
     List<Employee> findAllByOrderByPositionAscFirstNameAsc();
     Optional<Employee> findEmployeeByPhone(String phone); //method only used in testing
-    List<Employee> findAllByContactsOrderByPositionAscFirstNameAsc(Contact contact);
+    List<Employee> findAllByContacts_contactIdOrderByPositionAscFirstNameAsc(long contactId);
 }

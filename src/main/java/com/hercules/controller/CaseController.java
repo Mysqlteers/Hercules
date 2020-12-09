@@ -110,8 +110,9 @@ public class CaseController {
             if (contactService.findContactByCaseId(caseId).isPresent()) {
                 Contact contact = contactService.findContactByCaseId(caseId).get();
                 model.addAttribute("contactlist", personService.findAllByContactOrderByPositionAscFirstNameAsc(contact));
-                model.addAttribute("employees", employeeService.findAllByContactsOrderByPositionAscFirstNameAsc(contact));
-                for (Employee e: employeeService.findAllByContactsOrderByPositionAscFirstNameAsc(contact)) {
+                model.addAttribute("employees", employeeService.findAllByContacts_contactIdOrderByPositionAscFirstNameAsc(contact.getContactId()));
+                for (Employee e: employeeService.findAllByContacts_contactIdOrderByPositionAscFirstNameAsc(contact.getContactId())) {
+                    System.out.println("in each loop");
                     System.out.println(e.toString());
                 }
             } else {

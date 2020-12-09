@@ -54,7 +54,8 @@ public class EmployeeJPA implements EmployeeService {
     }
 
     @Override
-    public List<Employee> findAllByContactsOrderByPositionAscFirstNameAsc(Contact contact) {
-        return er.findAllByContactsOrderByPositionAscFirstNameAsc(contact);
+    public List<Employee> findAllByContacts_contactIdOrderByPositionAscFirstNameAsc(long contactId) {
+        return er.findAllByContacts_contactIdOrderByPositionAscFirstNameAsc(contactId);
     }
+
 }

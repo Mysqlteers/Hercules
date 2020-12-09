@@ -1,7 +1,9 @@
 package com.hercules.service.springdatajpa;
 
+import com.hercules.model.Case;
 import com.hercules.model.Contact;
 import com.hercules.model.Employee;
+import com.hercules.service.CaseService;
 import com.hercules.service.ContactService;
 import com.hercules.service.EmployeeService;
 import org.junit.jupiter.api.*;
@@ -19,6 +21,9 @@ class EmployeeJPATest {
 
     @Autowired
     EmployeeService es;
+
+    @Autowired
+    CaseService caseService;
 
     private String TESTPHONE = "tilfældigt nummer";
     private Long TESTCASEID = (long) 9999999;
@@ -82,9 +87,21 @@ class EmployeeJPATest {
     @Test
     @Order(6)
     void canAddEmployeeToContact() {
-        Contact contact = new Contact();
-        contact.setCaseId((long)2);
-        contact = cs.save(contact);
+        long caseId = (long) 2;
+        Case ccase = new Case();
+        if (caseService.findById(caseId).isEmpty()) {
+            ccase.setCaseId(caseId);
+            ccase = caseService.save(ccase);
+        } else {
+            ccase = caseService.findById(caseId).get();
+        }
+        Contact contact;
+        if (cs.findContactByCaseId(caseId).isPresent()) {
+            contact = cs.findContactByCaseId(caseId).get();
+        } else {
+            contact = new Contact(caseId);
+            contact = cs.save(contact);
+        }
 
         Employee employee = new Employee();
         employee.setPosition("AAAAQ");
@@ -92,6 +109,14 @@ class EmployeeJPATest {
 
         contact.addEmployee(employee);
         contact = cs.save(contact);
+        employee = es.save(employee);
+
+        System.out.println(es.findAllByContacts_contactIdOrderByPositionAscFirstNameAsc(contact.getContactId()).size());
+        System.out.println("before loop");
+        for (Employee c : es.findAllByContacts_contactIdOrderByPositionAscFirstNameAsc(contact.getContactId())) {
+            System.out.println("loop");
+//            System.out.println(c.toString());
+        }
 //
 //        Employee employee = es.findById((long) 1).get();
 ////        contact.getEmployees().add(employee);
