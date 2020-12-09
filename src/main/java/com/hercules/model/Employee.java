@@ -1,7 +1,6 @@
 package com.hercules.model;
 
-    import com.hercules.service.utility.S3Loader;
-
+import com.hercules.service.utility.S3Loader;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;

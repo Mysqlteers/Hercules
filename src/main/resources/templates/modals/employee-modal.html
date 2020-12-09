@@ -37,7 +37,7 @@
                         <input type="file"
                                class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"
                                name="file" th:value="${employee?.getPictureLocation()} ?: ''"
-                               placeholder="Billede URL">
+                               placeholder="Billede URL" >
                     </div>
                     <div class="u-form-date u-form-group u-form-partition-factor-2 u-form-group-5">
                         <label for="">Fornavn</label>
@@ -67,7 +67,7 @@
                      <div class="u-form-date u-form-group u-form-partition-factor-2 u-form-group-5">
                          <label for="">Timeløn</label>
                          <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"  name="wage" placeholder="Timeløn"
-                                type="number" th:value="${employee?.getWage()} ?: 0">
+                                type="number" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0" th:value="${employee?.getWage()} ?: 0">
                      </div>
                     <div class="u-align-left u-form-group u-form-submit">
                         <input style="background-color: #adcce9; height: 60px" class="u-button-style u-hover-palette-1-light-1 u-btn-1" type="submit" value="Gem" onclick="alert('Ansat er blevet gemt!')">
