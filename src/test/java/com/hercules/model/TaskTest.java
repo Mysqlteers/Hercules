@@ -28,7 +28,7 @@ public class TaskTest {
         subtask_1.setDeadline(LocalDate.now().plusDays(10).toString());
         subtasks.add(subtask_1);
 
-        Task task = new Task("test super task",null, "2020-12-10", "2020/12/20", "", subtasks, false);
+        Task task = new Task("test super task",null, "2020-12-10", "2020-12-20", "", subtasks, false);
 
         task.addPicture("before-after-pictures/test_pic.jpg", "", true);
 

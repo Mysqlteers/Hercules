@@ -1,5 +1,6 @@
 package com.hercules.service.springdatajpa;
 
+import com.hercules.model.Case;
 import com.hercules.model.Document;
 import com.hercules.service.CaseService;
 import com.hercules.service.DocumentService;
@@ -9,6 +10,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -31,8 +36,12 @@ public class DocumentJPATest {
     @Order(1)
     public void canSaveAndCanFindByCaseId(){
         Document newDocument = new Document();
-        newDocument.setSuperCase(cs.findById(testCaseId).get());
-        ds.save(newDocument);
+
+        ArrayList<Case> k = new ArrayList<>(cs.findAll());
+        Case myCase = k.get(0);
+        myCase.addDocument("helloWorld", "before-after-pictures/test_pic.jpg");
+        cs.save(myCase);
+
         assertTrue(ds.findDocumentByCaseId(testCaseId).isPresent());
     }
 
@@ -49,7 +58,7 @@ public class DocumentJPATest {
     void canFindById(){
         Document document = ds.findDocumentByCaseId(testCaseId).get();
         Document otherDocument = ds.findById(document.getDocumentId()).get();
-        assertEquals(document.getDocumentId(), otherDocument.getSuperCase());
+//        assertEquals(document.getDocumentId(), otherDocument.getSuperCase());
         assertEquals(document.getDocumentId(), otherDocument.getDocumentId());
     }
 
