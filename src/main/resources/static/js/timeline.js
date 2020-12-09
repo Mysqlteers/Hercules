@@ -47,12 +47,15 @@ function createChart(e) {
 
     //find element where day == startday
     let filteredArray = dayElements.filter(day => day.dataset.period === startDay);
-    left = filteredArray[0].offsetLeft;
-
+        console.log(filteredArray[0])
+        if (filteredArray[0]!=undefined) {
+            left = filteredArray[0].offsetLeft;
+        }
     //find element where day == startday
     filteredArray = dayElements.filter(day => day.dataset.period === endDay);
-    width = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth - left;
-
+        if (filteredArray[0]!=undefined) {
+            width = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth - left;
+        }
 
     // apply css
     el.style.left = `${left}px`;

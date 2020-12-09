@@ -1,18 +1,15 @@
 package com.hercules.controller;
 
 import com.hercules.model.Case;
-import com.hercules.model.S3File;
 import com.hercules.model.Task;
 import com.hercules.service.CaseService;
 import com.hercules.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.Map;
-import java.util.Set;
 
 @Controller
 public class TaskController {
