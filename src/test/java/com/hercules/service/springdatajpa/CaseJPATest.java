@@ -34,7 +34,11 @@ class CaseJPATest {
         Task subtask_1 = new Task("task2");
         subtask_1.addPicture("before-after-pictures/test_pic.jpg", "", false);
         newCase.addTask(subtask_1);
-        newCase.addDocument("testdoc", "before-after-pictures/test_pic.jpg" );
+        newCase.addDocument("testdoc", "before-after-pictures/test_pic.jpg" ); // Added from
+        newCase.addDocument("testdoc2", "before-after-pictures/test_pic.jpg" );
+        newCase.addDocument("testdoc3", "before-after-pictures/test_pic.jpg" );
+        newCase.addDocument("testdoc4", "before-after-pictures/test_pic.jpg" );
+        newCase.addDocument("testdoc5", "before-after-pictures/test_pic.jpg" );
         cs.save(newCase);
         assertTrue(cs.findById(newCase.getId()).isPresent());
     }
@@ -43,9 +47,7 @@ class CaseJPATest {
     @Order(5)
     void canDeleteById() {
         int sizeBefore = cs.findAll().size();
-
         cs.deleteById(cs.findByLocation(location).get().getCaseId());
-
         assertTrue(sizeBefore > cs.findAll().size());
     }
 
