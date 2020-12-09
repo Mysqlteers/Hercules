@@ -49,12 +49,12 @@ public class EmployeeJPA implements EmployeeService {
     }
 
     @Override
-    public List<Employee> findAllByContactsOrderByPositionAscFirstNameAsc(Contact contact) {
-        return er.findAllByContactsOrderByPositionAscFirstNameAsc(contact);
+    public Optional<Employee> findEmployeeByPhone(String phone) {
+        return er.findEmployeeByPhone(phone);
     }
 
     @Override
-    public Optional<Employee> findEmployeeByPhone(String phone) {
-        return er.findEmployeeByPhone(phone);
+    public List<Employee> findAllByContactsOrderByPositionAscFirstNameAsc(Contact contact) {
+        return er.findAllByContactsOrderByPositionAscFirstNameAsc(contact);
     }
 }
