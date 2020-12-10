@@ -1,6 +1,7 @@
 package com.hercules.service.springdatajpa;
 
 import com.hercules.model.Case;
+import com.hercules.model.Document;
 import com.hercules.model.Task;
 import com.hercules.service.CaseService;
 import org.junit.jupiter.api.MethodOrderer;
@@ -30,42 +31,46 @@ class CaseJPATest {
     @Test
     @Order(1)
     void canSaveAndFindByLocation() {
-        Case newCase = new Case("Nedriv væg", 1, location);
+        Case testCase = new Case("Nedriv væg", 1, location);
         Task subtask_1 = new Task("task2");
         subtask_1.addPicture("before-after-pictures/test_pic.jpg", "", false);
-        newCase.addTask(subtask_1);
-        cs.save(newCase);
-        assertTrue(cs.findById(newCase.getId()).isPresent());
+        testCase.addTask(subtask_1);
+        Document myDoc = new Document();
+        myDoc.setLocation("before-after-pictures/test_pic.jpg");
+        myDoc.setDocumentName("testMyDoc");
+        testCase.addDocument(myDoc);
+        cs.save(testCase);
+        assertTrue(cs.findById(testCase.getId()).isPresent());
     }
 
     @Test
-    @Order(5)
+    @Order(6)
     void canDeleteById() {
         int sizeBefore = cs.findAll().size();
-
-        cs.deleteById(cs.findByLocation(location).get().getCaseId());
+        Case testCase = cs.findByLocation(location).get();
+        cs.deleteById(testCase.getCaseId());
 
         assertTrue(sizeBefore > cs.findAll().size());
     }
 
     @Test
-    @Order(4)
+    @Order(5)
     void canUpdate() {
-        Case newCase = cs.findByLocation(location).get();
-        newCase.setStatus(2);
-        cs.save(newCase);
-        Case updatedCase = cs.findById(newCase.getCaseId()).get();
-        assertEquals(newCase.getDescription(), updatedCase.getDescription());
+        Case testCase = cs.findByLocation(location).get();
+        testCase.setStatus(2);
+        cs.save(testCase);
+        Case updatedCase = cs.findById(testCase.getCaseId()).get();
+        assertEquals(testCase.getDescription(), updatedCase.getDescription());
         assertTrue(updatedCase.getStatus() == 2);
     }
 
     @Test
     @Order(3)
     void canFindById() {
-        Case newCase = cs.findByLocation(location).get();
-        Case otherCase = cs.findById(newCase.getCaseId()).get();
-        assertEquals(newCase.getDescription(), otherCase.getDescription());
-        assertEquals(newCase.getStatus(), otherCase.getStatus());
-        assertEquals(newCase.getCaseId(), otherCase.getCaseId());
+        Case testCase = cs.findByLocation(location).get();
+        Case otherCase = cs.findById(testCase.getCaseId()).get();
+        assertEquals(testCase.getDescription(), otherCase.getDescription());
+        assertEquals(testCase.getStatus(), otherCase.getStatus());
+        assertEquals(testCase.getCaseId(), otherCase.getCaseId());
     }
 }
