@@ -42,9 +42,8 @@ public class S3Loader {
     }
 
 
-    public static S3Loader getInstance()
-    {
-        if (instance==null)
+    public static S3Loader getInstance() {
+        if (instance == null)
             instance =  new S3Loader();
         return instance;
     }
@@ -68,8 +67,7 @@ public class S3Loader {
         }
         catch (Exception e){e.printStackTrace();}
         finally {
-            if(outputStream != null)
-            {
+            if(outputStream != null) {
                 outputStream.close();
             }
         }
@@ -84,9 +82,6 @@ public class S3Loader {
             url = s3Client.getUrl(bucketName, s3ObjectName).toExternalForm();
         }
         catch (Exception e){e.printStackTrace();}
-        finally {
-        }
-
         return url;
     }
 
@@ -110,8 +105,6 @@ public class S3Loader {
             request.setMetadata(metadata);
             s3Client.putObject(request);
 
-        } catch (AmazonServiceException e) {
-            e.printStackTrace();
         } catch (SdkClientException e) {
             e.printStackTrace();
         }
@@ -129,19 +122,14 @@ public class S3Loader {
             s3Client.putObject(new PutObjectRequest(bucketName, fileName, inputStream, meta));
             inputStream.close();
 
-        } catch (AmazonServiceException e) {
-            e.printStackTrace();
-        } catch (SdkClientException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (IOException | SdkClientException e) {
             e.printStackTrace();
         }
     }
 
 
     //convert multipartfile to normal file. Saves file in temp to get full file path
-    public static File multipartFileToFile(MultipartFile multipartFile, String filename) throws IOException {
-        File convFile = new File(System.getProperty("java.io.tmpdir")+"/"+filename);
-        return convFile;
+    public static File multipartFileToFile(MultipartFile multipartFile, String filename) {
+        return new File(System.getProperty("java.io.tmpdir") + "/" + filename);
     }
 }

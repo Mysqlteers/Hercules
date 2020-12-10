@@ -36,18 +36,18 @@ public class DocumentController {
     }
 
     @PostMapping("/addDocument")
-    public String addDocument(@RequestParam(name = "file") MultipartFile file, @RequestParam("name") String name,  @RequestParam("caseId") long caseId) throws IOException {
+    public String addDocument(@RequestParam(name = "file") MultipartFile file, @RequestParam("name") String name,  @RequestParam("caseId") long caseId){
         Case myCase = caseService.findById(caseId).get();
 
-        s3Loader.uploadFile(file, "documents/"+name);
+        s3Loader.uploadFile(file, "documents/" + name);
 
         Document myDoc = new Document();
         myDoc.setDocumentName(name);
-        myDoc.setLocation("documents/"+name);
+        myDoc.setLocation("documents/" + caseId + "/" + name);
 
         myCase.addDocument(myDoc);
         caseService.save(myCase);
-        return "redirect:/caseDetails/"+myCase.getCaseId();
+        return "redirect:/caseDetails/" + myCase.getCaseId();
 
     }
 }

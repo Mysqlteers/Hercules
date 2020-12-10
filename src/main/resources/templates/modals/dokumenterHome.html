@@ -22,8 +22,7 @@
                     <td class="u-border-1 u-border-grey-30 u-first-column u-grey-5 u-table-cell u-table-cell-4"
                         th:text="${document?.documentName}"></td>
                     <td class="u-border-1 u-border-grey-30 u-table-cell">
-                        <a download="someFile" target="_blank"
-                           th:attr="download=${document?.documentName}" th:href="${document?.getUrl()}">Download</a>
+                        <a th:href="${document?.getUrl()}">Download</a>
                     </td>
                     <td class="u-border-1 u-border-grey-30 u-table-cell">
                         <form action="/deleteDocument" method="POST">
