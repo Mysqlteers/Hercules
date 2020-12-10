@@ -13,7 +13,7 @@ public class Contact {
     private Long contactId;
     @Column(name = "case_id")
     private Long caseId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "contact")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "contact")
     @JsonManagedReference
     private Set<Person> persons;
     @ManyToMany(mappedBy = "contacts", fetch = FetchType.EAGER)
