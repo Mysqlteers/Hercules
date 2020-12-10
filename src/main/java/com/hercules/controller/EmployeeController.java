@@ -40,7 +40,7 @@ public class EmployeeController {
             anEmployee.setPictureLocation(existingEmployee.getPictureLocation());
         }
 
-        //the input forms put an empty string if no text but we need it to be null for thymeleaf to work
+        //the input forms put an empty string if no text but we need it to be null for database to work
         if (anEmployee.getPosition().equals("")) {
             anEmployee.setPosition(null);
         }
@@ -60,10 +60,14 @@ public class EmployeeController {
             anEmployee.setEmail(null);
         }
 
+        //get the employeeId from database into object
         anEmployee = employeeService.save(anEmployee);
+
         //file path of where to upload in s3 bucket
         String fileName = "employee-pictures/" + anEmployee.getEmployeeId();
 
+        //we check if employee doesnt have a picture OR the input file exists
+        //in which case, we want to update the employee picture
         if (anEmployee.getPictureLocation() == (null) || !multipartFile.isEmpty()) {
             anEmployee.setPictureLocation(fileName);
             s3Loader.uploadImage(S3Loader.multipartFileToFile(multipartFile, "temppicture"), fileName);
