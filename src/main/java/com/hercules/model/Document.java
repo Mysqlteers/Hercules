@@ -13,9 +13,7 @@ public class Document {
     @Column(name = "document_id")
     private Long documentId;
 
-
     private String documentName;
-
 
     private String location;
     @ManyToOne

@@ -21,14 +21,12 @@ class DocumentJPATest {
     Document myDoc;
 
     @Test
-    void CanCreateAndFindByIDAndThenDelete()
-    {
+    void CanCreateAndFindByIDAndThenDelete() {
         myDoc = new Document();
         int elements = ds.findAll().size();
         myDoc= ds.save(myDoc);
-        assert  ds.findAll().size()>elements;
-
+        assert  ds.findAll().size() > elements;
         ds.deleteById(myDoc.getDocumentId());
-        assert ds.findAll().size()==elements;
+        assert ds.findAll().size() == elements;
     }
 }

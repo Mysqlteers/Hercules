@@ -124,12 +124,10 @@ public class S3Loader {
      */
     public void uploadFile(MultipartFile file, String fileName) {
         try {
-
             InputStream inputStream = file.getInputStream();
             ObjectMetadata meta = new ObjectMetadata();
             s3Client.putObject(new PutObjectRequest(bucketName, fileName, inputStream, meta));
             inputStream.close();
-
 
         } catch (AmazonServiceException e) {
             e.printStackTrace();
@@ -144,7 +142,6 @@ public class S3Loader {
     //convert multipartfile to normal file. Saves file in temp to get full file path
     public static File multipartFileToFile(MultipartFile multipartFile, String filename) throws IOException {
         File convFile = new File(System.getProperty("java.io.tmpdir")+"/"+filename);
-        System.out.println(convFile.getAbsolutePath());
         return convFile;
     }
 }
