@@ -83,35 +83,4 @@ class EmployeeJPATest {
         cs.deleteById(cs.findContactByCaseId(TESTCASEID).get().getContactId());
         assertTrue(sizeBefore > es.findAll().size());
     }
-
-    //this method is for testing if system can add an employee to a contact associated with a case
-    @Test
-    @Order(6)
-    void canAddEmployeeToContact() {
-//        long caseId = (long) 2;
-//        Case ccase = new Case();
-//        if (caseService.findById(caseId).isEmpty()) {
-//            ccase.setCaseId(caseId);
-//            ccase = caseService.save(ccase);
-//        } else {
-//            ccase = caseService.findById(caseId).get();
-//        }
-//        Contact contact;
-//        if (cs.findContactByCaseId(caseId).isPresent()) {
-//            contact = cs.findContactByCaseId(caseId).get();
-//        } else {
-//            contact = new Contact(caseId);
-//            contact = cs.save(contact);
-//        }
-//
-//        Employee employee = new Employee();
-//        employee.setPosition("AAAAQ");
-//        employee = es.save(employee);
-//
-//        contact.addEmployee(employee);
-//        contact = cs.save(contact);
-//        employee = es.save(employee);
-//
-        assertTrue(true);
-    }
 }

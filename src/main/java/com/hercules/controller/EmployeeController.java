@@ -40,6 +40,7 @@ public class EmployeeController {
             anEmployee.setPictureLocation(existingEmployee.getPictureLocation());
         }
 
+        //TODO refactor employee-modal elvis operators to return null instead of ""
         //the input forms put an empty string if no text but we need it to be null for database to work
         if (anEmployee.getPosition().equals("")) {
             anEmployee.setPosition(null);

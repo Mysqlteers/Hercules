@@ -27,6 +27,18 @@ public class CaseController {
     @Autowired
     TaskService taskService;
 
+    @Autowired
+    CaseService caseService;
+
+    @Autowired
+    ContactService contactService;
+
+    @Autowired
+    PersonService personService;
+
+    @Autowired
+    EmployeeService employeeService;
+
 
     /**
      * Method hanldes the creation of a timeline, by passing the days in a month as a list, as well as
@@ -61,18 +73,6 @@ public class CaseController {
         return "modals/timeline";
     }
 
-
-    @Autowired
-    CaseService caseService;
-
-    @Autowired
-    ContactService contactService;
-
-    @Autowired
-    PersonService personService;
-
-    @Autowired
-    EmployeeService employeeService;
 
     @GetMapping("/")
     public String index(Model model) {
@@ -125,8 +125,6 @@ public class CaseController {
                 model.addAttribute("employee", new HashSet<Employee>());
             }
 
-
-
             //Adding
             LocalDate startDate = LocalDate.now().minusDays(7);
             LocalDate endDate = LocalDate.now().plusMonths(1).minusDays(7);
@@ -139,15 +137,10 @@ public class CaseController {
 
             model.addAttribute("mainTask", caseService.findById((long) caseId).get());
 
-
-
             return "caseDetails";
         } else {
             model.addAttribute("errorCode", 0);
             return "genericErrorPage";
         }
-
-
-
     }
 }

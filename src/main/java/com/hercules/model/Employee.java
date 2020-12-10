@@ -11,22 +11,6 @@ public class Employee {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "employee_id")
     private Long employeeId;
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "employeeId=" + employeeId +
-                ", contacts=" + contacts +
-                ", pictureLocation='" + pictureLocation + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", position='" + position + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", certificates='" + certificates + '\'' +
-                ", wage=" + wage +
-                '}';
-    }
-
     @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "employee_case",
@@ -45,11 +29,6 @@ public class Employee {
     private String certificates;
     private double wage;
 
-    public String imageURL() {
-        //get full link of picture
-        return S3Loader.getInstance().getS3ObjectUrl(pictureLocation);
-    }
-
     public Employee() {
     }
 
@@ -64,6 +43,27 @@ public class Employee {
         this.phone = phone;
         this.certificates = certificates;
         this.wage = wage;
+    }
+
+    public String imageURL() {
+        //get full link of picture
+        return S3Loader.getInstance().getS3ObjectUrl(pictureLocation);
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "employeeId=" + employeeId +
+                ", contacts=" + contacts +
+                ", pictureLocation='" + pictureLocation + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", position='" + position + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", certificates='" + certificates + '\'' +
+                ", wage=" + wage +
+                '}';
     }
 
     public Long getEmployeeId() {
