@@ -83,8 +83,10 @@ public class EmployeeController {
     public String addEmployeesToCase(@RequestParam("employeeIds") List<Long> pickedEmployees, @PathVariable("caseId") Long caseId) {
         Contact contact = contactService.findContactByCaseId(caseId).get();
         for (Long id: pickedEmployees) {
-            Employee e = employeeService.findById(id).get();
-            contact.addEmployee(e);
+                if (id != null) {
+                    Employee e = employeeService.findById(id).get();
+                    contact.addEmployee(e);
+                }
         }
         contactService.save(contact);
         return "redirect:/caseDetails/" + caseId;
