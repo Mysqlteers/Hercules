@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html style="font-size: 16px;">
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org" style="font-size: 16px;">
 <head>
     <title>Sager</title>
     <link rel="stylesheet" th:href="@{/css/caseDetails.css}" media="screen" type="text/css">
@@ -12,13 +10,17 @@
 </head>
 <body class="u-body">
 <header th:replace="fragments/header :: header"></header>
+<!--below section contains the modal to create a new case from scratch-->
 <section style="position: absolute; right: 10px; z-index: 50" th:replace="modals/case-modal.html :: case-modal(${null})"></section>
     <section class="u-clearfix u-section-1" id="sec-444b">
-      <div class="u-clearfix u-sheet u-sheet-1" th:each="case:${cases}">
+<!--        make a new div for each case object, we get in the list of cases in the database-->
+      <div class="u-clearfix u-sheet u-sheet-1" th:each="case: ${cases}">
         <div class="u-clearfix u-expanded-width u-gutter-0 u-layout-wrap u-layout-wrap-1">
           <div class="u-layout" style="">
             <div class="u-layout-row" style="">
               <div class="u-align-left u-container-style u-layout-cell u-left-cell u-size-30 u-size-xs-60 u-white u-layout-cell-1" src="">
+<!--                  we check the status to set the right background color of the case, we have this check 3 times-->
+<!--                  where the div has different color depending on the status-->
                   <div class="u-container-layout u-container-layout-1" th:if="${case.status == 0}" style="background-color: lightskyblue">
                       <table>
                           <tbody>
@@ -37,7 +39,11 @@
                               <td th:text="${case.description}"></td>
                           </tr>
                           <tr>
-                              <td><a th:href="@{'/caseDetails/'+${case.caseId}}"><button style="height: 49.6px; width: 126.133px" class="u-btn u-button-style u-btn-1">Detaljer</button></a></td>
+                              <td><a th:href="@{'/caseDetails/'+${case.caseId}}">
+                                  <button style="height: 49.6px; width: 126.133px" class="u-btn u-button-style u-btn-1">
+                                      Detaljer
+                                  </button>
+                              </a></td>
                               <td style="height: 50px"><button th:replace="modals/case-modal.html :: case-modal(${case})"></button></td>
                           </tr>
                           </tbody>
@@ -62,7 +68,11 @@
                               <td th:text="${case.description}"></td>
                           </tr>
                           <tr>
-                              <td><a th:href="@{'/caseDetails/'+${case.caseId}}"><button class="u-btn u-button-style u-btn-1" style="height: 49.6px; width: 126.133px">Detaljer</button></a></td>
+                              <td><a th:href="@{'/caseDetails/'+${case.caseId}}">
+                                  <button class="u-btn u-button-style u-btn-1" style="height: 49.6px; width: 126.133px">
+                                      Detaljer
+                                  </button>
+                              </a></td>
                               <td style="height: 50px"><button th:replace="modals/case-modal.html :: case-modal(${case})"></button></td>
                           </tr>
                           </tbody>
@@ -87,15 +97,19 @@
                               <td th:text="${case.description}"></td>
                           </tr>
                           <tr>
-                              <td><a th:href="@{'/caseDetails/'+${case.caseId}}"><button class="u-btn u-button-style u-btn-1" style="height: 49.6px; width: 126.133px">Detaljer</button></a></td>
+                              <td><a th:href="@{'/caseDetails/'+${case.caseId}}">
+                                  <button class="u-btn u-button-style u-btn-1" style="height: 49.6px; width: 126.133px">
+                                      Detaljer
+                                  </button>
+                              </a></td>
                               <td><button th:replace="modals/case-modal.html :: case-modal(${case})"></button></td>
                           </tr>
                           </tbody>
                       </table>
                   </div>
               </div>
-              <div class="u-align-center u-container-style u-image u-layout-cell u-right-cell u-size-30 u-size-xs-60 u-image-1" src="" data-image-width="1080" data-image-height="1080">
-              </div>
+<!--                below div contains the standard placeholder image-->
+              <div class="u-align-center u-container-style u-image u-layout-cell u-right-cell u-size-30 u-size-xs-60 u-image-1" src="" data-image-width="1080" data-image-height="1080"></div>
             </div>
           </div>
         </div>
