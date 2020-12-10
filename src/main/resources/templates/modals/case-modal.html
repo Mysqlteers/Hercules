@@ -9,8 +9,8 @@
 <body>
     <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
 <!--        modal button -->
-        <a th:if="${case != null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#'+${case?.getCaseId()}" th:text="'Opdater sag'"></a>
-        <a th:unless="${case != null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#sec-7902'" th:text="'Opret sag'"></a>
+        <a th:if="${case != null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#'+${case?.getCaseId()}" th:text="'OPDATER SAG'"></a>
+        <a th:unless="${case != null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#sec-7902'" th:text="'OPRET SAG'"></a>
     </div>
 <!--modal -->
 <div class="u-black u-clearfix u-container-style u-dialog-block u-opacity u-opacity-70 u-valign-middle u-section-4" th:id="${case?.getCaseId()} ?: 'sec-7902'" >

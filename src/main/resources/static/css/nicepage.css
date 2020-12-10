@@ -16053,6 +16053,7 @@ html {
   font-size: 16px;
 }
 .u-body {
+  overflow: auto;
   font-size: 1rem;
   line-height: 1.6;
 }
