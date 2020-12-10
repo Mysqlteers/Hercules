@@ -1,4 +1,4 @@
-/*package com.hercules.model;
+package com.hercules.model;
 
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -14,8 +14,7 @@ class PersonTest {
     @Test
     @Order(1)
     void canCreatePersonObject() {
-        Person person = new Person();
-        assertNotNull(person);
+        assertNotNull(new Person());
     }
 
     @Test
@@ -26,4 +25,4 @@ class PersonTest {
         newPerson.setPhone(newPhone);
         assertEquals(newPerson.getPhone(), newPhone);
     }
-}*/
+}
