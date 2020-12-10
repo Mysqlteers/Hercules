@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class CaseController {
@@ -113,9 +114,12 @@ public class CaseController {
 
             if (contactService.findContactByCaseId(caseId).isPresent()) {
                 Contact contact = contactService.findContactByCaseId(caseId).get();
+                List<Employee> attachedEmployees = employeeService.findAllByContacts_contactIdOrderByPositionAscFirstNameAsc(contact.getContactId());
+                List<Employee> allEmployees = employeeService.findAllByOrderByPositionAscFirstNameAsc();
+                allEmployees.removeAll(attachedEmployees);
                 model.addAttribute("contactlist", personService.findAllByContactOrderByPositionAscFirstNameAsc(contact));
-                model.addAttribute("allEmployees", employeeService.findAllByOrderByPositionAscFirstNameAsc());
-                model.addAttribute("attachedEmployees", employeeService.findAllByContacts_contactIdOrderByPositionAscFirstNameAsc(contact.getContactId()));
+                model.addAttribute("allEmployees", allEmployees);
+                model.addAttribute("attachedEmployees", attachedEmployees);
             } else {
                 model.addAttribute("contactlist", new HashSet<Person>());
                 model.addAttribute("employee", new HashSet<Employee>());
