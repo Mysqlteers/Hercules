@@ -25,7 +25,6 @@ public class Document {
     /* ***********************************************************  Constructors and methods  ************************************************************ */
 
     public Document() {
-
     }
 
     public Document(Case superCase, String documentName, String location) {

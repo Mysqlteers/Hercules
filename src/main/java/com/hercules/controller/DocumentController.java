@@ -3,6 +3,7 @@ package com.hercules.controller;
 import com.hercules.model.Case;
 import com.hercules.model.Document;
 import com.hercules.service.CaseService;
+import com.hercules.service.DocService;
 import com.hercules.service.utility.S3Loader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,32 +19,24 @@ public class DocumentController {
     @Autowired
     CaseService caseService;
 
+    @Autowired
+    DocService docService;
+
     private S3Loader s3Loader = S3Loader.getInstance();
 
-    @GetMapping("/dokumenter{id}")
-    public String dokumenterHomer(@PathVariable("id") long id, Model model){
-        model.addAttribute("case",caseService.findById(id));
-        return "dokumenterHome";
-    }
-    
     @PostMapping("/deleteDocument")
-    public String removeDocument(Model model, @RequestParam(name = "document") long documentId, @RequestParam("caseId") long caseId){
+    public String removeDocument(@RequestParam(name = "document") long documentId, @RequestParam("caseId") long caseId){
         Case myCase = caseService.findById(caseId).get();
-        Document myDoc = new Document();
-        for (Document document: myCase.getDocumentsAsList()) {
-            if(document.getDocumentId() == documentId) {
-                myDoc = document;
-            }
-        }
+        Document myDoc = docService.findById(documentId).get();
         myCase.removeDocument(myDoc);
+        docService.deleteById(myDoc.getDocumentId());
         caseService.save(myCase);
-        model.addAttribute("case",myCase);
-        return "redirect:/dokumenter"+myCase.getCaseId();
+        return "redirect:/caseDetails/"+myCase.getCaseId();
 
     }
 
     @PostMapping("/addDocument")
-    public String addDocument(Model model, @RequestParam(name = "file") MultipartFile file, @RequestParam("navn") String name,  @RequestParam("caseId") long caseId) throws IOException {
+    public String addDocument(@RequestParam(name = "file") MultipartFile file, @RequestParam("navn") String name,  @RequestParam("caseId") long caseId) throws IOException {
         Case myCase = caseService.findById(caseId).get();
 
         s3Loader.uploadFile(file, "documents/"+name);
@@ -54,8 +47,7 @@ public class DocumentController {
 
         myCase.addDocument(myDoc);
         caseService.save(myCase);
-        model.addAttribute("case",myCase);
-        return "redirect:/dokumenter"+myCase.getCaseId();
+        return "redirect:/caseDetails/"+myCase.getCaseId();
 
     }
 }
