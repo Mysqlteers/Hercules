@@ -41,6 +41,11 @@ public class TaskJPA implements TaskService {
     }
 
     @Override
+    public Optional<Task> findByName(String name) {
+        return taskRepository.findByName(name);
+    }
+
+    @Override
     public Optional<Task> findByTaskId(Long taskId) {
         return taskRepository.findByTaskId(taskId);
     }
