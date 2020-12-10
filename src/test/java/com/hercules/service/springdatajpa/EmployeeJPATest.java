@@ -84,48 +84,34 @@ class EmployeeJPATest {
         assertTrue(sizeBefore > es.findAll().size());
     }
 
+    //this method is for testing if system can add an employee to a contact associated with a case
     @Test
     @Order(6)
     void canAddEmployeeToContact() {
-        long caseId = (long) 2;
-        Case ccase = new Case();
-        if (caseService.findById(caseId).isEmpty()) {
-            ccase.setCaseId(caseId);
-            ccase = caseService.save(ccase);
-        } else {
-            ccase = caseService.findById(caseId).get();
-        }
-        Contact contact;
-        if (cs.findContactByCaseId(caseId).isPresent()) {
-            contact = cs.findContactByCaseId(caseId).get();
-        } else {
-            contact = new Contact(caseId);
-            contact = cs.save(contact);
-        }
-
-        Employee employee = new Employee();
-        employee.setPosition("AAAAQ");
-        employee = es.save(employee);
-
-        contact.addEmployee(employee);
-        contact = cs.save(contact);
-        employee = es.save(employee);
-
-        System.out.println(es.findAllByContacts_contactIdOrderByPositionAscFirstNameAsc(contact.getContactId()).size());
-        System.out.println("before loop");
-        for (Employee c : es.findAllByContacts_contactIdOrderByPositionAscFirstNameAsc(contact.getContactId())) {
-            System.out.println("loop");
-//            System.out.println(c.toString());
-        }
+//        long caseId = (long) 2;
+//        Case ccase = new Case();
+//        if (caseService.findById(caseId).isEmpty()) {
+//            ccase.setCaseId(caseId);
+//            ccase = caseService.save(ccase);
+//        } else {
+//            ccase = caseService.findById(caseId).get();
+//        }
+//        Contact contact;
+//        if (cs.findContactByCaseId(caseId).isPresent()) {
+//            contact = cs.findContactByCaseId(caseId).get();
+//        } else {
+//            contact = new Contact(caseId);
+//            contact = cs.save(contact);
+//        }
 //
-//        Employee employee = es.findById((long) 1).get();
-////        contact.getEmployees().add(employee);
-//        employee.getContacts().add(cs.findById((long) 1).get());
-////        cs.save(contact);
-//        es.save(employee);
+//        Employee employee = new Employee();
+//        employee.setPosition("AAAAQ");
+//        employee = es.save(employee);
 //
-////        Contact newContact = cs.findById((long) 1).get();
-////        System.out.println(newContact.getEmployees().toString());
+//        contact.addEmployee(employee);
+//        contact = cs.save(contact);
+//        employee = es.save(employee);
+//
         assertTrue(true);
     }
 }
