@@ -11,11 +11,18 @@ import java.util.Set;
 public class Contact {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "contact_id")
     private Long contactId;
+
     @Column(name = "case_id")
     private Long caseId;
+
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "contact")
     @JsonManagedReference
     private Set<Person> persons;
+
+    @OneToMany(cascade = CascadeType.DETACH, mappedBy = "contact")
+    private Set<Tool> tools;
+
+
     @ManyToMany(mappedBy = "contacts", fetch = FetchType.EAGER)
     private Set<Employee> employees = new HashSet<>();
 

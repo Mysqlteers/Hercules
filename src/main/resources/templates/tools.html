@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Værktøjer/Maskiner</title>
+    <link rel="stylesheet" th:href="@{/css/employeeList.css}" media="screen" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/nicepage.css}" media="screen" type="text/css">
+    <script class="u-script" type="text/javascript" th:src="@{/js/jquery.js}" defer=""></script>
+    <script class="u-script" type="text/javascript" th:src="@{/js/nicepage.js}" defer=""></script>
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
+</head>
+<body class="u-body">
+<header th:replace="fragments/header :: header"></header>
+<button th:replace="modals/tool-modal.html :: tool-modal(${null})"></button>
+<div class="u-align-center u-clearfix u-section-1" id="sec-a4df">
+    <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-expanded-width u-table u-table-responsive u-table-1">
+            <table class="u-table-entity u-table-entity-1">
+                <colgroup>
+                    <!--              set different column width of table-->
+                    <col width="11.7%">
+                    <col width="13.6%">
+                    <col width="17.5%">
+                    <col width="14.3%">
+                    <col width="14.3%">
+                    <col width="14.6%">
+                    <col width="14.6%">
+                </colgroup>
+                <thead class="u-palette-4-base u-table-header u-table-header-1">
+                <tr style="height: 21px;">
+                    <th class="u-border-1 u-border-palette-4-base u-table-cell">Serie Nummer</th>
+                    <th class="u-border-1 u-border-palette-4-base u-table-cell">Type</th>
+                    <th class="u-border-1 u-border-palette-4-base u-table-cell">Model</th>
+                    <th class="u-border-1 u-border-palette-4-base u-table-cell">Lejet</th>
+                    <th class="u-border-1 u-border-palette-4-base u-table-cell">Daglige omkostninger</th>
+                    <th class="u-border-1 u-border-palette-4-base u-table-cell">sags nr</th>
+                    <th class="u-border-1 u-border-palette-4-base u-table-cell"></th>
+                    <!--                Last th is for buttons so no header name necessary, still here for the design-->
+                </tr>
+                </thead>
+                <tbody class="u-table-body">
+                <tr style="height: 75px;" th:each="tool: ${tools}">
+                    <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${tool?.getSerialNr()}">Serie Nummer</td>
+                    <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${tool?.getType()}">Type</td>
+                    <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${tool?.getModel()}">Model</td>
+                    <td class="u-border-1 u-border-grey-30 u-table-cell" style="text-align:center">
+                        <input type="checkbox" value="true" disabled th:checked="${tool?.isRented()}" readonly="true"
+                               style="transform: scale(2.5)">
+                    </td>
+                    <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${tool?.getDailyCost()}">daglige omkostnigner</td>
+                    <td th:if="${tool?.getContact()!=null}" class="u-border-1 u-border-grey-30 u-table-cell" th:text="${tool?.getContact().getCaseID()} ?: 'ikke i brug'">nuværende sag</td>
+                    <td th:unless="${tool?.getContact()!=null}" class="u-border-1 u-border-grey-30 u-table-cell" th:text="'ikke i brug'">nuværende sag</td>
+                    <td class="u-border-1 u-border-grey-30 u-table-cell" style="display: table-row">
+                        <a th:href="@{'/deleteTool/' + ${tool.getToolId()}}">
+                            <button class="u-btn u-button-style u-btn-1"  onclick="return confirm('Er du sikker på, at du vil slette denne ansatte?')" style="background-color: crimson; color: white; width: 132px;
+                            margin:  20px 20px 0px 20px;">
+                                SLET
+                            </button>
+                        </a>
+                        <button th:replace="modals/tool-modal.html :: tool-modal(${tool})"></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

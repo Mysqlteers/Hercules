@@ -11,51 +11,46 @@ import java.util.Set;
 
 @Service
 public class ToolJPA implements ToolService {
-    private com.hercules.repository.ToolRepository ToolRepository;
+    private ToolRepository toolRepository;
 
-    public ToolJPA(ToolRepository ToolRepository) {
-        this.ToolRepository = ToolRepository;
+    public ToolJPA(com.hercules.repository.ToolRepository ToolRepository) {
+        this.toolRepository = ToolRepository;
     }
 
 
     @Override
     public Set<Tool> findAll() {
-        Set<Tool> ToolSet = new HashSet<>();
-        ToolRepository.findAll().forEach(ToolSet::add);
-        return ToolSet;
+        Set<Tool> toolSet = new HashSet<>();
+        toolRepository.findAll().forEach(toolSet::add);
+        return toolSet;
     }
 
     @Override
     public Tool save(Tool object) {
-        return ToolRepository.save(object);
+        return toolRepository.save(object);
     }
 
     @Override
     public void deleteById(Long aLong) {
-        ToolRepository.deleteById(aLong);
+        toolRepository.deleteById(aLong);
     }
 
     @Override
     public Optional<Tool> findById(Long aLong) {
-        return ToolRepository.findById(aLong);
-    }
-
-    @Override
-    public Optional<Tool> findByName(String name) {
-        return ToolRepository.findByName(name);
+        return toolRepository.findById(aLong);
     }
 
     @Override
     public Optional<Tool> findByToolId(Long ToolId) {
-        return ToolRepository.findByToolId(ToolId);
+        return toolRepository.findByToolId(ToolId);
     }
 
 
     public ToolRepository getToolRepository() {
-        return ToolRepository;
+        return toolRepository;
     }
 
     public void setToolRepository(ToolRepository ToolRepository) {
-        this.ToolRepository = ToolRepository;
+        this.toolRepository = ToolRepository;
     }
 }
