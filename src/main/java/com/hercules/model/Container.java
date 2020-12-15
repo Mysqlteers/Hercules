@@ -40,6 +40,19 @@ public class Container {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Container{" +
+                "containerId=" + containerId +
+                ", containerName='" + containerName + '\'' +
+                ", dailyCost=" + dailyCost +
+                ", numberOfDays=" + numberOfDays +
+                ", pickUpPrice=" + pickUpPrice +
+                ", isPickedUp=" + isPickedUp +
+                ", contact=" + contact +
+                '}';
+    }
+
     public Contact getContact() {
         return contact;
     }

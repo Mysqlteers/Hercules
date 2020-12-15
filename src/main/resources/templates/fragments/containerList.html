@@ -1,5 +1,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<div th:fragment="containerList">
+<link rel="stylesheet" href="../../static/css/Sager.css" media="screen">
+<link th:href="@{/css/create-case-modal.css}" rel="stylesheet">
+<link th:href="@{/css/nicepage.css}"  rel="stylesheet">
+<script class="u-script" th:src="@{/js/jquery.js}" type="text/javascript"></script>
+<script class="u-script" th:src="@{/js/nicepage.js}" type="text/javascript"></script>
+
+<div th:fragment="containerList(containerlist, viewCaseId)">
 
 <div class="u-clearfix u-sheet u-sheet-1">
     <div class="u-table u-table-responsive u-table-1">
@@ -36,23 +42,20 @@
                 <td class="u-border-1 u-border-grey-30 u-table-cell"
                     th:text="${container.getIsPickedUp()}"></td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell">
-                    <a th:href="@{'/deleteContainer/' + ${container.getContainerId()} + '/' + ${viewCase.getCaseId()}}">
+                    <a th:href="@{'/deleteContainer/' + ${container.getContainerId()} + '/' + ${viewCaseId}}">
                         <button onclick="return confirm('Er du sikker?')" style="background-color: crimson; color: white"
                                 type="button">
                             Slet
                         </button>
                     </a>
-                    <a th:href="@{'/updateContainer/'+${container.getContainerId()}}">
-                        <button type="button" class="u-btn u-button-style u-btn-1" style="background-color: #478ac9; color: white; width: 122.133px">
-                            Opdater
-                        </button>
-                    </a>
+                    <button th:replace="modals/container-modal.html :: container-modal(${container}, ${viewCaseId})"></button>
                 </td>
             </tr>
             </tbody>
         </table>
         <div>
-            <button th:replace="modals/container-modal.html :: container-modal(${viewCase.getCaseId()})"></button>
+            this is replacement div
+            <button th:replace="modals/container-modal.html :: container-modal(${null}, ${viewCaseId})"></button>
         </div>
     </div>
 </div>

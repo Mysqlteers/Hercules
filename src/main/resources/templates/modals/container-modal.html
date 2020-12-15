@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style="font-size: 16px;" xmlns:th="http://www.thymeleaf.org" th:fragment="employee-modal(employee)">
+<html style="font-size: 16px;" xmlns:th="http://www.thymeleaf.org" th:fragment="container-modal(container, viewCaseId)">
 <head>
     <link rel="stylesheet" href="../../static/css/Sager.css" media="screen">
     <link th:href="@{/css/create-case-modal.css}" rel="stylesheet">
@@ -13,65 +13,45 @@
 <body>
 <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
     <!--        modal button -->
-    <!--        checking if new or editing employee-->
-    <a th:if="${employee != null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#'+${employee?.getEmployeeId()}" th:text="'OPDATER'"></a>
-    <a th:unless="${employee != null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#sec-7902'" th:text="'OPRET ANSAT'"></a>
+    <!--        checking if new or editing container-->
+    <a th:if="${container != null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#'+${container?.getContainerId()}" th:text="'OPDATER'"></a>
+    <a th:unless="${container != null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#sec-7912'" th:text="'OPRET CONTAINER'"></a>
 </div>
 <!--modal -->
-<div class="u-black u-clearfix u-container-style u-dialog-block u-opacity u-opacity-70 u-valign-middle u-section-4" th:id="${employee?.getEmployeeId()} ?: 'sec-7902'" >
+<div class="u-black u-clearfix u-container-style u-dialog-block u-opacity u-opacity-70 u-valign-middle u-section-4" th:id="${container?.getContainerId()} ?: 'sec-7912'" >
     <div class="u-container-style u-dialog u-white u-dialog-1">
         <div class="u-container-layout u-container-layout-1">
             <div class="u-expanded-width u-form u-form-1">
-                <form enctype="multipart/form-data"
-                      action="/updateEmployee" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" method="post"
+                hello in modal
+                <form action="/updateContainer" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" method="post"
                       style="padding: 10px">
+                    <input type="number" hidden required th:value="${viewCaseId}" name="viewCaseId">
                     <div class="u-form-group u-form-name">
-                        <input name="employeeId" placeholder="Ansat nr"
-                               required hidden type="text" th:value="${employee?.getEmployeeId()} ?: ${null}" readonly>
+                        <input name="containerId"
+                               required hidden type="text" th:value="${container?.getContainerId() ?: null}" readonly>
                     </div>
                     <div class="u-form-email u-form-group">
-                        <label for="">Stilling</label>
-                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="position" th:value="${employee?.getPosition()  ?: ''}" placeholder="Stilling">
+                        <label for="">Container navn</label>
+                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="containerName" th:value="${container?.getContainerName()  ?: null}" placeholder="Container navn">
                     </div>
                     <div class="u-form-group u-form-message">
-                        <label for="">Billede</label>
-                        <input type="file"
-                               class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"
-                               name="file" th:value="${employee?.getPictureLocation()} ?: ''"
-                               placeholder="Billede URL" >
+                        <label for="">Daglige omkostninger</label>
+                        <input type="number" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="dailyCost" th:value="${container?.getDailyCost()  ?: null}" placeholder="Daglige omkostninger" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0">
                     </div>
-                    <div class="u-form-date u-form-group u-form-partition-factor-2 u-form-group-5">
-                        <label for="">Fornavn</label>
-                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"  name="firstName" placeholder="Fornavn"
-                               type="text" th:value="${employee?.getFirstName()} ?: ''">
+                    <div class="u-form-email u-form-group">
+                        <label for="">Antal dage</label>
+                        <input type="number" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="numberOfDays" th:value="${container?.getNumberOfDays()  ?: null}" placeholder="Antal dage" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0">
                     </div>
-                    <div class="u-form-date u-form-group u-form-partition-factor-2 u-form-group-5">
-                        <label for="">Efternavn</label>
-                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"  name="lastName" placeholder="Efternavn"
-                               type="text" th:value="${employee?.getLastName()} ?: ''">
+                    <div class="u-form-email u-form-group">
+                        <label for="">Pris for afhentning</label>
+                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="pickUpPrice" th:value="${container?.getPickUpPrice()  ?: null}" placeholder="Pris for afhentning" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0">
                     </div>
-                    <div class="u-form-date u-form-group u-form-partition-factor-2 u-form-group-5">
-                        <label for="">Certifikater</label>
-                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"  name="certificates" placeholder="Certifikater"
-                               type="text" th:value="${employee?.getCertificates()} ?: ''">
-                    </div>
-                    <div class="u-form-date u-form-group u-form-partition-factor-2 u-form-group-5">
-                        <label for="">Telefon nr.</label>
-                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"  name="phone" placeholder="Telefon nr."
-                               type="text" th:value="${employee?.getPhone()} ?: ''">
-                    </div>
-                    <div class="u-form-date u-form-group u-form-partition-factor-2 u-form-group-5">
-                        <label for="">Email</label>
-                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"  name="email" placeholder="Email"
-                               type="text" th:value="${employee?.getEmail()} ?: ''">
-                    </div>
-                    <div class="u-form-date u-form-group u-form-partition-factor-2 u-form-group-5">
-                        <label for="">Timeløn</label>
-                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"  name="wage" placeholder="Timeløn"
-                               type="number" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0" th:value="${employee?.getWage()} ?: 0">
+                    <div class="u-form-email u-form-group">
+                        <label for="">Afhentet</label>
+                        <input type="checkbox" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="isPickedUp" th:value="${container?.isPickedUp()  ?: false}">
                     </div>
                     <div class="u-align-left u-form-group u-form-submit">
-                        <input style="background-color: #adcce9; height: 60px" class="u-button-style u-hover-palette-1-light-1 u-btn-1" type="submit" value="Gem" onclick="alert('Ansat er blevet gemt!')">
+                        <input style="background-color: #adcce9; height: 60px" class="u-button-style u-hover-palette-1-light-1 u-btn-1" type="submit" value="Gem" onclick="alert('Container er blevet gemt!')">
                     </div>
                 </form>
             </div>
