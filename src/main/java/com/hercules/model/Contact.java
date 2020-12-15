@@ -18,6 +18,8 @@ public class Contact {
     private Set<Person> persons;
     @ManyToMany(mappedBy = "contacts", fetch = FetchType.EAGER)
     private Set<Employee> employees = new HashSet<>();
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "contact")
+    private Set<Container> containers;
 
     public void addEmployee(Employee employee) {
         employees.add(employee);
@@ -32,17 +34,26 @@ public class Contact {
     public Contact() {
     }
 
-    public Contact(Long contactId, Long caseId, Set<Person> persons, Set<Employee> employees) {
+    public Contact(Long contactId, Long caseId, Set<Person> persons, Set<Employee> employees, Set<Container> containers) {
         this.contactId = contactId;
         this.caseId = caseId;
         this.persons = persons;
         this.employees = employees;
+        this.containers = containers;
     }
 
     public Contact(Long caseId) {
         this.caseId = caseId;
         this.persons = new HashSet<>();
         this.employees = new HashSet<>();
+    }
+
+    public Set<Container> getContainers() {
+        return containers;
+    }
+
+    public void setContainers(Set<Container> containers) {
+        this.containers = containers;
     }
 
     public Set<Employee> getEmployees() {
