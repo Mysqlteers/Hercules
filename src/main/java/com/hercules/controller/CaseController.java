@@ -103,6 +103,10 @@ public class CaseController {
     @GetMapping("/deleteCase/{caseId}")
     public String deleteCase(@PathVariable Long caseId) {
         caseService.deleteById(caseId);
+        Contact contact = contactService.findContactByCaseId(caseId).get();
+        for (Employee e : contact.getEmployees()) {
+            contact.removeEmployee(e);
+        }
         contactService.deleteById(contactService.findContactByCaseId(caseId).get().getContactId());
         return "redirect:/";
     }
