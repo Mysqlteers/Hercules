@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html style="font-size: 16px;" xmlns:th="http://www.thymeleaf.org" th:fragment="container-modal(container, viewCaseId)">
 <head>
-    <link rel="stylesheet" href="../../static/css/Sager.css" media="screen">
+<!--    <link rel="stylesheet" href="../../static/css/Sager.css" media="screen">-->
     <link th:href="@{/css/create-case-modal.css}" rel="stylesheet">
     <link th:href="@{/css/nicepage.css}"  rel="stylesheet">
     <script class="u-script" th:src="@{/js/jquery.js}" type="text/javascript"></script>
@@ -9,6 +9,14 @@
     <meta content="Nicepage 3.0.9, nicepage.com" name="generator">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" id="u-theme-google-font"
           rel="stylesheet">
+
+    <script type="text/javascript">
+        function submitForm() {
+            console.log('pressed submit');
+            document.getElementById("containerFormId").submit();
+        }
+    </script>
+
 </head>
 <body>
 <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
@@ -23,35 +31,36 @@
         <div class="u-container-layout u-container-layout-1">
             <div class="u-expanded-width u-form u-form-1">
                 hello in modal
-                <form action="/updateContainer" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" method="post"
+                <form id="containerFormId" th:action="@{'/updateContainer/' + ${viewCaseId}}" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" method="post"
                       style="padding: 10px">
                     <input type="number" hidden required th:value="${viewCaseId}" name="viewCaseId">
                     <div class="u-form-group u-form-name">
                         <input name="containerId"
-                               required hidden type="text" th:value="${container?.getContainerId() ?: null}" readonly>
+                               required hidden type="text" th:value="${container?.getContainerId() ?: ''}" readonly>
                     </div>
                     <div class="u-form-email u-form-group">
                         <label for="">Container navn</label>
-                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="containerName" th:value="${container?.getContainerName()  ?: null}" placeholder="Container navn">
+                        <input type="text" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="containerName" th:value="${container?.getContainerName()  ?: ''}" placeholder="Container navn">
                     </div>
                     <div class="u-form-group u-form-message">
                         <label for="">Daglige omkostninger</label>
-                        <input type="number" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="dailyCost" th:value="${container?.getDailyCost()  ?: null}" placeholder="Daglige omkostninger" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0">
+                        <input type="number" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="dailyCost" th:value="${container?.getDailyCost()  ?: ''}" placeholder="Daglige omkostninger" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0">
                     </div>
                     <div class="u-form-email u-form-group">
                         <label for="">Antal dage</label>
-                        <input type="number" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="numberOfDays" th:value="${container?.getNumberOfDays()  ?: null}" placeholder="Antal dage" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0">
+                        <input type="number" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="numberOfDays" th:value="${container?.getNumberOfDays()  ?: ''}" placeholder="Antal dage" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0">
                     </div>
                     <div class="u-form-email u-form-group">
                         <label for="">Pris for afhentning</label>
-                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="pickUpPrice" th:value="${container?.getPickUpPrice()  ?: null}" placeholder="Pris for afhentning" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0">
+                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="pickUpPrice" th:value="${container?.getPickUpPrice()  ?: ''}" placeholder="Pris for afhentning" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0">
                     </div>
                     <div class="u-form-email u-form-group">
                         <label for="">Afhentet</label>
-                        <input type="checkbox" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="isPickedUp" th:value="${container?.isPickedUp()  ?: false}">
+                        <input type="checkbox" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="isPickedUp">
                     </div>
+<!--                    <button onclick="submitForm()">Gem</button>-->
                     <div class="u-align-left u-form-group u-form-submit">
-                        <input style="background-color: #adcce9; height: 60px" class="u-button-style u-hover-palette-1-light-1 u-btn-1" type="submit" value="Gem" onclick="alert('Container er blevet gemt!')">
+                        <input style="background-color: #adcce9; height: 60px" class="u-button-style u-hover-palette-1-light-1 u-btn-1" type="submit" value="Gem" >
                     </div>
                 </form>
             </div>

@@ -1,22 +1,24 @@
 package com.hercules.controller;
 
 import com.hercules.model.Container;
+import com.hercules.service.ContactService;
 import com.hercules.service.ContainerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ContainerController {
     @Autowired
     ContainerService containerService;
 
-    @PostMapping("/updateContainer")
-    public String updateContainer(@ModelAttribute Container container, @RequestParam("viewCaseId") Long caseId) {
-        System.out.println(container.toString());
+    @Autowired
+    ContactService contactService;
+
+    @PostMapping("/updateContainer/{viewCaseId}")
+    public String updateContainer(@ModelAttribute Container container, @PathVariable("viewCaseId") Long caseId) {
+        container.setContact(contactService.findContactByCaseId(caseId).get());
+        containerService.save(container);
         return "redirect:/caseDetails/" + caseId;
     }
 }

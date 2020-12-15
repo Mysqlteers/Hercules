@@ -48,14 +48,14 @@
                             Slet
                         </button>
                     </a>
-                    <button th:replace="modals/container-modal.html :: container-modal(${container}, ${viewCaseId})"></button>
+                    <button th:replace="/modals/container-modal.html :: container-modal(${container}, ${viewCaseId})"></button>
                 </td>
             </tr>
             </tbody>
         </table>
         <div>
             this is replacement div
-            <button th:replace="modals/container-modal.html :: container-modal(${null}, ${viewCaseId})"></button>
+            <button th:replace="/modals/container-modal.html :: container-modal(${null}, ${viewCaseId})"></button>
         </div>
     </div>
 </div>

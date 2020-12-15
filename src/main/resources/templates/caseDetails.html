@@ -225,7 +225,7 @@
                     <div aria-labelledby="link-tab-c7b8" class="u-container-style u-tab-pane u-white u-tab-pane-5" id="tab-c7b8"
                          role="tabpanel">
                         <div class="u-container-layout u-container-layout-5">
-                            <p th:replace="fragments/containerList.html :: containerList(${containerlist}, ${viewCase})"></p>
+                            <p th:replace="/fragments/containerList.html :: containerList(${containerlist}, ${viewCase.getCaseId()})"></p>
                         </div>
                     </div>
                 </div>
