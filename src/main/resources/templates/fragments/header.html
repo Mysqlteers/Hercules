@@ -48,7 +48,7 @@
             </span>
         </button>
 <!--        style on below makes the number arrows on number input disappear-->
-        <input class="u-search-input" type="number" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0" id="caseId" name="search" value="" placeholder="Søg efter sagsnummer">
+        <input class="u-search-input" required type="number" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0" id="caseId" oninput="javascript: if (this.value > this.max) this.value = this.value.slice(0, this.max);" min="1" max="922337203685477580" name="search" value="" placeholder="Søg efter sagsnummer">
     </form>
 </div>
 
