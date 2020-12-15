@@ -47,7 +47,6 @@ function createChart(e) {
 
     //find element where day == startday
     let filteredArray = dayElements.filter(day => day.dataset.period === startDay);
-        console.log(filteredArray[0])
         if (filteredArray[0]!=undefined) {
             left = filteredArray[0].offsetLeft;
         }
@@ -74,7 +73,6 @@ function createChart(e) {
         if (el.childElementCount<=0) {
             el.appendChild(child)
             el.onclick = function() {
-                console.log("clicked")
                 child.click()}
 
         }
