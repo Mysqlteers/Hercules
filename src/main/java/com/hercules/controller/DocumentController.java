@@ -39,7 +39,7 @@ public class DocumentController {
     public String addDocument(@RequestParam(name = "file") MultipartFile file, @RequestParam("name") String name,  @RequestParam("caseId") long caseId){
         Case myCase = caseService.findById(caseId).get();
 
-        s3Loader.uploadFile(file, "documents/" + name);
+        s3Loader.uploadFile(file, "documents/" + caseId + "/" + name);
 
         Document myDoc = new Document();
         myDoc.setDocumentName(name);
