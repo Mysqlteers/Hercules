@@ -16,7 +16,7 @@
                 margin: 0
             }
 
-            .mySlides {
+            .mySlide {
                 display: none
             }
 
@@ -128,14 +128,14 @@
             }
         </style>
 
-        <div class="mySlides fade" th:if="${Images.size()<1}">
+        <div class="mySlide fade" th:if="${Images.size()<1}" >
             <div class="numbertext">1</div>
             <img style="width:100%" th:src="@{/images/default-image.jpg}">
             <div class="text">Caption Text</div>
         </div>
 
-        <div class="mySlides fade" th:each="image : ${Images}" th:unless="${Images.size()<1}">
-            <div class="numbertext" th:if="${image.isAfterPicture()}"
+        <div class="mySlide fade" th:each="image : ${Images}" th:unless="${Images.size()<1}">
+            <div class="numbertext" th:if="${!image.isAfterPicture()}"
                  th:text="${imageStat.count} + ' / '+${Images.size()}"></div>
             <img style="width:100%" th:src="${image.imageUrl()}">
             <div class="text" th:text="${image.getDescription()}">Caption Text</div>
@@ -164,7 +164,7 @@
         }
 
         /* Hide the images by default */
-        .mySlides {
+        .mySlide {
             display: none;
         }
 
@@ -274,7 +274,7 @@
 
         function showSlides(n) {
             let i;
-            let slides = document.getElementsByClassName("mySlides");
+            let slides = document.getElementsByClassName("mySlide");
             let dots = document.getElementsByClassName("dot");
             let captionText = document.getElementById("caption");
             if (n > slides.length) {
