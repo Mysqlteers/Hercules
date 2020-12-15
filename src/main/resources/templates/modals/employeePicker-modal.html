@@ -11,20 +11,23 @@
     <meta charset="UTF-8">
     <style>
         .modal {
-            max-height: calc(100vh - 200px);
-            overflow-y: auto;
-
+            width: 100%;
+            height: 100%;
+            top: 50%;
+            left: 50%;
+            max-width: 100%;
+            transform: translate(-50%,-50%);
         }
     </style>
 </head>
-<body>
+<body >
 <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
     <a th:href="'#sec-7903'" th:text="'Tilknyt ansat til sag'" class="u-btn u-button-style u-dialog-link u-btn-1"></a>
 </div>
-<div th:id="'sec-7903'" class="u-black u-clearfix u-container-style u-dialog-block u-opacity u-opacity-70 u-valign-middle u-section-4">
-    <div class="u-container-style u-dialog u-white u-dialog-1" style="background-color: white; width: 75%">
+<div th:id="'sec-7903'" class=" u-black u-clearfix u-container-style u-dialog-block u-opacity u-opacity-70 u-valign-middle u-section-4 modal">
+    <div class="u-container-style u-dialog u-white" style="background-color: white; left: 10%; width: 80%;">
         <div class="u-container-layout u-container-layout-1">
-            <div class="modal u-expanded-width u-form u-form-1">
+            <div class="u-expanded-width u-form u-form-1" style="overflow: auto">
                 <form th:action="'/addEmployeesToCase/' + ${viewCase.getCaseId()}">
                     <table class="u-table-entity u-table-entity-1">
                         <colgroup>
