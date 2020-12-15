@@ -6,39 +6,43 @@
         <h2>her skal der være containere</h2>
         <table class="u-table-entity">
             <colgroup>
-                <col width="18.1%">
-                <col width="27.2%">
-                <col width="27.3%">
-                <col width="17.4%">
-                <col width="10.0%">
+                <col width="25%">
+                <col width="15%">
+                <col width="15%">
+                <col width="15%">
+                <col width="15%">
+                <col width="15%">
             </colgroup>
             <thead class="u-palette-4-base u-table-header u-table-header-1">
             <tr style="height: 35px;">
-                <th class="u-border-1 u-border-palette-4-base u-table-cell">Stilling</th>
-                <th class="u-border-1 u-border-palette-4-base u-table-cell">Navn</th>
-                <th class="u-border-1 u-border-palette-4-base u-table-cell">Email</th>
-                <th class="u-border-1 u-border-palette-4-base u-table-cell">Telefonnummer</th>
+                <th class="u-border-1 u-border-palette-4-base u-table-cell">Container navn</th>
+                <th class="u-border-1 u-border-palette-4-base u-table-cell">Daglige omkostninger</th>
+                <th class="u-border-1 u-border-palette-4-base u-table-cell">Antal dage</th>
+                <th class="u-border-1 u-border-palette-4-base u-table-cell">Pris for afhentning</th>
+                <th class="u-border-1 u-border-palette-4-base u-table-cell">Afhentet</th>
                 <th class="u-border-1 u-border-palette-4-base u-table-cell"></th>
             </tr>
             </thead>
             <tbody class="u-table-body">
-            <tr style="height: 78px;" th:each="person: ${contactlist}">
+            <tr style="height: 78px;" th:each="container: ${containerlist}">
                 <td class="u-border-1 u-border-grey-30 u-first-column u-grey-5 u-table-cell u-table-cell-5"
-                    th:text="${person.getPosition()}"></td>
+                    th:text="${container.getContainerName()}"></td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell"
-                    th:text="${person.getFirstName()} + ' ' + ${person.getLastName()}"></td>
+                    th:text="${container.getDailyCost()} + ' ' + ${person.getLastName()}"></td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell"
-                    th:text="${person.getEmail()}"></td>
+                    th:text="${container.getNumberOfDays()}"></td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell"
-                    th:text="${person.getPhone()}"></td>
+                    th:text="${container.getPickUpPrice()}"></td>
+                <td class="u-border-1 u-border-grey-30 u-table-cell"
+                    th:text="${container.getIsPickedUp()}"></td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell">
-                    <a th:href="@{'/deletePerson/' + ${person.getPersonId()} + '/' + ${viewCase.getCaseId()}}">
+                    <a th:href="@{'/deleteContainer/' + ${container.getContainerId()} + '/' + ${viewCase.getCaseId()}}">
                         <button onclick="return confirm('Er du sikker?')" style="background-color: crimson; color: white"
                                 type="button">
                             Slet
                         </button>
                     </a>
-                    <a th:href="@{'/updatePerson/'+${person.getPersonId()}}">
+                    <a th:href="@{'/updateContainer/'+${container.getContainerId()}}">
                         <button type="button" class="u-btn u-button-style u-btn-1" style="background-color: #478ac9; color: white; width: 122.133px">
                             Opdater
                         </button>
@@ -48,7 +52,7 @@
             </tbody>
         </table>
         <div>
-            <button th:replace="modals/person-modal.html :: person-modal(${viewCase.getCaseId()})"></button>
+            <button th:replace="modals/container-modal.html :: container-modal(${viewCase.getCaseId()})"></button>
         </div>
     </div>
 </div>

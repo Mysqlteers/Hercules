@@ -1,11 +1,13 @@
 package com.hercules.service.springdatajpa;
 
+import com.hercules.model.Contact;
 import com.hercules.model.Container;
 import com.hercules.repository.ContainerRepository;
 import com.hercules.service.ContainerService;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -20,6 +22,11 @@ public class ContainerJPA implements ContainerService {
     @Override
     public Optional<Container> findFirstByContainerName(String containerName) {
         return cr.findFirstByContainerName(containerName);
+    }
+
+    @Override
+    public List<Container> findAllByContactOrderByContainerIdDesc(Contact contact) {
+        return cr.findAllByContactOrderByContainerIdDesc(contact);
     }
 
     @Override

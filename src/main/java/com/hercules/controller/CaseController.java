@@ -1,15 +1,8 @@
 package com.hercules.controller;
 
-import com.hercules.model.Case;
-import com.hercules.model.Contact;
-import com.hercules.model.Employee;
-import com.hercules.model.Person;
-import com.hercules.service.CaseService;
-import com.hercules.service.ContactService;
-import com.hercules.service.EmployeeService;
-import com.hercules.service.PersonService;
+import com.hercules.model.*;
+import com.hercules.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.hercules.service.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +31,9 @@ public class CaseController {
 
     @Autowired
     EmployeeService employeeService;
+
+    @Autowired
+    ContainerService containerService;
 
 
     /**
@@ -116,18 +112,29 @@ public class CaseController {
         if(caseService.findById(caseId).isPresent()) {
             model.addAttribute("viewCase", caseService.findById(caseId).get());
 
-            if (contactService.findContactByCaseId(caseId).isPresent()) {
-                Contact contact = contactService.findContactByCaseId(caseId).get();
+            Contact contact = contactService.findContactByCaseId(caseId).get();
                 List<Employee> attachedEmployees = employeeService.findAllByContacts_contactIdOrderByPositionAscFirstNameAsc(contact.getContactId());
                 List<Employee> allEmployees = employeeService.findAllByOrderByPositionAscFirstNameAsc();
                 allEmployees.removeAll(attachedEmployees);
                 model.addAttribute("contactlist", personService.findAllByContactOrderByPositionAscFirstNameAsc(contact));
                 model.addAttribute("allEmployees", allEmployees);
                 model.addAttribute("attachedEmployees", attachedEmployees);
-            } else {
-                model.addAttribute("contactlist", new HashSet<Person>());
-                model.addAttribute("employee", new HashSet<Employee>());
-            }
+                model.addAttribute("containerlist", containerService.findAllByContactOrderByContainerIdDesc(contact));
+
+//            if (contactService.findContactByCaseId(caseId).isPresent()) {
+//                Contact contact = contactService.findContactByCaseId(caseId).get();
+//                List<Employee> attachedEmployees = employeeService.findAllByContacts_contactIdOrderByPositionAscFirstNameAsc(contact.getContactId());
+//                List<Employee> allEmployees = employeeService.findAllByOrderByPositionAscFirstNameAsc();
+//                allEmployees.removeAll(attachedEmployees);
+//                model.addAttribute("contactlist", personService.findAllByContactOrderByPositionAscFirstNameAsc(contact));
+//                model.addAttribute("allEmployees", allEmployees);
+//                model.addAttribute("attachedEmployees", attachedEmployees);
+//                model.addAttribute("containerlist", containerService.findAllByContactOrderByContainerIdDesc(contact));
+//            } else {
+//                model.addAttribute("contactlist", new HashSet<Person>());
+//                model.addAttribute("employee", new HashSet<Employee>());
+//                model.addAttribute("containerlist", new HashSet<Container>());
+//            }
 
             //Adding
             LocalDate startDate = LocalDate.now().minusDays(7);
