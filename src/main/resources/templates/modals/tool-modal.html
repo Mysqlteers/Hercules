@@ -43,10 +43,11 @@
                          <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"  name="model" placeholder="model"
                                 type="text" th:value="${tool?.getModel()} ?: ''">
                      </div>
+
                      <div class="u-form-date u-form-group u-form-partition-factor-2 u-form-group-5">
                          <label for="">Lejet</label>
-                         <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"  name="rented" placeholder="lejet"
-                                type="checkbox" value="true" th:checked="${tool?.isRented()} ?: false"  style="transform: scale(2.5)">
+                         <input name="rented" placeholder="lejet"
+                                type="checkbox" value="true" th:checked="${tool?.isRented()} ?: false" style="margin-left: 1vw ; transform: scale(2.5)">
                      </div>
                      <div class="u-form-date u-form-group u-form-partition-factor-2 u-form-group-5">
                          <label for="">Daglige omkostninger</label>
@@ -65,8 +66,7 @@
             </svg>
             <svg class="u-svg-content" id="svg-797b" version="1.1"
                  viewBox="0 0 16 16" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px"><rect height="16" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -3.3138 8.0002)" width="2" x="7" y="0"></rect>
-                <rect height="2" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -3.3138 8.0002)" width="16" x="0"
-                      y="7"></rect></svg>
+                <rect height="2" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -3.3138 8.0002)" width="16" x="0" y="7"></rect></svg>
         </button>
     </div>
 </div>
