@@ -37,12 +37,15 @@ class JobTypeJPATest {
         //Checker om den kan finde den rette jobType i DB baseret på ID
         assertEquals(jobType.getJobTypeId(), js.findById(jobType.getJobTypeId()).get().getJobTypeId());
 
-        //Checker om dailycost er opdateret i DB
+        //checker om vi kan finde jobtype efter description
+        assertEquals(jobType.getPrice(), js.findByDescription(testDescription).get().getPrice());
+
+        //Checker om price er opdateret i DB
         jobType.setPrice(500.5);
         jobType = js.save(jobType);
         assertEquals(jobType.getPrice(), js.findById(jobType.getJobTypeId()).get().getPrice());
 
-        //Checker om den kan slette containeren fra DB
+        //Checker om den kan slette jobtype fra DB
         js.deleteById(jobType.getJobTypeId());
         assertTrue(js.findById(jobType.getJobTypeId()).isEmpty());
     }

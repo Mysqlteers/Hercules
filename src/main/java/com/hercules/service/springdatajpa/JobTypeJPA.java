@@ -46,4 +46,9 @@ public class JobTypeJPA implements JobTypeService {
     public List<JobType> findAllByMaterialOrderByDescriptionAsc(boolean material) {
         return jr.findAllByMaterialOrderByDescriptionAsc(material);
     }
+
+    @Override
+    public Optional<JobType> findByDescription(String description) {
+        return jr.findByDescription(description);
+    }
 }
