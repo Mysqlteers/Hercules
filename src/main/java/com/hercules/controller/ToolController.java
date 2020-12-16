@@ -26,14 +26,18 @@ public class ToolController
     }
 
     @PostMapping("/updateTool")
-    public String updateTool(@ModelAttribute Tool tool, @RequestParam(name = "contactId", required = true) long contactId){
-        tool=ts.save(tool);
-        if (contactId!=-1)
+    public String updateTool(@ModelAttribute Tool tool, @RequestParam(name = "contactId") long contactId){
+        System.out.println("contact = "+contactId);
+        System.out.println("tool = "+tool.getToolId());
+        if (contactId!=-1 &&  cs.findContactByCaseId(contactId).isPresent())
         {
             Contact contact = cs.findContactByCaseId(contactId).get();
+            tool.setInfo(contact);
             contact.addTool(tool);
             cs.save(contact);
+            ts.save(tool);
         }
+        ts.save(tool);
         return "redirect:/tools";
     }
 

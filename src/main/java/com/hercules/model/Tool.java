@@ -29,7 +29,7 @@ public class Tool
     //todo test if works
     @ManyToOne
     @JoinColumn(name = "contact_id")
-    private Contact contact;
+    private Contact info;
 
     /********************************************** Constructors ************************************************************/
     public Tool() {
@@ -85,11 +85,11 @@ public class Tool
         this.dailyCost = dailyCost;
     }
 
-    public Contact getContact() {
-        return contact;
+    public Contact getInfo() {
+        return info;
     }
 
-    public void setContact(Contact contact) {
-        this.contact = contact;
+    public void setInfo(Contact info) {
+        this.info = info;
     }
 }

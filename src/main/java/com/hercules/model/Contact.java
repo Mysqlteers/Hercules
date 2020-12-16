@@ -19,7 +19,7 @@ public class Contact {
     @JsonManagedReference
     private Set<Person> persons;
 
-    @OneToMany(cascade = CascadeType.DETACH, mappedBy = "contact")
+    @OneToMany(cascade = CascadeType.DETACH, mappedBy = "info")
     private Set<Tool> tools;
 
 
@@ -37,12 +37,12 @@ public class Contact {
     }
 
     public void addTool(Tool tool) {
-        tool.setContact(this);
+        tool.setInfo(this);
         tools.add(tool);
     }
 
     public void removeTool(Tool tool) {
-        tool.setContact(null);
+        tool.setInfo(null);
         tools.remove(tool);
     }
 
