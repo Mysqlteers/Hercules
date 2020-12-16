@@ -28,20 +28,16 @@ class ToolTest {
         // can save and find
         Tool tool = new Tool();
         tool.model= "testModel";
-
         tool = ts.save(tool);
-
         assertTrue(ts.findById(tool.getToolId()).isPresent());
 
         //update
         tool.model= "OtherTestModel";
         ts.save(tool);
-
         assertTrue(ts.findById(tool.getToolId()).get().model.equals("OtherTestModel"));
 
         //delete
         ts.deleteById(tool.getToolId());
-
         assertFalse(ts.findById(tool.getToolId()).isPresent());
     }
 
@@ -55,19 +51,14 @@ class ToolTest {
         Tool tool2 = new Tool();
         tool.model= "testModel";
 
-
         testContact.addTool(tool);
         testContact.addTool(tool2);
 
         tool = ts.save(tool);
         tool2 = ts.save(tool2);
 
-
         cs.save(testContact);
-
         testContact=cs.findById(testContact.getContactId()).get();
-
-        System.out.println(testContact.getTools().size());
 
         assert testContact.getTools().size()==2;
     }
@@ -78,6 +69,7 @@ class ToolTest {
     {
         Contact testContact = new Contact();
         testContact = cs.save(testContact);
+
         Tool tool = new Tool();
         Tool tool2 = new Tool();
         tool.model= "testModel";
@@ -92,13 +84,7 @@ class ToolTest {
         tool2 = ts.save(tool2);
 
         testContact = cs.save(testContact);
-
         cs.deleteById(testContact.getContactId());
-
-        System.out.println("ID 1 ="+tool.getToolId());
-        System.out.println("ID 2 ="+tool2.getToolId());
-        System.out.println("TestContact ="+testContact.getContactId());
-
 
         assertFalse(ts.findById(tool.getToolId()).isPresent());
         assertFalse(ts.findById(tool2.getToolId()).isPresent());
