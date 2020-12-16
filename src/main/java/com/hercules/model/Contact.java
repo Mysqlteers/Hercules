@@ -1,6 +1,7 @@
 package com.hercules.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.sun.istack.Nullable;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -19,8 +20,9 @@ public class Contact {
     @JsonManagedReference
     private Set<Person> persons;
 
-    @OneToMany(cascade = CascadeType.DETACH, mappedBy = "info")
-    private Set<Tool> tools;
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "info", fetch = FetchType.EAGER)
+    @Nullable
+    private Set<Tool> tools = new HashSet<>();
 
 
     @ManyToMany(mappedBy = "contacts", fetch = FetchType.EAGER)
@@ -92,6 +94,14 @@ public class Contact {
 
     public void setPersons(Set<Person> persons) {
         this.persons = persons;
+    }
+
+    public Set<Tool> getTools() {
+        return tools;
+    }
+
+    public void setTools(Set<Tool> tools) {
+        this.tools = tools;
     }
 
     @Override

@@ -29,9 +29,9 @@ public class ToolController
     public String updateTool(@ModelAttribute Tool tool, @RequestParam(name = "contactId") long contactId){
         System.out.println("contact = "+contactId);
         System.out.println("tool = "+tool.getToolId());
-        if (contactId!=-1 &&  cs.findContactByCaseId(contactId).isPresent())
+        if (contactId!=-1 &&  cs.findById(contactId).isPresent())
         {
-            Contact contact = cs.findContactByCaseId(contactId).get();
+            Contact contact = cs.findById(contactId).get();
             tool.setInfo(contact);
             contact.addTool(tool);
             cs.save(contact);

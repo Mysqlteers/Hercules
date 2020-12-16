@@ -1,5 +1,7 @@
 package com.hercules.model;
 
+import com.sun.istack.Nullable;
+
 import javax.persistence.*;
 
 
@@ -12,9 +14,6 @@ public class Tool
     @Column(name = "tool_id")
     private Long toolId;
 
-    //sagsnr, ejet, serie nr, type, model, daglig omkostning
-
-
     String serialNr;
 
     String type;
@@ -26,9 +25,10 @@ public class Tool
     int dailyCost;
 
     /************************************************ Relations ************************************************************/
-    //todo test if works
+
     @ManyToOne
     @JoinColumn(name = "contact_id")
+    @Nullable
     private Contact info;
 
     /********************************************** Constructors ************************************************************/
