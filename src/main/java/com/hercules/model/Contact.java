@@ -36,6 +36,16 @@ public class Contact {
         employee.getContacts().remove(this);
     }
 
+    public void addTool(Tool tool) {
+        tool.setContact(this);
+        tools.add(tool);
+    }
+
+    public void removeTool(Tool tool) {
+        tool.setContact(null);
+        tools.remove(tool);
+    }
+
     public Contact() {
     }
 

@@ -12,7 +12,7 @@
 </head>
 <body class="u-body">
 <header th:replace="fragments/header :: header"></header>
-<button th:replace="modals/tool-modal.html :: tool-modal(${null})"></button>
+<button th:replace="modals/tool-modal.html :: tool-modal(${null}, ${contacts})"></button>
 <div class="u-align-center u-clearfix u-section-1" id="sec-a4df">
     <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-expanded-width u-table u-table-responsive u-table-1">
@@ -58,7 +58,7 @@
                                 SLET
                             </button>
                         </a>
-                        <button th:replace="modals/tool-modal.html :: tool-modal(${tool})"></button>
+                        <button th:replace="modals/tool-modal.html :: tool-modal(${tool}, ${contacts})"></button>
                     </td>
                 </tr>
                 </tbody>
