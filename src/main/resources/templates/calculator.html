@@ -17,9 +17,6 @@
 </head>
 <body class="u-body">
   <header th:remove="tag" th:replace="fragments/header :: header"></header>
-  <a href="/jobTypeList">
-      <button>Se alle job typer og materialer</button>
-  </a>
 
   <section class="u-clearfix u-section-1" id="sec-1491">
       <div class="u-clearfix u-sheet u-sheet-1">
@@ -45,8 +42,12 @@
                         <select name="material" id="material">
                             <option th:each="material : ${materialList}" th:value="${material.description}" th:text="${material.description}" style="width: 100px">
                         </select><br>
-                        <input type="submit" value="Udregn pris">
+                        <input type="submit" value="UDREGN PRIS" class="u-btn u-button-style u-btn-1">
                     </form>
+                    <br>
+                    <a href="/jobTypeList" style="bottom: 0">
+                        <button class="u-btn u-button-style u-btn-1">Se alle job typer og materialer</button>
+                    </a>
                 </div>
               </div>
               <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
