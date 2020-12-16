@@ -101,7 +101,7 @@ public class Container {
         this.pickUpPrice = pickUpPrice;
     }
 
-    public boolean isPickedUp() {
+    public boolean getIsPickedUp() {
         return isPickedUp;
     }
 

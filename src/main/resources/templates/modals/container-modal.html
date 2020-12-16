@@ -10,11 +10,15 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" id="u-theme-google-font"
           rel="stylesheet">
 
-    <script type="text/javascript">
-        function submitForm() {
-            console.log('pressed submit');
-            document.getElementById("containerFormId").submit();
-        }
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js%22%3E">
+        $("#isPickedUp").on('change', function() {
+            if ($(this).is(':checked')) {
+                $(this).attr('value', 'true');
+            } else {
+                $(this).attr('value', 'false');
+            }
+            // $('#checkbox-value').text($('#checkbox1').val());
+        });
     </script>
 
 </head>
@@ -30,7 +34,6 @@
     <div class="u-container-style u-dialog u-white u-dialog-1">
         <div class="u-container-layout u-container-layout-1">
             <div class="u-expanded-width u-form u-form-1">
-                hello in modal
                 <form id="containerFormId" th:action="@{'/updateContainer/' + ${viewCaseId}}" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" method="post"
                       style="padding: 10px">
                     <input type="number" hidden required th:value="${viewCaseId}" name="viewCaseId">
@@ -44,7 +47,7 @@
                     </div>
                     <div class="u-form-group u-form-message">
                         <label for="">Daglige omkostninger</label>
-                        <input type="number" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="dailyCost" th:value="${container?.getDailyCost()  ?: ''}" placeholder="Daglige omkostninger" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0">
+                        <input step="any" type="number" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="dailyCost" th:value="${container?.getDailyCost()  ?: ''}" placeholder="Daglige omkostninger" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0">
                     </div>
                     <div class="u-form-email u-form-group">
                         <label for="">Antal dage</label>
@@ -52,12 +55,19 @@
                     </div>
                     <div class="u-form-email u-form-group">
                         <label for="">Pris for afhentning</label>
-                        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="pickUpPrice" th:value="${container?.getPickUpPrice()  ?: ''}" placeholder="Pris for afhentning" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0">
+                        <input step="any" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="pickUpPrice" th:value="${container?.getPickUpPrice()  ?: ''}" placeholder="Pris for afhentning" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0">
                     </div>
-                    <div class="u-form-email u-form-group">
-                        <label for="">Afhentet</label>
-                        <input type="checkbox" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="isPickedUp">
+                    <div  class="u-form-email u-form-group" style="text-align: left">
+                        <label for="">Afhentet</label><br>
+                        <input type="checkbox" hidden name="isPickedUpCheckbox" th:value="${'off'}">
+                        <input th:if="${container.isPickedUp == 'true'    ?: ${'false'}}" checked id="isPickedUp" type="checkbox" class="u-border-1 u-border-grey-30 u-input-rectangle u-white" name="isPickedUpCheckbox" style="transform: scale(3); margin-left: 10px">
+                        <input th:unless="${container.isPickedUp == 'true'    ?: ${'false'}}" checked id="isPickedUp" type="checkbox" class="u-border-1 u-border-grey-30 u-input-rectangle u-white" name="isPickedUpCheckbox" style="transform: scale(3); margin-left: 10px">
                     </div>
+<!--                    <div th:unless="${container.isPickedUp == 'true'   ?: ${'false'}}" class="u-form-email u-form-group" style="text-align: left">-->
+<!--                        <label for="">Afhentet</label><br>-->
+<!--                        <input type="checkbox" hidden name="isPickedUpCheckbox" th:value="${'off'}">-->
+<!--                        <input id="isPickedUp" type="checkbox" class="u-border-1 u-border-grey-30 u-input-rectangle u-white" name="isPickedUpCheckbox" style="transform: scale(3); margin-left: 10px">-->
+<!--                    </div>-->
 <!--                    <button onclick="submitForm()">Gem</button>-->
                     <div class="u-align-left u-form-group u-form-submit">
                         <input style="background-color: #adcce9; height: 60px" class="u-button-style u-hover-palette-1-light-1 u-btn-1" type="submit" value="Gem" >

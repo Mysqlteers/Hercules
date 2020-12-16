@@ -34,18 +34,20 @@
                 <td class="u-border-1 u-border-grey-30 u-first-column u-grey-5 u-table-cell u-table-cell-5"
                     th:text="${container.getContainerName()}"></td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell"
-                    th:text="${container.getDailyCost()} + ' ' + ${person.getLastName()}"></td>
+                    th:text="${container.getDailyCost()}"></td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell"
                     th:text="${container.getNumberOfDays()}"></td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell"
                     th:text="${container.getPickUpPrice()}"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell"
-                    th:text="${container.getIsPickedUp()}"></td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell">
+                <td th:if="${!container.getIsPickedUp()}" class="u-border-1 u-border-grey-30 u-table-cell"
+                    th:text="${'Nej'}"></td>
+                <td th:if="${container.getIsPickedUp()}" class="u-border-1 u-border-grey-30 u-table-cell"
+                    th:text="${'Ja'}"></td>
+                <td class="u-border-1 u-border-grey-30 u-table-cell" style="text-align: center">
                     <a th:href="@{'/deleteContainer/' + ${container.getContainerId()} + '/' + ${viewCaseId}}">
-                        <button onclick="return confirm('Er du sikker?')" style="background-color: crimson; color: white"
+                        <button onclick="return confirm('Er du sikker?')" class="u-btn u-button-style u-btn-1" style="width:131.533px; background-color: crimson; color: white"
                                 type="button">
-                            Slet
+                            SLET
                         </button>
                     </a>
                     <button th:replace="/modals/container-modal.html :: container-modal(${container}, ${viewCaseId})"></button>
@@ -54,7 +56,6 @@
             </tbody>
         </table>
         <div>
-            this is replacement div
             <button th:replace="/modals/container-modal.html :: container-modal(${null}, ${viewCaseId})"></button>
         </div>
     </div>
