@@ -40,12 +40,6 @@ public class ToolJPA implements ToolService {
         return toolRepository.findById(aLong);
     }
 
-    @Override
-    public Optional<Tool> findByToolId(Long ToolId) {
-        return toolRepository.findByToolId(ToolId);
-    }
-
-
     public ToolRepository getToolRepository() {
         return toolRepository;
     }

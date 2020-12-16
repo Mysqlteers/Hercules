@@ -20,7 +20,7 @@ public class Contact {
     @JsonManagedReference
     private Set<Person> persons;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "info", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "contact", fetch = FetchType.EAGER)
     @Nullable
     private Set<Tool> tools = new HashSet<>();
 
@@ -39,12 +39,12 @@ public class Contact {
     }
 
     public void addTool(Tool tool) {
-        tool.setInfo(this);
+        tool.setContact(this);
         tools.add(tool);
     }
 
     public void removeTool(Tool tool) {
-        tool.setInfo(null);
+        tool.setContact(null);
         tools.remove(tool);
     }
 

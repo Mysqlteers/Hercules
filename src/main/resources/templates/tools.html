@@ -49,8 +49,8 @@
                                style="transform: scale(2.5)">
                     </td>
                     <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${tool?.getDailyCost()}">daglige omkostnigner</td>
-                    <td th:if="${tool?.getInfo()!=null}" class="u-border-1 u-border-grey-30 u-table-cell" th:text="${tool?.getInfo().getCaseId()} ?: 'ikke i brug'">nuværende sag</td>
-                    <td th:unless="${tool?.getInfo()!=null}" class="u-border-1 u-border-grey-30 u-table-cell" th:text="'ikke i brug'">nuværende sag</td>
+                    <td th:if="${tool?.getContact()!=null}" class="u-border-1 u-border-grey-30 u-table-cell" th:text="${tool?.getContact().getCaseId()} ?: 'ikke i brug'">nuværende sag</td>
+                    <td th:unless="${tool?.getContact()!=null}" class="u-border-1 u-border-grey-30 u-table-cell" th:text="'ikke i brug'">nuværende sag</td>
                     <td class="u-border-1 u-border-grey-30 u-table-cell" style="display: table-row">
                         <a th:href="@{'/deleteTool/' + ${tool.getToolId()}}">
                             <button class="u-btn u-button-style u-btn-1"  onclick="return confirm('Er du sikker på, at du vil slette denne ansatte?')" style="background-color: crimson; color: white; width: 132px;

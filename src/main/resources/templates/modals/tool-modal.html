@@ -68,9 +68,10 @@
                     <div class="u-form-select-wrapper" >
                         <select class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" style="display: block"
                                 name="contactId">
-                            <option value="-1">Ingen sag</option>
-                            <option th:each="info : ${contacts}"
-                                    th:text="'sags nr : '+${info.getCaseId()}" th:value="${info.getContactId()}"></option>
+                            <option selected th:if="${tool?.getContact()!=null}" th:value="${tool?.getContact()?.getContactId()}" th:text="'Sags nr : '+${tool?.getContact()?.getCaseId()}" ></option>
+                            <option value="-1">Ingen Sag</option>
+                            <option th:if="${contact.getCaseId()!=tool?.getContact()?.getCaseId()}" th:each="contact : ${contacts} "
+                                    th:text="'Sags nr : '+${contact.getCaseId()}" th:value="${contact.getContactId()}"></option>
                         </select>
                     </div>
                     </div>

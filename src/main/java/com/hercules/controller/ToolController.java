@@ -10,8 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-public class ToolController
-{
+public class ToolController {
     @Autowired
     ToolService ts;
 
@@ -26,13 +25,12 @@ public class ToolController
     }
 
     @PostMapping("/updateTool")
-    public String updateTool(@ModelAttribute Tool tool, @RequestParam(name = "contactId") long contactId){
-        System.out.println("contact = "+contactId);
-        System.out.println("tool = "+tool.getToolId());
-        if (contactId!=-1 &&  cs.findById(contactId).isPresent())
-        {
+    public String updateTool(@ModelAttribute Tool tool, @RequestParam(name = "contactId") long contactId)  {
+        System.out.println("contact = " + contactId);
+        System.out.println("tool = " + tool.getToolId());
+        if (contactId != -1 && cs.findById(contactId).isPresent()) {
             Contact contact = cs.findById(contactId).get();
-            tool.setInfo(contact);
+            tool.setContact(contact);
             contact.addTool(tool);
             cs.save(contact);
             ts.save(tool);
@@ -42,8 +40,8 @@ public class ToolController
     }
 
     @GetMapping("/deleteTool/{toolId}")
-    public String deleteTool(@PathVariable("toolId") long toolId){
-        System.out.println("deleting tool with id = "+toolId);
+    public String deleteTool(@PathVariable("toolId") long toolId) {
+        System.out.println("deleting tool with id = " + toolId);
         ts.deleteById(toolId);
         return "redirect:/tools";
     }

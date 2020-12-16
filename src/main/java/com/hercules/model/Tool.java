@@ -7,8 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "tools")
-public class Tool
-{
+public class Tool {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tool_id")
@@ -29,13 +28,13 @@ public class Tool
     @ManyToOne
     @JoinColumn(name = "contact_id")
     @Nullable
-    private Contact info;
+    private Contact contact;
 
     /********************************************** Constructors ************************************************************/
     public Tool() {
     }
 
-/******************************************* Getters and setters ************************************************************/
+    /******************************************* Getters and setters *********************************************************/
 
     public Long getToolId() {
         return toolId;
@@ -85,11 +84,11 @@ public class Tool
         this.dailyCost = dailyCost;
     }
 
-    public Contact getInfo() {
-        return info;
+    public Contact getContact() {
+        return contact;
     }
 
-    public void setInfo(Contact info) {
-        this.info = info;
+    public void setContact(Contact contact) {
+        this.contact = contact;
     }
 }

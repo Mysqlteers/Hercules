@@ -1,9 +1,6 @@
 package com.hercules.controller;
 
-import com.hercules.model.Case;
-import com.hercules.model.Contact;
-import com.hercules.model.Employee;
-import com.hercules.model.Person;
+import com.hercules.model.*;
 import com.hercules.service.CaseService;
 import com.hercules.service.ContactService;
 import com.hercules.service.EmployeeService;
@@ -106,6 +103,9 @@ public class CaseController {
         Contact contact = contactService.findContactByCaseId(caseId).get();
         for (Employee e : contact.getEmployees()) {
             contact.removeEmployee(e);
+        }
+        for (Tool t : contact.getTools()) {
+            contact.removeTool(t);
         }
         contactService.deleteById(contactService.findContactByCaseId(caseId).get().getContactId());
         return "redirect:/";

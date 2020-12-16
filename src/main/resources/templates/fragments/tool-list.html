@@ -9,15 +9,6 @@
     <h2>Liste over værktøjer og maskiner tilknyttet denne sag</h2>
     <div class="u-expanded-width u-table u-table-responsive u-table-1">
         <table class="u-table-entity u-table-entity-1">
-<!--            <colgroup>-->
-<!--                &lt;!&ndash;              set different column width of table&ndash;&gt;-->
-<!--                <col width="11.7%">-->
-<!--                <col width="13.6%">-->
-<!--                <col width="17.5%">-->
-<!--                <col width="14.3%">-->
-<!--                <col width="14.3%">-->
-<!--                <col width="14.6%">-->
-<!--            </colgroup>-->
             <thead class="u-palette-4-base u-table-header u-table-header-1">
             <tr style="height: 21px;">
                 <th class="u-border-1 u-border-palette-4-base u-table-cell">Serie Nummer</th>
@@ -38,13 +29,13 @@
                            style="transform: scale(2.5)">
                 </td>
                 <td style="column-span : 1;" class="u-border-1 u-border-grey-30 u-table-cell" th:text="${tool?.getDailyCost()}">daglige omkostnigner</td>
-                <td style="column-span : 1;" th:if="${tool?.getInfo()!=null}" class="u-border-1 u-border-grey-30 u-table-cell" th:text="${tool?.getInfo().getCaseId()} ?: 'ikke i brug'">nuværende sag</td>
-                <td th:unless="${tool?.getInfo()!=null}" class="u-border-1 u-border-grey-30 u-table-cell" th:text="'ikke i brug'">nuværende sag</td>
+                <td style="column-span : 1;" th:if="${tool?.getContact()!=null}" class="u-border-1 u-border-grey-30 u-table-cell" th:text="${tool?.getContact().getCaseId()} ?: 'ikke i brug'">nuværende sag</td>
+                <td th:unless="${tool?.getContact()!=null}" class="u-border-1 u-border-grey-30 u-table-cell" th:text="'ikke i brug'">nuværende sag</td>
             </tr>
-            <tr>
-                <td style="column-span: 6;"
+            <tr style="column-span: 6;"
                     class="u-border-1 u-border-grey-30 u-table-cell"
-                    th:text="'daglige omkostninger for værktøj og maskiner = '+${#aggregates.sum(tools.![dailyCost])}"></td>
+                    th:text="'Daglige omkostninger for værktøj og maskiner = '+${#aggregates.sum(tools.![dailyCost])}">
+
             </tr>
             </tbody>
         </table>
