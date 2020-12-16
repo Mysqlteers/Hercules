@@ -4,14 +4,24 @@ public class CalculationHelper {
     private String jobtype;
     private String material;
     private double cubicarea;
+    private double markup;
 
     public CalculationHelper() {
     }
 
-    public CalculationHelper(String jobtype, String material, double cubicarea) {
+    public CalculationHelper(String jobtype, String material, double cubicarea, double markup) {
         this.jobtype = jobtype;
         this.material = material;
         this.cubicarea = cubicarea;
+        this.markup = markup;
+    }
+
+    public double getMarkup() {
+        return markup;
+    }
+
+    public void setMarkup(double markup) {
+        this.markup = markup;
     }
 
     public double getCubicarea() {
