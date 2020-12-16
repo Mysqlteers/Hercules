@@ -58,19 +58,17 @@
                         <input step="any" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="pickUpPrice" th:value="${container?.getPickUpPrice()  ?: ''}" placeholder="Pris for afhentning" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0">
                     </div>
                     <div  class="u-form-email u-form-group" style="text-align: left">
-                        <label for="">Afhentet</label><br>
+                        <label for="isPickedUp">Afhentet</label><br>
                         <input type="checkbox" hidden name="isPickedUpCheckbox" th:value="${'off'}">
-                        <input th:if="${container.isPickedUp == 'true'    ?: ${'false'}}" checked id="isPickedUp" type="checkbox" class="u-border-1 u-border-grey-30 u-input-rectangle u-white" name="isPickedUpCheckbox" style="transform: scale(3); margin-left: 10px">
-                        <input th:unless="${container.isPickedUp == 'true'    ?: ${'false'}}" checked id="isPickedUp" type="checkbox" class="u-border-1 u-border-grey-30 u-input-rectangle u-white" name="isPickedUpCheckbox" style="transform: scale(3); margin-left: 10px">
+                        <span th:if="${container?.isPickedUp == 'true' ?: 'false'}">
+                            <input checked id="isPickedUp" type="checkbox" class="u-border-1 u-border-grey-30 u-input-rectangle u-white" name="isPickedUpCheckbox" style="transform: scale(3); margin: 10px">
+                        </span>
+                        <span th:unless="${container?.isPickedUp == 'true' ?: 'false'}">
+                            <input id="isPickedUp" type="checkbox" class="u-border-1 u-border-grey-30 u-input-rectangle u-white" name="isPickedUpCheckbox" style="transform: scale(3); margin: 10px;">
+                        </span>
                     </div>
-<!--                    <div th:unless="${container.isPickedUp == 'true'   ?: ${'false'}}" class="u-form-email u-form-group" style="text-align: left">-->
-<!--                        <label for="">Afhentet</label><br>-->
-<!--                        <input type="checkbox" hidden name="isPickedUpCheckbox" th:value="${'off'}">-->
-<!--                        <input id="isPickedUp" type="checkbox" class="u-border-1 u-border-grey-30 u-input-rectangle u-white" name="isPickedUpCheckbox" style="transform: scale(3); margin-left: 10px">-->
-<!--                    </div>-->
-<!--                    <button onclick="submitForm()">Gem</button>-->
                     <div class="u-align-left u-form-group u-form-submit">
-                        <input style="background-color: #adcce9; height: 60px" class="u-button-style u-hover-palette-1-light-1 u-btn-1" type="submit" value="Gem" >
+                        <input style="background-color: #adcce9; height: 60px; width:131.533px;" class="u-button-style u-hover-palette-1-light-1 u-btn-1" type="submit" value="Gem" >
                     </div>
                 </form>
             </div>

@@ -9,15 +9,16 @@
 
 <div class="u-clearfix u-sheet u-sheet-1">
     <div class="u-table u-table-responsive u-table-1">
-        <h2>her skal der være containere</h2>
+        <h2>Liste over tilknyttede containere</h2>
         <table class="u-table-entity">
             <colgroup>
-                <col width="25%">
                 <col width="15%">
                 <col width="15%">
                 <col width="15%">
                 <col width="15%">
                 <col width="15%">
+                <col width="15%">
+                <col width="10%">
             </colgroup>
             <thead class="u-palette-4-base u-table-header u-table-header-1">
             <tr style="height: 35px;">
@@ -26,6 +27,7 @@
                 <th class="u-border-1 u-border-palette-4-base u-table-cell">Antal dage</th>
                 <th class="u-border-1 u-border-palette-4-base u-table-cell">Pris for afhentning</th>
                 <th class="u-border-1 u-border-palette-4-base u-table-cell">Afhentet</th>
+                <th class="u-border-1 u-border-palette-4-base u-table-cell">Samlede omkostninger</th>
                 <th class="u-border-1 u-border-palette-4-base u-table-cell"></th>
             </tr>
             </thead>
@@ -43,6 +45,7 @@
                     th:text="${'Nej'}"></td>
                 <td th:if="${container.getIsPickedUp()}" class="u-border-1 u-border-grey-30 u-table-cell"
                     th:text="${'Ja'}"></td>
+                <td th:text="${container.calculateTotal()}" class="u-border-1 u-border-grey-30 u-table-cell"></td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell" style="text-align: center">
                     <a th:href="@{'/deleteContainer/' + ${container.getContainerId()} + '/' + ${viewCaseId}}">
                         <button onclick="return confirm('Er du sikker?')" class="u-btn u-button-style u-btn-1" style="width:131.533px; background-color: crimson; color: white"

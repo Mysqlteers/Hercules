@@ -1,6 +1,7 @@
 package com.hercules.model;
 
 import javax.persistence.*;
+import java.text.DecimalFormat;
 
 @Entity @Table(name = "containers")
 public class Container {
@@ -32,12 +33,16 @@ public class Container {
     public Container() {
     }
 
-    public double calculateTotal() {
+    public String calculateTotal() {
+        DecimalFormat df = new DecimalFormat("0.00");
+        double totalPrice;
         if (isPickedUp) {
-            return (dailyCost * numberOfDays + pickUpPrice);
+            totalPrice = (dailyCost * numberOfDays + pickUpPrice);
         } else {
-            return (dailyCost * numberOfDays);
+            totalPrice = (dailyCost * numberOfDays);
         }
+
+        return df.format(totalPrice);
     }
 
     @Override
