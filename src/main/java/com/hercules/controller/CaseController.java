@@ -113,18 +113,13 @@ public class CaseController {
             model.addAttribute("viewCase", caseService.findById(caseId).get());
 
             Contact contact = contactService.findContactByCaseId(caseId).get();
-                List<Employee> attachedEmployees = employeeService.findAllByContacts_contactIdOrderByPositionAscFirstNameAsc(contact.getContactId());
-                List<Employee> allEmployees = employeeService.findAllByOrderByPositionAscFirstNameAsc();
-                allEmployees.removeAll(attachedEmployees);
-                model.addAttribute("contactlist", personService.findAllByContactOrderByPositionAscFirstNameAsc(contact));
-                model.addAttribute("allEmployees", allEmployees);
-                model.addAttribute("attachedEmployees", attachedEmployees);
-                model.addAttribute("containerlist", containerService.findAllByContactOrderByContainerIdDesc(contact));
-
-            System.out.println("case containersdfadsf");
-                for (Container c: containerService.findAllByContactOrderByContainerIdDesc(contact)) {
-                    System.out.println(c.getIsPickedUp());
-                }
+            List<Employee> attachedEmployees = employeeService.findAllByContacts_contactIdOrderByPositionAscFirstNameAsc(contact.getContactId());
+            List<Employee> allEmployees = employeeService.findAllByOrderByPositionAscFirstNameAsc();
+            allEmployees.removeAll(attachedEmployees);
+            model.addAttribute("contactlist", personService.findAllByContactOrderByPositionAscFirstNameAsc(contact));
+            model.addAttribute("allEmployees", allEmployees);
+            model.addAttribute("attachedEmployees", attachedEmployees);
+            model.addAttribute("containerlist", containerService.findAllByContactOrderByContainerIdDesc(contact));
 
             //Adding
             LocalDate startDate = LocalDate.now().minusDays(7);
