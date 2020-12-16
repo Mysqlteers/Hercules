@@ -19,13 +19,17 @@ public class ContainerController {
     ContactService contactService;
 
     @PostMapping("/updateContainer/{viewCaseId}")
-    public String updateContainer(@ModelAttribute Container container, @PathVariable("viewCaseId") Long caseId, @RequestParam("isPickedUpCheckbox") Optional<String> checkbox) {
-        container.setContact(contactService.findContactByCaseId(caseId).get());
+    public String updateContainer(@ModelAttribute Container container, @RequestParam("pickUpCheckbox") Optional<String> checkbox, @PathVariable("viewCaseId") Long caseId) {
         if (checkbox.isPresent()) {
             container.setPickedUp(true);
         } else {
             container.setPickedUp(false);
         }
+//        container.setPickedUp(checkbox);
+        System.out.println("container");
+        System.out.println(container.getIsPickedUp());
+
+        container.setContact(contactService.findContactByCaseId(caseId).get());
         containerService.save(container);
         return "redirect:/caseDetails/" + caseId;
     }

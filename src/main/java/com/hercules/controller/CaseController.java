@@ -121,20 +121,10 @@ public class CaseController {
                 model.addAttribute("attachedEmployees", attachedEmployees);
                 model.addAttribute("containerlist", containerService.findAllByContactOrderByContainerIdDesc(contact));
 
-//            if (contactService.findContactByCaseId(caseId).isPresent()) {
-//                Contact contact = contactService.findContactByCaseId(caseId).get();
-//                List<Employee> attachedEmployees = employeeService.findAllByContacts_contactIdOrderByPositionAscFirstNameAsc(contact.getContactId());
-//                List<Employee> allEmployees = employeeService.findAllByOrderByPositionAscFirstNameAsc();
-//                allEmployees.removeAll(attachedEmployees);
-//                model.addAttribute("contactlist", personService.findAllByContactOrderByPositionAscFirstNameAsc(contact));
-//                model.addAttribute("allEmployees", allEmployees);
-//                model.addAttribute("attachedEmployees", attachedEmployees);
-//                model.addAttribute("containerlist", containerService.findAllByContactOrderByContainerIdDesc(contact));
-//            } else {
-//                model.addAttribute("contactlist", new HashSet<Person>());
-//                model.addAttribute("employee", new HashSet<Employee>());
-//                model.addAttribute("containerlist", new HashSet<Container>());
-//            }
+            System.out.println("case containersdfadsf");
+                for (Container c: containerService.findAllByContactOrderByContainerIdDesc(contact)) {
+                    System.out.println(c.getIsPickedUp());
+                }
 
             //Adding
             LocalDate startDate = LocalDate.now().minusDays(7);

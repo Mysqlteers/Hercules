@@ -43,7 +43,7 @@
                     th:text="${container.getPickUpPrice() + ' kr.'}"></td>
                 <td th:if="${!container.getIsPickedUp()}" class="u-border-1 u-border-grey-30 u-table-cell"
                     th:text="${'Nej'}"></td>
-                <td th:if="${container.getIsPickedUp()}" class="u-border-1 u-border-grey-30 u-table-cell"
+                <td th:unless="${!container.getIsPickedUp()}" class="u-border-1 u-border-grey-30 u-table-cell"
                     th:text="${'Ja'}"></td>
                 <td th:text="${container.calculateTotal() + ' kr.'}" class="u-border-1 u-border-grey-30 u-table-cell"></td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell" style="text-align: center">
