@@ -262,13 +262,16 @@
                      role="tabpanel">
                     <div th:replace="fragments/tool-list :: tool-list(${contact?.getTools()})"></div>
                 </div>
+                    </div>
 
                 <!--  Affald/ containere in here below      -->
 
                 <div aria-labelledby="link-tab-container" class="u-container-style u-tab-pane u-white u-tab-pane-5"
                      id="tab-container"
                      role="tabpanel">
-                    <div class="u-container-layout u-container-layout-5"></div>
+                    <div class="u-container-layout u-container-layout-5">
+                        <p th:replace="/fragments/containerList.html :: containerList(${containerlist}, ${viewCase.getCaseId()})"></p>
+                    </div>
                 </div>
 
             </div>
