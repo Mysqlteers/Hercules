@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;" xmlns:th="http://www.thymeleaf.org" th:fragment="jobType-modal(jobtype)">
+<head>
+    <link rel="stylesheet" th:href="@{/css/Sager.css}">
+    <link th:href="@{/css/create-case-modal.css}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" id="u-theme-google-font"
+          rel="stylesheet">
+</head>
+<body>
+<div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+    <!--        modal button -->
+    <a th:if="${jobtype != null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#'+${jobtype?.getJobTypeId()}" th:text="'OPDATER'" style="margin: 0;"></a>
+    <a th:unless="${jobtype != null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#sec-7902'" th:text="'OPRET JOBTYPE'"></a>
+</div>
+<!--modal -->
+<div class="u-black u-clearfix u-container-style u-dialog-block u-opacity u-opacity-70 u-valign-middle u-section-4" th:id="${jobtype?.getJobTypeId()} ?: 'sec-7902'" >
+    <div class="u-container-style u-dialog u-white u-dialog-1">
+        <div class="u-container-layout u-container-layout-1">
+            <div class="u-expanded-width u-form u-form-1">
+                <form action="/updateJobType" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" method="post"
+                      style="padding: 10px">
+                    <div class="u-form-group u-form-name">
+                        <input name="jobTypeId" placeholder="Sags nr"
+                               required hidden type="text" th:value="${jobtype?.getJobTypeId()} ?: ${null}" readonly>
+                    </div>
+                    <div class="u-form-email u-form-group">
+                        <label for="">Beskrivelse</label>
+                        <input type="text" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="description" th:value="${jobtype?.getDescription()  ?: ''}" required placeholder="Beskrivelse">
+                    </div>
+                    <div class="u-form-group u-form-message">
+                        <label for="">Pris</label>
+                        <input step="any" type="number" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="price" th:value="${jobtype?.getPrice()} ?: 0" required placeholder="Pris">
+                    </div>
+                    <div class="u-form-group u-form-select u-form-group-6">
+                        <div class="u-form-select-wrapper" th:if="${jobtype?.getMaterial() == false}">
+                            <label for="selectId">Job type eller Materiale</label>
+                            <select class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"
+                                    name="material" id="selectId">
+                                <option value="true" selected>Job type</option>
+                                <option value="1">Materiale</option>
+                            </select>
+                            <svg class="u-caret" height="12" version="1" width="14" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 8L0 4h8z" fill="currentColor"></path>
+                            </svg>
+                        </div>
+                        <div class="u-form-select-wrapper" th:unless="${jobtype?.getMaterial() == false}">
+                            <label for="selectId">Job type eller Materiale</label>
+                            <select class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"
+                                    name="material" id="selectId">
+                                <option value="0">Job type</option>
+                                <option value="1" selected>Materiale</option>
+                            </select>
+                            <svg class="u-caret" height="12" version="1" width="14" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 8L0 4h8z" fill="currentColor"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="u-align-left u-form-group u-form-submit">
+                        <input style="background-color: #adcce9; height: 60px" class="u-button-style u-hover-palette-1-light-1 u-btn-1" type="submit" value="Gem" onclick="alert('Job typen/materialet er blevet gemt!')">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <button class="u-dialog-close-button u-icon u-text-grey-40 u-icon-1">
+            <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" style="" viewBox="0 0 16 16">
+                <use xlink:href="#svg-797b" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+            </svg>
+            <svg class="u-svg-content" id="svg-797b" version="1.1"
+                 viewBox="0 0 16 16" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px"><rect height="16" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -3.3138 8.0002)" width="2" x="7" y="0"></rect>
+                <rect height="2" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -3.3138 8.0002)" width="16" x="0"
+                      y="7"></rect></svg>
+        </button>
+    </div>
+</div>
+</body>
+<!--Style-->
+<style>
+    .u-section-4 {
+        min-height: 100px;
+    }
+
+    .u-section-4 .u-dialog-1 {
+        width: 800px;
+        min-height: 50px;
+        margin: 6px auto;
+    }
+
+    .u-section-4 .u-container-layout-1 {
+        padding: 30px;
+    }
+
+    .u-section-4 .u-form-1 {
+        height: 18px;
+        margin: 0;
+    }
+
+    .u-section-4 .u-form-group-4 {
+        margin-left: 0;
+    }
+
+    .u-section-4 .u-form-group-5 {
+        margin-left: 0;
+    }
+
+    .u-section-4 .u-form-group-6 {
+        margin-left: 0;
+    }
+
+    .u-section-4 .u-btn-1 {
+        border-style: none;
+    }
+
+    .u-section-4 .u-icon-1 {
+        width: 20px;
+        height: 20px;
+    }
+
+    @media (max-width: 1199px) {
+        .u-section-4 .u-form-1 {
+            margin-right: initial;
+            margin-left: initial;
+        }
+    }
+
+    @media (max-width: 991px) {
+        .u-section-4 .u-dialog-1 {
+            width: 720px;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .u-section-4 .u-dialog-1 {
+            width: 540px;
+        }
+
+        .u-section-4 .u-container-layout-1 {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    }
+
+    @media (max-width: 575px) {
+        .u-section-4 .u-dialog-1 {
+            width: 340px;
+        }
+    }</style>
+</html>
