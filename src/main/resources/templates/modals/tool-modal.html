@@ -62,7 +62,7 @@
                         <label for="">Daglige omkostninger</label>
                         <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="dailyCost"
                                placeholder="daglige omkostninger"
-                               th:value="${tool?.getDailyCost()} ?: 0" type="number">
+                               th:value="${tool?.getDailyCost()} ?: 0" type="number" oninput="checkNumber(this)">
                     </div>
                     <div class="u-form-group u-form-select u-form-group-6">
                     <div class="u-form-select-wrapper" >

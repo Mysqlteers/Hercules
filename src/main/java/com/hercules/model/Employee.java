@@ -26,13 +26,14 @@ public class Employee {
     private String position;
     private String email;
     private String phone;
-    private String certificates;
+    @OneToMany
+    private Set<Document> certificates;
     private double wage;
 
     public Employee() {
     }
 
-    public Employee(Long employeeId, Set<Contact> contacts, String pictureLocation, String firstName, String lastName, String position, String email, String phone, String certificates, double wage) {
+    public Employee(Long employeeId, Set<Contact> contacts, String pictureLocation, String firstName, String lastName, String position, String email, String phone, Set<Document> certificates, double wage) {
         this.employeeId = employeeId;
         this.contacts = contacts;
         this.pictureLocation = pictureLocation;
@@ -130,11 +131,11 @@ public class Employee {
         this.phone = phone;
     }
 
-    public String getCertificates() {
+    public Set<Document> getCertificates() {
         return certificates;
     }
 
-    public void setCertificates(String certificates) {
+    public void setCertificates(Set<Document> certificates) {
         this.certificates = certificates;
     }
 
