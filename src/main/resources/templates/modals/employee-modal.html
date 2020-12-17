@@ -67,7 +67,7 @@
                      </div>
                      <div class="u-form-date u-form-group u-form-partition-factor-2 u-form-group-5">
                          <label for="">Timeløn</label>
-                         <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"  name="wage" placeholder="Timeløn"
+                         <input oninput="checkNumber(this)" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"  name="wage" placeholder="Timeløn"
                                 type="number" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0" th:value="${employee?.getWage()} ?: 0">
                      </div>
                     <div class="u-align-left u-form-group u-form-submit">

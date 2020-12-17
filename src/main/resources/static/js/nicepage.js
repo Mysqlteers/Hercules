@@ -8037,3 +8037,15 @@ https://github.com/imakewebthings/waypoints/blob/master/licenses.txt
         ).call(window)
     }
 });
+
+function checkNumber(input) {
+    if (input.validity.badInput) {
+        input.setCustomValidity("Indtast venligst et tal");
+    } else if (input.validity.stepMismatch) {
+        input.setCustomValidity("Tallet skal være et heltal")
+    } else if (input.validity.rangeUnderflow) {
+        input.setCustomValidity("Tallet skal være mindst 0")
+    } else {
+        input.setCustomValidity("");
+    }
+}
