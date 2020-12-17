@@ -105,7 +105,7 @@
 
 
                     <!-- Image slider -->
-                    <div th:replace="fragments/imageSlider :: slider(${task.getPicturesAsList()})"></div>
+                    <div th:replace="fragments/imageSlider :: slider(${task.getPicturesAsList()}, ${task})"></div>
 
                 </div>
             </div>

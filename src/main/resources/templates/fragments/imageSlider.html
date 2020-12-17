@@ -3,7 +3,7 @@
     <meta content="width=device-width, initial-scale=1" name="viewport">
 
 </head>
-<div th:fragment="slider(Images)">
+<div th:fragment="slider(Images, task)">
 
     <div class="slideshow-container-to-after">
         <style>
@@ -145,12 +145,12 @@
         <button class="next" onclick="plusSlides(1)" th:if="${Images.size()>1}"></button>
     </div>
 
-    <form enctype="multipart/form-data" method="post" action="#">
+    <br>
+    <form enctype="multipart/form-data" th:id="'file-form-'+${task.getTaskId()}" method="post" action="#">
         <input type="file"
                class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"
-               name="file" placeholder="Billede URL" >
+               name="file" placeholder="Billede URL" value="" th:attr="data-taskId=${task.getTaskId()}" onchange="fileChanged(this)">
     </form>
-    <br>
 
     <div style="text-align:center">
         <span class="dot" onclick="currentSlide(1)"></span>
@@ -262,7 +262,6 @@
         }
     </style>
     <script>
-
         let slideIndex = 1;
         showSlides(slideIndex);
 
@@ -296,6 +295,24 @@
             slides[slideIndex - 1].style.display = "block";
             dots[slideIndex - 1].className += " active";
             captionText.innerHTML = dots[slideIndex - 1].alt;
+        }
+
+        function fileChanged(element) {
+
+            if (element.value == "") {
+                return
+            } else {
+                $.ajax({
+                    url: "addImageToTask",
+                    type : "POST",
+                    data : {
+                        file : element.value,
+                        taskId : element.data.taskId
+                    },
+                    success : {},
+                    error : {}
+                })
+            }
         }
     </script>
 </div>
