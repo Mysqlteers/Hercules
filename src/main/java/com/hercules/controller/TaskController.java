@@ -1,13 +1,18 @@
 package com.hercules.controller;
 
 import com.hercules.model.Case;
+import com.hercules.model.Document;
 import com.hercules.model.Task;
 import com.hercules.service.CaseService;
 import com.hercules.service.TaskService;
+import com.hercules.service.utility.S3Loader;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.servlet.WebMvcProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Map;
 
@@ -29,6 +34,21 @@ public class TaskController {
             return "redirect:/timeline/"+task.getSuperTask().getTaskId()+"/"+ LocalDate.now().getMonthValue()+"/"+LocalDate.now().getYear();
         else
             return "redirect:/caseDetails/"+task.getCase().getCaseId();
+    }
+
+    @PostMapping(value="/addImageToTask")
+    public String uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("taskId") long id) throws IOException {
+
+
+        String fileName = "images/" + id + "/" + file.getOriginalFilename();
+        S3Loader s3Loader = S3Loader.getInstance();
+        s3Loader.uploadImage(S3Loader.multipartFileToFile(file, "temppicture"), fileName);
+
+        Task myTask =taskService.findByTaskId(id).get();
+        myTask.addPicture(fileName, "", false);
+        taskService.save(myTask);
+
+        return "redirect:/timeline/"+myTask.getSuperTask().getTaskId()+"/"+ LocalDate.now().getMonthValue()+"/"+LocalDate.now().getYear();
     }
 
 

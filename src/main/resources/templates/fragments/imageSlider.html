@@ -5,7 +5,9 @@
 </head>
 <div th:fragment="slider(Images, task)">
 
-    <div class="slideshow-container-to-after">
+    <br>
+
+    <div th:class="'slideshow-container-to-after'+${task.getTaskId()}">
         <style>
             * {
                 box-sizing: border-box
@@ -128,32 +130,53 @@
             }
         </style>
 
-        <div class="mySlides fade" th:if="${Images.size()<1}">
-            <div class="numbertext">1</div>
-            <img style="width:100%" th:src="@{/images/default-image.jpg}">
-            <div class="text">Intet billede</div>
-        </div>
-
-        <div class="mySlides fade" th:each="image : ${Images}" th:unless="${Images.size()<1}">
-            <div class="numbertext" th:text="${imageStat.count} + ' / '+${Images.size()}"></div>
-            <img style="width:100%" th:src="${image.imageUrl()}">
-            <div class="text" th:text="${image.getDescription()}">Caption Text</div>
+        <div th:if="${Images.size()<1}">
+            <div th:class="'mySlides'+${task.getTaskId()}+' fade'">
+                <div class="numbertext">1</div>
+                <img style="width:100%" th:src="@{/images/default-image.jpg}">
+                <div class="text">Intet billede</div>
+            </div>
         </div>
 
 
-        <button class="prev" onclick="plusSlides(-1)" th:if="${Images.size()>1}"></button>
-        <button class="next" onclick="plusSlides(1)" th:if="${Images.size()>1}"></button>
+        <div th:unless="${Images.size()<1}">
+            <!--        for the first load-->
+            <div th:class="'mySlides'+${task.getTaskId()}+' fade'" th:each="image, imageStat : ${Images}"
+                 th:if="${imageStat.first}">
+                <div class="numbertext" th:text="${imageStat.count} + ' / '+${Images.size()}"></div>
+                <img style="width:100%" th:src="${image.imageUrl()}">
+                <div class="text" th:text="${image.getDescription()}">Caption Text</div>
+            </div>
+
+            <div style="display: none" th:class="'mySlides'+${task.getTaskId()}+' fade'" th:each="image, imageStat : ${Images}"
+                 th:unless="${imageStat.first}">
+                <div class="numbertext" th:text="${imageStat.count} + ' / '+${Images.size()}"></div>
+                <img style="width:100%" th:src="${image.imageUrl()}">
+                <div class="text" th:text="${image.getDescription()}">Caption Text</div>
+            </div>
+            <br>
+
+            <button class="prev" onclick="plusSlides(this,-1)" th:attr="data-taskid=${task.getTaskId()}"
+                    th:if="${Images.size()>1}"  style="position: relative">&#10094;</button>
+            <button class="next" onclick="plusSlides(this, 1)" th:attr="data-taskid=${task.getTaskId()}"
+                    th:if="${Images.size()>1}"  style="position: relative">&#10095;</button>
+        </div>
+
+
     </div>
-
-    <br>
-    <form enctype="multipart/form-data" th:id="'file-form-'+${task.getTaskId()}" method="post" action="#">
-        <input type="file"
-               class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"
-               name="file" placeholder="Billede URL" value="" th:attr="data-taskId=${task.getTaskId()}" onchange="fileChanged(this)">
+    <form action="/addImageToTask" enctype="multipart/form-data" method="post" th:id="'file-form-'+${task.getTaskId()}">
+        <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"
+               name="file"
+               placeholder="Billede URL" th:attr="data-taskId=${task.getTaskId()}" type="file" value="">
+        <!--onchange="fileChanged(this)"-->
+        <input name="taskId" th:value="${task.getTaskId()}" type="hidden">
+        <br>
+        <input th:value="'Tilføj Billede'" type="submit">
     </form>
 
     <div style="text-align:center">
-        <span class="dot" onclick="currentSlide(1)"></span>
+        <span onclick="currentSlide(this.dataset.number)" th:attr="data-number=${imageStat.count}"
+              th:class="'dot'+${task.getTaskId()}" th:each="image, imageStat : ${Images}"></span>
     </div>
     <style>
         * {
@@ -263,23 +286,24 @@
     </style>
     <script>
         let slideIndex = 1;
-        showSlides(slideIndex);
 
         // Next/previous controls
-        function plusSlides(n) {
-            showSlides(slideIndex += n);
+        function plusSlides(element, n) {
+            showSlides(element, slideIndex += n);
         }
 
         // Thumbnail image controls
-        function currentSlide(n) {
-            showSlides(slideIndex = n);
+        function currentSlide(element, n) {
+            showSlides(element, slideIndex = n);
         }
 
-        function showSlides(n) {
+        function showSlides(element, n) {
             let i;
-            let slides = document.getElementsByClassName("mySlides");
-            let dots = document.getElementsByClassName("dot");
-            let captionText = document.getElementById("caption");
+            let taskId = element.dataset.taskid;
+            let slides = document.getElementsByClassName("mySlides" + taskId);
+            console.log("slides for " + taskId + "  =" + slides.length)
+            let dots = document.getElementsByClassName("dot" + taskId);
+            let captionText = document.getElementById("caption" + taskId);
             if (n > slides.length) {
                 slideIndex = 1
             }
@@ -292,26 +316,33 @@
             for (i = 0; i < dots.length; i++) {
                 dots[i].className = dots[i].className.replace(" active", "");
             }
+
             slides[slideIndex - 1].style.display = "block";
             dots[slideIndex - 1].className += " active";
             captionText.innerHTML = dots[slideIndex - 1].alt;
         }
 
         function fileChanged(element) {
-
             if (element.value == "") {
-                return
+
             } else {
+                let form = element.parentElement
+                // let data = new FormData(form)
+                let data = {}
+                data["taskId"] = element.dataset.taskId;
+                data["file"] = element.files[0];
                 $.ajax({
-                    url: "addImageToTask",
-                    type : "POST",
-                    data : {
-                        file : element.value,
-                        taskId : element.data.taskId
+                    type: "POST",
+                    enctype: 'multipart/form-data',
+                    contentType: "application/JSON",
+                    data: JSON.stringify(data),
+                    success: function (response) {
+                        console.log("SUCCESS : ", response);
                     },
-                    success : {},
-                    error : {}
-                })
+                    error: function (e) {
+                        console.log("ERROR : ", e);
+                    }
+                });
             }
         }
     </script>
