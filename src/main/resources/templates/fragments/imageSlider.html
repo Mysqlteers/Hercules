@@ -131,12 +131,11 @@
         <div class="mySlides fade" th:if="${Images.size()<1}">
             <div class="numbertext">1</div>
             <img style="width:100%" th:src="@{/images/default-image.jpg}">
-            <div class="text">Caption Text</div>
+            <div class="text">Intet billede</div>
         </div>
 
         <div class="mySlides fade" th:each="image : ${Images}" th:unless="${Images.size()<1}">
-            <div class="numbertext" th:if="${image.isAfterPicture()}"
-                 th:text="${imageStat.count} + ' / '+${Images.size()}"></div>
+            <div class="numbertext" th:text="${imageStat.count} + ' / '+${Images.size()}"></div>
             <img style="width:100%" th:src="${image.imageUrl()}">
             <div class="text" th:text="${image.getDescription()}">Caption Text</div>
         </div>
@@ -144,8 +143,13 @@
 
         <button class="prev" onclick="plusSlides(-1)" th:if="${Images.size()>1}"></button>
         <button class="next" onclick="plusSlides(1)" th:if="${Images.size()>1}"></button>
-
     </div>
+
+    <form enctype="multipart/form-data" method="post" action="#">
+        <input type="file"
+               class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"
+               name="file" placeholder="Billede URL" >
+    </form>
     <br>
 
     <div style="text-align:center">
