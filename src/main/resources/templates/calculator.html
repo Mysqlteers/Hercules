@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" style="font-size: 20px">
+<head>
+    <title>Beregninger</title>
+    <link rel="stylesheet" href="nicepage.css" media="screen">
+    <link media="screen" rel="stylesheet" th:href="@{/css/caseDetails.css}" type="text/css">
+    <link media="screen" rel="stylesheet" th:href="@{/css/nicepage.css}" type="text/css">
+    <script class="u-script" defer="" th:src="@{/js/jquery.js}" type="text/javascript"></script>
+    <script class="u-script" defer="" th:src="@{/js/nicepage.js}" type="text/javascript"></script>
+<link rel="stylesheet" href="calculator.css" media="screen">
+    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{js/calculateJS.js}"></script>
+    <meta name="generator" content="Nicepage 3.0.9, nicepage.com">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
+</head>
+<body class="u-body">
+  <header th:remove="tag" th:replace="fragments/header :: header"></header>
+
+  <section class="u-clearfix u-section-1" id="sec-1491">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+          <div class="u-layout">
+            <div class="u-layout-row">
+              <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-1">
+                <div class="u-container-layout u-container-layout-1">
+<!--                    left side of the page -->
+                  <h2 class="u-heading-font u-text u-text-default u-title u-text-1">Vælg det arbejde, du vil have udført</h2>
+                    <form id="calculateForm">
+                        <label for="cubicarea" style="display: inline-block; width: 130px">Kubikmeter</label>
+                        <input type="number" step="any" id="cubicarea" required style="width: 100px; -webkit-appearance: none; -moz-appearance: textfield; margin: 0"><br>
+
+                        <label for="jobtype" style="display: inline-block; width: 130px">Job type</label>
+                        <select name="jobtype" id="jobtype" style="width: 100px">
+                            <option maxlength="18" th:each="jobtype : ${jobTypeList}" th:value="${jobtype.description}" th:text="${jobtype.description}" style="width: 100px"></option>
+                        </select><br>
+
+                        <label for="material" style="display: inline-block; width: 130px">Materiale</label>
+                        <select name="material" id="material" style="width: 100px">
+                            <option th:each="material : ${materialList}" th:value="${material.description}" th:text="${material.description}" style="width: 100px">
+                        </select><br>
+
+                        <label for="markup" style="display: inline-block; width: 130px">Mark up i %</label>
+                        <input type="number" step="any" id="markup" name="markup" required value="30" style="width: 100px; -webkit-appearance: none; -moz-appearance: textfield; margin: 0"><br>
+
+                        <input type="submit" value="UDREGN PRIS" class="u-btn u-button-style u-btn-1">
+                    </form>
+                    <br>
+                    <a href="/jobTypeList" style="bottom: 0">
+                        <button class="u-btn u-button-style u-btn-1">Se alle job typer og materialer</button>
+                    </a>
+                </div>
+              </div>
+              <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
+                <div class="u-container-layout u-container-layout-2">
+<!--                    right side of the page -->
+                    <h2 class="u-heading-font u-text u-text-default u-title u-text-2">Pris for denne opgave</h2>
+                    <div id="priceDiv"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+<script type="application/javascript">
+    preventFormDefault($("#calculateForm"));
+</script>
+</html>
