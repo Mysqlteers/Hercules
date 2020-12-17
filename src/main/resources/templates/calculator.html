@@ -32,12 +32,12 @@
                         <input type="number" step="any" id="cubicarea" required style="width: 100px; -webkit-appearance: none; -moz-appearance: textfield; margin: 0"><br>
 
                         <label for="jobtype" style="display: inline-block; width: 130px">Job type</label>
-                        <select name="jobtype" id="jobtype">
-                            <option th:each="jobtype : ${jobTypeList}" th:value="${jobtype.description}" th:text="${jobtype.description}" style="width: 100px"></option>
+                        <select name="jobtype" id="jobtype" style="width: 100px">
+                            <option maxlength="18" th:each="jobtype : ${jobTypeList}" th:value="${jobtype.description}" th:text="${jobtype.description}" style="width: 100px"></option>
                         </select><br>
 
                         <label for="material" style="display: inline-block; width: 130px">Materiale</label>
-                        <select name="material" id="material">
+                        <select name="material" id="material" style="width: 100px">
                             <option th:each="material : ${materialList}" th:value="${material.description}" th:text="${material.description}" style="width: 100px">
                         </select><br>
 
