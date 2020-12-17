@@ -9,7 +9,7 @@
 <body>
 <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
     <!--        modal button -->
-    <a th:if="${jobtype != null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#'+${jobtype?.getJobTypeId()}" th:text="'OPDATER'" style="margin:  0 20px 20px 20px;"></a>
+    <a th:if="${jobtype != null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#'+${jobtype?.getJobTypeId()}" th:text="'OPDATER'" style="margin: 0;"></a>
     <a th:unless="${jobtype != null}" class="u-btn u-button-style u-dialog-link u-btn-1" th:href="'#sec-7902'" th:text="'OPRET JOBTYPE'"></a>
 </div>
 <!--modal -->
@@ -33,9 +33,9 @@
                     </div>
                     <div class="u-form-group u-form-select u-form-group-6">
                         <div class="u-form-select-wrapper" th:if="${jobtype?.getMaterial() == 0}">
-                            <label for="">Job type eller Materiale</label>
+                            <label for="selectId">Job type eller Materiale</label>
                             <select class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"
-                                    name="material">
+                                    name="material" id="selectId">
                                 <option value="true" selected>Job type</option>
                                 <option value="1">Materiale</option>
                             </select>
@@ -44,8 +44,9 @@
                             </svg>
                         </div>
                         <div class="u-form-select-wrapper" th:unless="${jobtype?.getMaterial() == 0}">
+                            <label for="selectId">Job type eller Materiale</label>
                             <select class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"
-                                    name="material">
+                                    name="material" id="selectId">
                                 <option value="0">Job type</option>
                                 <option value="1" selected>Materiale</option>
                             </select>
@@ -55,7 +56,7 @@
                         </div>
                     </div>
                     <div class="u-align-left u-form-group u-form-submit">
-                        <input style="background-color: #adcce9; height: 60px" class="u-button-style u-hover-palette-1-light-1 u-btn-1" type="submit" value="Gem" onclick="alert('Sagen er blevet gemt!')">
+                        <input style="background-color: #adcce9; height: 60px" class="u-button-style u-hover-palette-1-light-1 u-btn-1" type="submit" value="Gem" onclick="alert('Job typen/materialet er blevet gemt!')">
                     </div>
                 </form>
             </div>

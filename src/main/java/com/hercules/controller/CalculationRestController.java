@@ -15,7 +15,11 @@ import java.text.DecimalFormat;
 @RestController
 public class CalculationRestController {
     @Autowired
-    JobTypeService jobTypeService;
+    private JobTypeService jobTypeService;
+
+    public CalculationRestController(JobTypeService jobTypeService) {
+        this.jobTypeService = jobTypeService;
+    }
 
     @PostMapping("/api/calculateTotal")
     public ResponseEntity<CalculationResult> calculateTotal(@RequestBody CalculationHelper helper) {

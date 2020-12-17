@@ -27,9 +27,6 @@
                 <div class="u-container-layout u-container-layout-1">
                   <h2 class="u-heading-font u-text u-text-default u-title u-text-1">Vælg det arbejde, du vil have udført</h2>
                     <form id="calculateForm">
-                        <label for="markup" style="display: inline-block; width: 130px">Mark up i %</label>
-                        <input type="number" step="any" id="markup" name="markup" required value="30" style="width: 100px; -webkit-appearance: none; -moz-appearance: textfield; margin: 0"><br>
-
                         <label for="cubicarea" style="display: inline-block; width: 130px">Kubikmeter</label>
                         <input type="number" step="any" id="cubicarea" required style="width: 100px; -webkit-appearance: none; -moz-appearance: textfield; margin: 0"><br>
 
@@ -42,6 +39,10 @@
                         <select name="material" id="material">
                             <option th:each="material : ${materialList}" th:value="${material.description}" th:text="${material.description}" style="width: 100px">
                         </select><br>
+
+                        <label for="markup" style="display: inline-block; width: 130px">Mark up i %</label>
+                        <input type="number" step="any" id="markup" name="markup" required value="30" style="width: 100px; -webkit-appearance: none; -moz-appearance: textfield; margin: 0"><br>
+
                         <input type="submit" value="UDREGN PRIS" class="u-btn u-button-style u-btn-1">
                     </form>
                     <br>
