@@ -37,6 +37,9 @@ public class CalculatorController {
 
     @PostMapping("/updateJobType")
     public String updateJobType(@ModelAttribute JobType jobType) {
+        if (jobTypeService.findByDescription(jobType.getDescription()).isPresent()) {
+            jobType.setJobTypeId(jobTypeService.findByDescription(jobType.getDescription()).get().getJobTypeId());
+        }
         jobTypeService.save(jobType);
         return "redirect:/jobTypeList";
     }

@@ -29,7 +29,7 @@
                     </div>
                     <div class="u-form-group u-form-message">
                         <label for="">Pris</label>
-                        <input type="number" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="price" th:value="${jobtype?.getPrice()} ?: 0" required placeholder="Pris">
+                        <input step="any" type="number" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="price" th:value="${jobtype?.getPrice()} ?: 0" required placeholder="Pris">
                     </div>
                     <div class="u-form-group u-form-select u-form-group-6">
                         <div class="u-form-select-wrapper" th:if="${jobtype?.getMaterial() == false}">
