@@ -2,6 +2,8 @@ package com.hercules.model;
 
 import javax.persistence.*;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 
 @Entity @Table(name = "containers")
 public class Container {
@@ -34,7 +36,11 @@ public class Container {
     }
 
     public String calculateTotal() {
-        DecimalFormat df = new DecimalFormat("0.00");
+        DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.getDefault());
+        otherSymbols.setDecimalSeparator('.');
+        otherSymbols.setGroupingSeparator(',');
+        DecimalFormat df = new DecimalFormat("#,##0.00", otherSymbols);
+        df.setGroupingUsed(true);
         double totalPrice;
         if (isPickedUp) {
             totalPrice = (dailyCost * numberOfDays + pickUpPrice);

@@ -10,15 +10,15 @@
 <div class="u-clearfix u-sheet u-sheet-1">
     <div class="u-table u-table-responsive u-table-1">
         <h2>Liste over tilknyttede containere</h2>
-        <table class="u-table-entity">
+        <table class="u-table-entity" style="table-layout: fixed">
             <colgroup>
-                <col width="15%">
-                <col width="15%">
-                <col width="15%">
-                <col width="15%">
-                <col width="15%">
+                <col width="20%">
                 <col width="15%">
                 <col width="10%">
+                <col width="15%">
+                <col width="8%">
+                <col width="15%">
+                <col width="17%">
             </colgroup>
             <thead class="u-palette-4-base u-table-header u-table-header-1">
             <tr style="height: 35px;">
@@ -32,9 +32,10 @@
             </tr>
             </thead>
             <tbody class="u-table-body">
-            <tr style="height: 78px;" th:each="container: ${containerlist}">
-                <td class="u-border-1 u-border-grey-30 u-first-column u-grey-5 u-table-cell u-table-cell-5"
-                    th:text="${container.getContainerName()}"></td>
+            <tr style="height: 78px" th:each="container: ${containerlist}">
+                <td th:text="${container.getContainerName()}" class="u-border-1 u-border-grey-30 u-first-column u-grey-5 u-table-cell u-table-cell-5"
+                     style="overflow: scroll; width: 100px; text-overflow: ellipsis">
+                </td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell"
                     th:text="${container.getDailyCost() + ' kr.'}"></td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell"

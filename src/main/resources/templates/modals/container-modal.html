@@ -46,15 +46,15 @@
                     </div>
                     <div class="u-form-group u-form-message">
                         <label for="">Daglige omkostninger</label>
-                        <input step="any" type="number" required class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="dailyCost" th:value="${container?.getDailyCost()  ?: 0}" placeholder="Daglige omkostninger" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0">
+                        <input step="any" type="number" min="0" required class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="dailyCost" th:value="${container?.getDailyCost()  ?: 0}" placeholder="Daglige omkostninger" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0">
                     </div>
                     <div class="u-form-email u-form-group">
                         <label for="">Antal dage</label>
-                        <input type="number" required class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="numberOfDays" th:value="${container?.getNumberOfDays()  ?: 0}" placeholder="Antal dage" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0">
+                        <input type="number" min="0" required class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="numberOfDays" th:value="${container?.getNumberOfDays()  ?: 0}" placeholder="Antal dage" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0">
                     </div>
                     <div class="u-form-email u-form-group">
                         <label for="">Pris for afhentning</label>
-                        <input step="any" required class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="pickUpPrice" th:value="${container?.getPickUpPrice()  ?: 0}" placeholder="Pris for afhentning" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0">
+                        <input type="number" min="0" step="any" required class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="pickUpPrice" th:value="${container?.getPickUpPrice()  ?: 0}" placeholder="Pris for afhentning" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0">
                     </div>
                     <div  class="u-form-email u-form-group" style="text-align: left">
                         <label for="isPickedUp">Afhentet</label><br>
