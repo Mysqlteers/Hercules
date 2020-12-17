@@ -1,8 +1,13 @@
 package com.hercules.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.hercules.service.utility.S3Loader;
+import com.sun.istack.Nullable;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -26,13 +31,15 @@ public class Employee {
     private String position;
     private String email;
     private String phone;
-    private String certificates;
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "employee")
+    @JsonManagedReference
+    private Set<Document> certificates;
     private double wage;
 
     public Employee() {
     }
 
-    public Employee(Long employeeId, Set<Contact> contacts, String pictureLocation, String firstName, String lastName, String position, String email, String phone, String certificates, double wage) {
+    public Employee(Long employeeId, Set<Contact> contacts, String pictureLocation, String firstName, String lastName, String position, String email, String phone, Set<Document> certificates, double wage) {
         this.employeeId = employeeId;
         this.contacts = contacts;
         this.pictureLocation = pictureLocation;
@@ -43,6 +50,21 @@ public class Employee {
         this.phone = phone;
         this.certificates = certificates;
         this.wage = wage;
+    }
+
+    public void addDocument(Document newDoc){
+        newDoc.setEmployee(this);
+        certificates.add(newDoc);
+    }
+
+    public void removeDocument(Document document){
+        certificates.remove(document);
+        document.setEmployee(null);
+    }
+
+    public List<Document> getDocumentsAsList(){
+        ArrayList<Document> myList = new ArrayList<Document>(certificates);
+        return myList;
     }
 
     public String imageURL() {
@@ -130,11 +152,11 @@ public class Employee {
         this.phone = phone;
     }
 
-    public String getCertificates() {
+    public Set<Document> getCertificates() {
         return certificates;
     }
 
-    public void setCertificates(String certificates) {
+    public void setCertificates(Set<Document> certificates) {
         this.certificates = certificates;
     }
 

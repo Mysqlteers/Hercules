@@ -2,6 +2,7 @@ package com.hercules.model;
 
 
 import com.hercules.service.utility.S3Loader;
+import com.sun.istack.Nullable;
 
 import javax.persistence.*;
 
@@ -18,7 +19,13 @@ public class Document {
     private String location;
     @ManyToOne
     @JoinColumn(name = "document_owner_id")
+    @Nullable
     private Case documentCase;
+
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    @Nullable
+    private Employee employee;
 
     /* ***********************************************************  Constructors and methods  ************************************************************ */
 
@@ -68,6 +75,14 @@ public class Document {
 
     public void setDocumentCase(Case documentCase) {
         this.documentCase = documentCase;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }
 
