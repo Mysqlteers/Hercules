@@ -1,11 +1,14 @@
 package com.hercules.controller;
 
+import com.hercules.model.JobType;
 import com.hercules.service.JobTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class CalculatorController {
@@ -29,6 +32,12 @@ public class CalculatorController {
     @GetMapping("/deleteJobType/{jobTypeId}")
     public String deleteJobType(@PathVariable("jobTypeId") Long jobTypeId) {
         jobTypeService.deleteById(jobTypeId);
+        return "redirect:/jobTypeList";
+    }
+
+    @PostMapping("/updateJobType")
+    public String updateJobType(@ModelAttribute JobType jobType) {
+        jobTypeService.save(jobType);
         return "redirect:/jobTypeList";
     }
 }

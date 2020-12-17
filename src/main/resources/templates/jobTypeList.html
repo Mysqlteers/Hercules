@@ -13,6 +13,7 @@
 </head>
 <body class="u-body">
 <header th:remove="tag" th:replace="fragments/header :: header"></header>
+<p th:replace="modals/jobType-modal.html :: jobType-modal(null)"></p>
 
 <section class="u-clearfix u-section-1" id="sec-1491">
     <div class="u-clearfix u-sheet u-sheet-1">
@@ -34,7 +35,7 @@
                                         <thead class="u-palette-4-base u-table-header u-table-header-1">
                                         <tr style="height: 35px;">
                                             <th class="u-border-1 u-border-palette-4-base u-table-cell">Beskrivelse</th>
-                                            <th class="u-border-1 u-border-palette-4-base u-table-cell">Pris</th>
+                                            <th class="u-border-1 u-border-palette-4-base u-table-cell">Pris faktor</th>
                                             <th class="u-border-1 u-border-palette-4-base u-table-cell"></th>
                                         </tr>
                                         </thead>
@@ -51,11 +52,7 @@
                                                         SLET
                                                     </button>
                                                 </a>
-                                                <a th:href="@{'/updateJobType/'+${jobtype.getJobTypeId()}}">
-                                                    <button type="button" class="u-btn u-button-style u-btn-1" style="background-color: #478ac9; color: white; width: 122.133px">
-                                                        OPDATER
-                                                    </button>
-                                                </a>
+                                                <p th:replace="modals/jobType-modal.html :: jobType-modal(${jobtype})"></p>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -96,11 +93,7 @@
                                                         SLET
                                                     </button>
                                                 </a>
-                                                <a th:href="@{'/updateJobType/'+${material.getJobTypeId()}}">
-                                                    <button type="button" class="u-btn u-button-style u-btn-1" style="background-color: #478ac9; color: white; width: 122.133px">
-                                                        OPDATER
-                                                    </button>
-                                                </a>
+                                                <p th:replace="modals/jobType-modal.html :: jobType-modal(${material})"></p>
                                             </td>
                                         </tr>
                                         </tbody>

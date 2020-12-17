@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" style="font-size: 16px">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" style="font-size: 20px">
 <head>
     <title>Beregninger</title>
     <link rel="stylesheet" href="nicepage.css" media="screen">
@@ -27,18 +27,18 @@
                 <div class="u-container-layout u-container-layout-1">
                   <h2 class="u-heading-font u-text u-text-default u-title u-text-1">Vælg det arbejde, du vil have udført</h2>
                     <form id="calculateForm">
-                        <label for="markup" style="display: inline-block; width: 100px">Mark up i %</label>
+                        <label for="markup" style="display: inline-block; width: 130px">Mark up i %</label>
                         <input type="number" step="any" id="markup" name="markup" required value="30" style="width: 100px; -webkit-appearance: none; -moz-appearance: textfield; margin: 0"><br>
 
-                        <label for="cubicarea" style="display: inline-block; width: 100px">Kubikmeter</label>
+                        <label for="cubicarea" style="display: inline-block; width: 130px">Kubikmeter</label>
                         <input type="number" step="any" id="cubicarea" required style="width: 100px; -webkit-appearance: none; -moz-appearance: textfield; margin: 0"><br>
 
-                        <label for="jobtype" style="display: inline-block; width: 100px">Job type</label>
+                        <label for="jobtype" style="display: inline-block; width: 130px">Job type</label>
                         <select name="jobtype" id="jobtype">
                             <option th:each="jobtype : ${jobTypeList}" th:value="${jobtype.description}" th:text="${jobtype.description}" style="width: 100px"></option>
                         </select><br>
 
-                        <label for="material" style="display: inline-block; width: 100px">Materiale</label>
+                        <label for="material" style="display: inline-block; width: 130px">Materiale</label>
                         <select name="material" id="material">
                             <option th:each="material : ${materialList}" th:value="${material.description}" th:text="${material.description}" style="width: 100px">
                         </select><br>
