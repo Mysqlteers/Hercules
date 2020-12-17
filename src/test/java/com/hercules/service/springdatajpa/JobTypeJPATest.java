@@ -55,7 +55,7 @@ class JobTypeJPATest {
     }
 
     @Test
-    public void createEmployeeAPI() {
+    public void testCalculator() {
         CalculationRestController crc = new CalculationRestController(js);
         String jobtypedescription = "testjobtype";
         String materialdescription = "testmaterial";
