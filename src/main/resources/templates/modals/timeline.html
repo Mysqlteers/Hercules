@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="timeline(dates, mainTask)">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -10,8 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" id="u-theme-google-font"
           rel="stylesheet">
 </head>
-<body>
-<div>
+<div th:fragment="timeline(dates, mainTask)">
     <div class="chart-wrapper" >
         <div class="timeline-header">
             <script th:src="@{/js/timeline.js}"></script>
@@ -37,5 +36,11 @@
         <a th:replace="/modals/taskModal.html :: taskModal(${task})"></a>
     </div>
 </div>
-</body>
+
+<div style="position: absolute; bottom: 5%; right: 5%">
+    <a class="u-btn u-button-style u-hover-palette-1-dark-1 u-btn-1"
+       onclick="return confirm('Er du sikker på, at du vil slette sagen?')"
+       style="background-color: crimson; " th:href="@{'/deleteCase/'}">Slet
+        sag</a>
+</div>
 </html>
