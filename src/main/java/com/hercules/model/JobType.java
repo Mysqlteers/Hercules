@@ -10,6 +10,8 @@ public class JobType {
     private String description;
     private double price;
 
+    /* ***********************************************************  Constructors and methods  ************************************************************ */
+
     public JobType() {
     }
 
@@ -19,6 +21,8 @@ public class JobType {
         this.description = description;
         this.price = price;
     }
+
+    /* ***********************************************************  getters and setters  ************************************************************ */
 
     public Long getJobTypeId() {
         return jobTypeId;

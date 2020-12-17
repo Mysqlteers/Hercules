@@ -16,9 +16,9 @@ function calculateTotal(jobtype, material, cubicarea, markup) {
         type: "POST",
         contentType: "application/JSON",
         data: JSON.stringify(calculate),
-        success: function(data) {
-            $("#priceDiv").html("Pris med markup: " + data.priceWithMarkup + " kr." + "<br>" +
-                                "Pris uden markup: " + data.priceWithoutMarkup + " kr.")
+        success: function(result) {
+            $("#priceDiv").html("Pris med markup: " + result.priceWithMarkup + " kr." + "<br>" +
+                                "Pris uden markup: " + result.priceWithoutMarkup + " kr.")
         },
         error: function() {
             console.log("Error in AJAX request.")

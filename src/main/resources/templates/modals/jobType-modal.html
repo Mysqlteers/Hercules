@@ -32,7 +32,7 @@
                         <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="price" th:value="${jobtype?.getPrice()} ?: 0" required placeholder="Pris">
                     </div>
                     <div class="u-form-group u-form-select u-form-group-6">
-                        <div class="u-form-select-wrapper" th:if="${jobtype?.getMaterial() == 0}">
+                        <div class="u-form-select-wrapper" th:if="${jobtype?.getMaterial() == false}">
                             <label for="selectId">Job type eller Materiale</label>
                             <select class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"
                                     name="material" id="selectId">
@@ -43,7 +43,7 @@
                                 <path d="M4 8L0 4h8z" fill="currentColor"></path>
                             </svg>
                         </div>
-                        <div class="u-form-select-wrapper" th:unless="${jobtype?.getMaterial() == 0}">
+                        <div class="u-form-select-wrapper" th:unless="${jobtype?.getMaterial() == false}">
                             <label for="selectId">Job type eller Materiale</label>
                             <select class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"
                                     name="material" id="selectId">
@@ -73,11 +73,6 @@
     </div>
 </div>
 </body>
-<script>
-    function reloadAfterModal() {
-        window.location.reload(true);
-    }
-</script>
 <!--Style-->
 <style>
     .u-section-4 {
