@@ -30,9 +30,6 @@ public class TaskRestController
             datesList.add(startDate);
             startDate = startDate.plusDays(1);
         }
-
-
-
         return ResponseEntity.ok(datesList);
     }
 }

@@ -137,7 +137,7 @@ public class CaseController {
                 startDate = startDate.plusDays(1);
             }
             model.addAttribute("dates", datesList);
-            model.addAttribute("mainTask", caseService.findById((long) caseId).get());
+            model.addAttribute("mainTask", caseService.findById(caseId).get());
             if (contactService.findContactByCaseId(caseId).isPresent())
                 model.addAttribute("contact", contactService.findContactByCaseId(caseId).get());
 

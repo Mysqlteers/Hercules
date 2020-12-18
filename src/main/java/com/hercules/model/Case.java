@@ -140,6 +140,11 @@ public class Case implements Taskable {
     }
 
     @Override
+    public Taskable getSuperTask() {
+        return null;
+    }
+
+    @Override
     public void addTask(Task task) {
         task.setCase(this);
         subtasks.add(task);

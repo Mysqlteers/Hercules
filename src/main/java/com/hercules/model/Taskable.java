@@ -7,6 +7,7 @@ public interface Taskable {
 
     public List<Task> getSubtasksAsList();
 
+    public Taskable getSuperTask();
 
     public void addTask(Task task);
 

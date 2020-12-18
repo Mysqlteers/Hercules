@@ -10,17 +10,21 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" id="u-theme-google-font"
           rel="stylesheet">
 </head>
-<div th:fragment="timeline(dates, mainTask)">
-    <div class="u-clearfix u-sheet u-sheet-1" style="text-align: center">
+<div th:fragment="timeline(dates, superTask)">
+    <div class="u-clearfix u-sheet u-sheet-1" style="text-align: center; display: flow">
         <a class="u-btn u-button-style u-btn-1" style="float: left; display: inline-block" onclick="changeMonth(-1)">&#10094; Tilbage</a>
-        <a th:if="${mainTask?.getSuperTask()} != null" th:href="'/timeline/'+${mainTask?.getSuperTask()?.getTaskId()}+'/'+${dates.get(0).getMonthValue()}+'/'+${dates.get(0).getYear()}" class="u-text u-text-default u-text-1" style="display: inline-block">Gå til over opgave</a>
-        <a th:unless="${mainTask?.getSuperTask()} != null" th:href="'/caseDetails/'+${mainTask?.getCase()?.getCaseId()}" class="u-text u-text-default u-text-1" style="display: inline-block">Gå til over opgave</a>
+        <a th:if="${superTask?.getSuperTask()} != null" th:href="'/timeline/'+${superTask?.getSuperTask()?.getTaskId()}+'/'+${dates.get(0).getMonthValue()}+'/'+${dates.get(0).getYear()}" class="u-text u-text-default u-text-1" style="display: inline-block">Gå til over opgave</a>
+        <a th:unless="${superTask?.getSuperTask()} != null" >
+            <a th:if="${superTask?.getClass().getSimpleName().equals(Case)}" th:href="'/caseDetails/'+${superTask?.getCaseId()}"
+               class="u-btn u-button-style u-btn-1" style="display: inline-block">Ingen over opgave</a>
+            <a th:unless="${superTask?.getClass().getSimpleName().equals(Case)}" th:href="'/caseDetails/'+${superTask?.getCase().getCaseId()}"
+               class="u-btn u-button-style u-btn-1" style="display: inline-block">Gå til over opgave</a>
+        </a>
         <a class="u-btn u-button-style u-btn-2" style="float: right; display: inline-block" onclick="changeMonth(1)">Frem &#10095;</a>
     </div>
     <div class="chart-wrapper" >
         <div class="timeline-header">
             <script th:src="@{/js/timeline.js}"></script>
-            <!--            todo add month slider -->
             <link rel="stylesheet" th:href="@{/css/timeline.css}">
             <ul class="chart-values">
                 <li th:attr="data-period=${day}" th:each="day : ${dates}"
@@ -30,7 +34,7 @@
                 <li data-color="#00BCD4" th:attr="data-duration=${task?.getStartDate()}+'/'+${task?.getDeadline()},
                 data-percentage_done=${task?.getPercentageDone()},
                 data-href=${'#'+task?.getId()}"
-                    th:each="task: ${mainTask?.getSubtasksAsList() ?: superTask?.getSubtasksAsList()} "
+                    th:each="task: ${superTask?.getSubtasksAsList() ?: superTask?.getSubtasksAsList()} "
                     th:text="${task?.name}+' '+${task?.getPercentageDone().toString()}+'%'"
                 >
                 </li>
@@ -38,7 +42,7 @@
         </div>
     </div>
 
-    <div th:each="task: ${mainTask?.getSubtasksAsList() ?: superTask.getSubtasksAsList()}">
+    <div th:each="task: ${superTask?.getSubtasksAsList() ?: superTask.getSubtasksAsList()}">
         <a th:replace="/modals/taskModal.html :: taskModal(${task})"></a>
     </div>
 </div>
