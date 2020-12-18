@@ -33,7 +33,7 @@ public class Employee {
     private String phone;
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "employee")
     @JsonManagedReference
-    private Set<Document> certificates;
+    private Set<Document> certificates = new HashSet<>();
     private double wage;
 
     public Employee() {
@@ -63,6 +63,9 @@ public class Employee {
     }
 
     public List<Document> getDocumentsAsList(){
+        if (certificates == null){
+            certificates = new HashSet<>();
+        }
         ArrayList<Document> myList = new ArrayList<Document>(certificates);
         return myList;
     }

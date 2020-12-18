@@ -45,7 +45,22 @@
                 <td class="u-border-1 u-border-grey-30 u-first-column u-grey-5 u-table-cell u-table-cell-8" th:text="${employee.getPosition()}">Stilling1</td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell u-align-center"><img style="border-radius: 50%" width="100px" height="100px" th:src="${employee.pictureLocation}" alt=""></td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${employee.getFirstName()} + ' ' + ${employee.getLastName()}">Navn1</td>
-                <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${employee.getCertificates()}">Certifikater1</td>
+                  <td class="u-border-1 u-border-grey-30 u-table-cell">
+<!--                      <table>-->
+<!--                          <thead>-->
+<!--                          <tr th:each="document: ${employee.getDocumentsAsList()}">-->
+<!--                              <th th:value="${document.getDocumentName()}"></th>-->
+<!--                              <th>-->
+<!--                                  <a th:href="${document.getUrl()}">Download</a>-->
+<!--                              </th>-->
+<!--                          </tr>-->
+<!--                          </thead>-->
+<!--                      </table>-->
+                      <div th:if="${employee.getDocumentsAsList().size() > 0}" th:each="document : ${employee?.getDocumentsAsList()}">
+                          <a th:href="${document?.getUrl()}" th:text="${document?.getOriginalFilename()} ?:''"></a>
+                      </div>
+                  </td>
+<!--                <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${employee.getCertificates()}">Certifikater1</td>-->
                 <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${employee.getPhone()}">Telefon1</td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${employee.getEmail()}">Email1</td>
                 <td class="u-border-1 u-border-grey-30 u-table-cell" th:text="${employee.getWage()}">Timeløn1</td>

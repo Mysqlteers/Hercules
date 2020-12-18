@@ -1,8 +1,10 @@
 package com.hercules.controller;
 
 import com.hercules.model.Contact;
+import com.hercules.model.Document;
 import com.hercules.model.Employee;
 import com.hercules.service.ContactService;
+import com.hercules.service.DocService;
 import com.hercules.service.EmployeeService;
 import com.hercules.service.utility.S3Loader;
 import jdk.dynalink.linker.LinkerServices;
@@ -13,25 +15,35 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class EmployeeController {
+    @Autowired
+    DocService docService;
+
     @Autowired
     EmployeeService employeeService;
 
     @Autowired
     ContactService contactService;
+
     private S3Loader s3Loader = S3Loader.getInstance();
 
     @GetMapping("/employees")
     public String employees(Model model) {
         model.addAttribute("employees", employeeService.findAllByOrderByPositionAscFirstNameAsc());
+        for (Employee e : employeeService.findAllByOrderByPositionAscFirstNameAsc()) {
+            System.out.println(e.getCertificates().size() + "  " + e.getDocumentsAsList().size());
+        }
         return "employeeList";
     }
 
     @PostMapping("/updateEmployee")
-    public String updateCase(@ModelAttribute Employee anEmployee, @RequestParam("file") MultipartFile multipartFile) throws IOException {
+    public String updateCase(@ModelAttribute Employee anEmployee, @RequestParam("file") MultipartFile multipartFile, @RequestParam(value = "certificateFiles", required = false) List<MultipartFile> certificateFiles) throws IOException {
+        System.out.println(certificateFiles.toString());
         //check if user is creating new employee or editing existing
         if (anEmployee.getEmployeeId() != null) {
             //if exists, get picture from database
@@ -54,9 +66,9 @@ public class EmployeeController {
         if (anEmployee.getPhone().equals("")) {
             anEmployee.setPhone(null);
         }
-        if (anEmployee.getCertificates().equals("")) {
-            anEmployee.setCertificates(null);
-        }
+//        if (anEmployee.getCertificates().equals("")) {
+//            anEmployee.setCertificates(null);
+//        }
         if (anEmployee.getEmail().equals("")) {
             anEmployee.setEmail(null);
         }
@@ -66,6 +78,28 @@ public class EmployeeController {
 
         //file path of where to upload in s3 bucket
         String fileName = "employee-pictures/" + anEmployee.getEmployeeId();
+        String certificateName;
+
+        if (anEmployee.getCertificates() == null) {
+            anEmployee.setCertificates(new HashSet<>());
+        }
+
+        for(MultipartFile m : certificateFiles) {
+        if (!m.getName().equals("")) {
+            certificateName = "employee-certificates/" + anEmployee.getEmployeeId() + "/" + m.getOriginalFilename();
+            s3Loader.uploadFile(m, certificateName);
+            System.out.println(certificateName);
+            Document document = new Document(certificateName, certificateName, anEmployee);
+            System.out.println(document.toString());
+            System.out.println(document.getUrl());
+            if (document.getOriginalFilename() != null || document.getOriginalFilename().equals("")) {
+                anEmployee.addDocument(document);
+                docService.save(document);
+            }
+            System.out.println(anEmployee.getCertificates().size());
+        }
+        }
+        System.out.println("Efter for loop: " + anEmployee.getCertificates().size());
 
         //we check if employee doesnt have a picture OR the input file exists
         //in which case, we want to update the employee picture
@@ -74,7 +108,9 @@ public class EmployeeController {
             s3Loader.uploadImage(S3Loader.multipartFileToFile(multipartFile, "temppicture"), fileName);
             anEmployee.setPictureLocation(anEmployee.imageURL());
         }
+        System.out.println("Efter pictures bliver uploaded " + anEmployee.getCertificates().size());
         employeeService.save(anEmployee);
+        System.out.println("Efter employee er gemt " + anEmployee.getCertificates().size());
         return "redirect:/employees";
     }
 

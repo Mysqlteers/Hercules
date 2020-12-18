@@ -23,7 +23,7 @@ public class Document {
     private Case documentCase;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id")
+    @JoinColumn(name = "document_employee_id")
     @Nullable
     private Employee employee;
 
@@ -38,9 +38,34 @@ public class Document {
         this.location = location;
     }
 
+    public Document(String documentName, String location, Employee employee) {
+        this.documentName = documentName;
+        this.location = location;
+        this.employee = employee;
+    }
 
     public String getUrl() {
         return S3Loader.getInstance().getS3ObjectUrl(location);
+    }
+
+    public String getOriginalFilename () {
+        try {
+            String[] strings = this.documentName.split("/");
+            return strings[2];
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Document{" +
+                "documentId=" + documentId +
+                ", documentName='" + documentName + '\'' +
+                ", location='" + location + '\'' +
+//                ", documentCase=" + documentCase +
+//                ", employee=" + employee +
+                '}';
     }
 
     /* ***********************************************************  getters and setters  ************************************************************ */
