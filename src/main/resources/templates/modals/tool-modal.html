@@ -32,7 +32,7 @@
                       style="padding: 10px">
                     <div class="u-form-group u-form-name">
                         <input hidden name="toolId"
-                               placeholder="tool nr" readonly required th:value="${tool?.getToolId()} ?: ${null}" type="text">
+                               placeholder="Tool nr" readonly required th:value="${tool?.getToolId()} ?: ${null}" type="text">
                     </div>
                     <div class="u-form-email u-form-group">
                         <label for="">Serie nr</label>
@@ -42,26 +42,26 @@
                     <div class="u-form-date u-form-group u-form-partition-factor-2 u-form-group-5">
                         <label for="">Type</label>
                         <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="type"
-                               placeholder="type"
+                               placeholder="Type"
                                th:value="${tool?.getType()} ?: ''" type="text">
                     </div>
                     <div class="u-form-date u-form-group u-form-partition-factor-2 u-form-group-5">
                         <label for="">Model</label>
                         <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="model"
-                               placeholder="model"
+                               placeholder="Model"
                                th:value="${tool?.getModel()} ?: ''" type="text">
                     </div>
 
                     <div class="u-form-date u-form-group u-form-partition-factor-2 u-form-group-5">
                         <label for="">Lejet</label>
-                        <input name="rented" placeholder="lejet"
+                        <input name="rented" placeholder="Lejet"
                                style="margin-left: 1vw ; transform: scale(2.5)" th:checked="${tool?.isRented()} ?: false" type="checkbox"
                                value="true">
                     </div>
                     <div class="u-form-date u-form-group u-form-partition-factor-2 u-form-group-5">
                         <label for="">Daglige omkostninger</label>
                         <input class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="dailyCost"
-                               placeholder="daglige omkostninger"
+                               placeholder="Daglige omkostninger"
                                th:value="${tool?.getDailyCost()} ?: 0" type="number" oninput="checkNumber(this)">
                     </div>
                     <div class="u-form-group u-form-select u-form-group-6">
