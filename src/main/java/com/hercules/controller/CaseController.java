@@ -38,8 +38,7 @@ public class CaseController {
 
 
     /**
-     * Method hanldes the creation of a timeline, by passing the days in a month as a list, as well as
-     *
+     * Method handles the creation of a timeline.
      * @param taskId the id of the required task
      * @param month the month of the year
      * @param year selected year
