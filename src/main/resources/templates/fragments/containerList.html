@@ -1,0 +1,68 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="../../static/css/Sager.css" media="screen">
+<link th:href="@{/css/create-case-modal.css}" rel="stylesheet">
+<link th:href="@{/css/nicepage.css}"  rel="stylesheet">
+<script class="u-script" th:src="@{/js/jquery.js}" type="text/javascript"></script>
+<script class="u-script" th:src="@{/js/nicepage.js}" type="text/javascript"></script>
+
+<div th:fragment="containerList(containerlist, viewCaseId)">
+
+<div class="u-clearfix u-sheet u-sheet-1">
+    <div class="u-table u-table-responsive u-table-1">
+        <h2>Liste over tilknyttede containere</h2>
+        <table class="u-table-entity" style="table-layout: fixed">
+            <colgroup>
+                <col width="20%">
+                <col width="15%">
+                <col width="10%">
+                <col width="15%">
+                <col width="8%">
+                <col width="15%">
+                <col width="17%">
+            </colgroup>
+            <thead class="u-palette-4-base u-table-header u-table-header-1">
+            <tr style="height: 35px;">
+                <th class="u-border-1 u-border-palette-4-base u-table-cell">Container navn</th>
+                <th class="u-border-1 u-border-palette-4-base u-table-cell">Daglige omkostninger</th>
+                <th class="u-border-1 u-border-palette-4-base u-table-cell">Antal dage</th>
+                <th class="u-border-1 u-border-palette-4-base u-table-cell">Pris for afhentning</th>
+                <th class="u-border-1 u-border-palette-4-base u-table-cell">Afhentet</th>
+                <th class="u-border-1 u-border-palette-4-base u-table-cell">Samlede omkostninger</th>
+                <th class="u-border-1 u-border-palette-4-base u-table-cell"></th>
+            </tr>
+            </thead>
+            <tbody class="u-table-body">
+            <tr style="height: 78px" th:each="container: ${containerlist}">
+                <td th:text="${container.getContainerName()}" class="u-border-1 u-border-grey-30 u-first-column u-grey-5 u-table-cell u-table-cell-5"
+                     style="overflow: scroll; width: 100px; text-overflow: ellipsis">
+                </td>
+                <td class="u-border-1 u-border-grey-30 u-table-cell"
+                    th:text="${container.getDailyCost() + ' kr.'}"></td>
+                <td class="u-border-1 u-border-grey-30 u-table-cell"
+                    th:text="${container.getNumberOfDays()}"></td>
+                <td class="u-border-1 u-border-grey-30 u-table-cell"
+                    th:text="${container.getPickUpPrice() + ' kr.'}"></td>
+                <td th:if="${!container.getIsPickedUp()}" class="u-border-1 u-border-grey-30 u-table-cell"
+                    th:text="${'Nej'}"></td>
+                <td th:unless="${!container.getIsPickedUp()}" class="u-border-1 u-border-grey-30 u-table-cell"
+                    th:text="${'Ja'}"></td>
+                <td th:text="${container.calculateTotal() + ' kr.'}" class="u-border-1 u-border-grey-30 u-table-cell"></td>
+                <td class="u-border-1 u-border-grey-30 u-table-cell" style="text-align: center">
+                    <a th:href="@{'/deleteContainer/' + ${container.getContainerId()} + '/' + ${viewCaseId}}">
+                        <button onclick="return confirm('Er du sikker?')" class="u-btn u-button-style u-btn-1" style="width:131.533px; background-color: crimson; color: white"
+                                type="button">
+                            SLET
+                        </button>
+                    </a>
+                    <button th:replace="/modals/container-modal.html :: container-modal(${container}, ${viewCaseId})"></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div>
+            <button th:replace="/modals/container-modal.html :: container-modal(${null}, ${viewCaseId})"></button>
+        </div>
+    </div>
+</div>
+
+</div>
