@@ -13,8 +13,8 @@
 <div th:fragment="timeline(dates, mainTask)">
     <div class="u-clearfix u-sheet u-sheet-1" style="text-align: center">
         <a class="u-btn u-button-style u-btn-1" style="float: left; display: inline-block" onclick="changeMonth(-1)">&#10094; Tilbage</a>
-        <a th:if="${mainTask?.getSuperTask()} != null" th:href="'/timeline/'+${mainTask?.getSuperTask()?.getTaskId()}+'/'+${dates.get(0).getMonthValue()}+'/'+${dates.get(0).getYear()}" class="u-text u-text-default u-text-1" style="display: inline-block">Gå til over opgave</a>
-        <a th:unless="${mainTask?.getSuperTask()} != null" th:href="'/caseDetails/'+${mainTask?.getCase()?.getCaseId()}" class="u-text u-text-default u-text-1" style="display: inline-block">Gå til over opgave</a>
+<!--        <a th:if="${mainTask?.getSuperTask()} != null" th:href="'/timeline/'+${mainTask?.getSuperTask()?.getTaskId()}+'/'+${dates.get(0).getMonthValue()}+'/'+${dates.get(0).getYear()}" class="u-text u-text-default u-text-1" style="display: inline-block">Gå til over opgave</a>-->
+<!--        <a th:unless="${mainTask?.getSuperTask()} != null" th:href="'/caseDetails/'+${mainTask?.getCase()?.getCaseId()}" class="u-text u-text-default u-text-1" style="display: inline-block">Gå til over opgave</a>-->
         <a class="u-btn u-button-style u-btn-2" style="float: right; display: inline-block" onclick="changeMonth(1)">Frem &#10095;</a>
     </div>
     <div class="chart-wrapper" >
