@@ -1,10 +1,7 @@
 package com.hercules.controller;
 
 import com.hercules.model.*;
-import com.hercules.service.CaseService;
-import com.hercules.service.ContactService;
-import com.hercules.service.EmployeeService;
-import com.hercules.service.PersonService;
+import com.hercules.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.hercules.service.TaskService;
 import org.springframework.stereotype.Controller;
@@ -35,6 +32,9 @@ public class CaseController {
 
     @Autowired
     EmployeeService employeeService;
+
+    @Autowired
+    ContainerService containerService;
 
 
     /**
@@ -123,6 +123,7 @@ public class CaseController {
                 model.addAttribute("contactlist", personService.findAllByContactOrderByPositionAscFirstNameAsc(contact));
                 model.addAttribute("allEmployees", allEmployees);
                 model.addAttribute("attachedEmployees", attachedEmployees);
+                model.addAttribute("containerlist", containerService.findAllByContactOrderByContainerIdDesc(contact));
             } else {
                 model.addAttribute("contactlist", new HashSet<Person>());
                 model.addAttribute("employee", new HashSet<Employee>());
