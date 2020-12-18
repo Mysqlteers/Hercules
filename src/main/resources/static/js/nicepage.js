@@ -8045,6 +8045,8 @@ function checkNumber(input) {
         input.setCustomValidity("Tallet skal være et heltal")
     } else if (input.validity.rangeUnderflow) {
         input.setCustomValidity("Tallet skal være mindst 0")
+    } else if (input.validity.stepMismatch) {
+        input.setCustomValidity("Tallet skal være et heltal")
     } else {
         input.setCustomValidity("");
     }

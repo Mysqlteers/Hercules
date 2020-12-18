@@ -2,6 +2,7 @@ package com.hercules.model;
 
 
 import com.hercules.service.utility.S3Loader;
+import com.sun.istack.Nullable;
 
 import javax.persistence.*;
 
@@ -18,7 +19,13 @@ public class Document {
     private String location;
     @ManyToOne
     @JoinColumn(name = "document_owner_id")
+    @Nullable
     private Case documentCase;
+
+    @ManyToOne
+    @JoinColumn(name = "document_employee_id")
+    @Nullable
+    private Employee employee;
 
     /* ***********************************************************  Constructors and methods  ************************************************************ */
 
@@ -31,9 +38,34 @@ public class Document {
         this.location = location;
     }
 
+    public Document(String documentName, String location, Employee employee) {
+        this.documentName = documentName;
+        this.location = location;
+        this.employee = employee;
+    }
 
     public String getUrl() {
         return S3Loader.getInstance().getS3ObjectUrl(location);
+    }
+
+    public String getOriginalFilename () {
+        try {
+            String[] strings = this.documentName.split("/");
+            return strings[2];
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Document{" +
+                "documentId=" + documentId +
+                ", documentName='" + documentName + '\'' +
+                ", location='" + location + '\'' +
+//                ", documentCase=" + documentCase +
+//                ", employee=" + employee +
+                '}';
     }
 
     /* ***********************************************************  getters and setters  ************************************************************ */
@@ -68,6 +100,14 @@ public class Document {
 
     public void setDocumentCase(Case documentCase) {
         this.documentCase = documentCase;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }
 
