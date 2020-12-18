@@ -35,7 +35,7 @@
             <div class="u-expanded-width u-form u-form-1">
                 <form id="containerFormId" th:action="@{'/updateContainer/' + ${viewCaseId}}" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" method="post"
                       style="padding: 10px">
-                    <input type="number" hidden required th:value="${viewCaseId}" name="viewCaseId">
+                    <input type="number" oninput="checkNumber(this)" hidden required th:value="${viewCaseId}" name="viewCaseId">
                     <div class="u-form-group u-form-name">
                         <input name="containerId"
                                required hidden type="text" th:value="${container?.getContainerId() ?: ''}" readonly>
@@ -46,15 +46,15 @@
                     </div>
                     <div class="u-form-group u-form-message">
                         <label for="">Daglige omkostninger</label>
-                        <input step="any" type="number" min="0" required class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="dailyCost" th:value="${container?.getDailyCost()  ?: 0}" placeholder="Daglige omkostninger" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0">
+                        <input step="any" type="number" min="0" oninput="checkNumber(this)" required class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="dailyCost" th:value="${container?.getDailyCost()  ?: 0}" placeholder="Daglige omkostninger" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0">
                     </div>
                     <div class="u-form-email u-form-group">
                         <label for="">Antal dage</label>
-                        <input type="number" min="0" required class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="numberOfDays" th:value="${container?.getNumberOfDays()  ?: 0}" placeholder="Antal dage" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0">
+                        <input type="number" min="0" oninput="checkNumber(this)" required class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="numberOfDays" th:value="${container?.getNumberOfDays()  ?: 0}" placeholder="Antal dage" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0">
                     </div>
                     <div class="u-form-email u-form-group">
                         <label for="">Pris for afhentning</label>
-                        <input type="number" min="0" step="any" required class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="pickUpPrice" th:value="${container?.getPickUpPrice()  ?: 0}" placeholder="Pris for afhentning" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0">
+                        <input type="number" min="0" step="any" required oninput="checkNumber(this)" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" name="pickUpPrice" th:value="${container?.getPickUpPrice()  ?: 0}" placeholder="Pris for afhentning" style="-webkit-appearance: none; -moz-appearance: textfield; margin: 0">
                     </div>
                     <div  class="u-form-email u-form-group" style="text-align: left">
                         <label for="isPickedUp">Afhentet</label><br>

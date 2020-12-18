@@ -8039,7 +8039,7 @@ https://github.com/imakewebthings/waypoints/blob/master/licenses.txt
 });
 
 function checkNumber(input) {
-    if (input.validity.badInput) {
+    if (input.validity.badInput || input.validity.valueMissing) {
         input.setCustomValidity("Indtast venligst et tal");
     } else if (input.validity.stepMismatch) {
         input.setCustomValidity("Tallet skal være et heltal")
