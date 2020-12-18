@@ -48,7 +48,10 @@ public class TaskController {
         myTask.addPicture(fileName, "", false);
         taskService.save(myTask);
 
-        return "redirect:/timeline/"+myTask.getSuperTask().getTaskId()+"/"+ LocalDate.now().getMonthValue()+"/"+LocalDate.now().getYear();
+        if (myTask.getSuperTask()!=null)
+            return "redirect:/timeline/"+myTask.getSuperTask().getTaskId()+"/"+ LocalDate.now().getMonthValue()+"/"+LocalDate.now().getYear();
+        else
+            return "redirect:/caseDetails/"+myTask.getCase().getCaseId();
     }
 
 

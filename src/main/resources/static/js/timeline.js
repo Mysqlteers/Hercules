@@ -6,9 +6,9 @@
  */
 
 function createChart(e) {
-    const days = document.querySelectorAll(".chart-values li");
-    const tasks = document.querySelectorAll(".chart-bars li");
-    const dayElements = [...days]
+    let days = document.querySelectorAll(".chart-values li");
+    let tasks = document.querySelectorAll(".chart-bars li");
+    let dayElements = [...days]
     let daysArray = new Array()
 
     days.forEach(dayElement => {
@@ -16,21 +16,24 @@ function createChart(e) {
     })
 
     tasks.forEach(el => {
-    const duration = el.dataset.duration.split("/");
+    let duration = el.dataset.duration.split("/");
     let startDay = duration[0];
     let endDay = duration[1];
     let left = 0;
     width = 0;
+    let skip = false;
 
     if (!daysArray.includes(startDay) || !daysArray.includes(endDay)) {
-
         //task is before
         if(startDay<daysArray[0] && endDay<daysArray[0]) {
-            return;
+            //set width 0;
+            left=0;
+            width=0;
+            skip=true;
         }
         //task is after
         else if(startDay>daysArray[daysArray.length-1] && endDay>daysArray[daysArray.length-1]) {
-            return;
+            skip=true;
         }
         //endday is inclued, but not startday
         else if (daysArray.includes(endDay) && !daysArray.includes(startDay)) {
@@ -40,22 +43,23 @@ function createChart(e) {
         else if (daysArray.includes(startDay) && !daysArray.includes(endDay)) {
             endDay = daysArray[daysArray.length - 1]
         }
-
-
-
+        else { // if task goes beyond both start and end
+            startDay = daysArray[0];
+            endDay = daysArray[daysArray.length - 1]
+        }
     }
 
-    //find element where day == startday
-    let filteredArray = dayElements.filter(day => day.dataset.period === startDay);
-        if (filteredArray[0]!=undefined) {
-            left = filteredArray[0].offsetLeft;
+        if (!skip) {
+            let filteredArray = dayElements.filter(day => day.dataset.period === startDay);
+            if (filteredArray[0] != undefined) {
+                left = filteredArray[0].offsetLeft;
+            }
+            //find element where day == startday
+            filteredArray = dayElements.filter(day => day.dataset.period === endDay);
+            if (filteredArray[0] != undefined) {
+                width = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth - left;
+            }
         }
-    //find element where day == startday
-    filteredArray = dayElements.filter(day => day.dataset.period === endDay);
-        if (filteredArray[0]!=undefined) {
-            width = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth - left;
-        }
-
     // apply css
     el.style.left = `${left}px`;
     el.style.width = `${width}px`;
@@ -80,7 +84,47 @@ function createChart(e) {
 });
 }
 
+function changeMonth(n)
+{
+    let days = document.querySelectorAll(".chart-values li");
+    let daysList = days[0].parentNode;
+    let startDate = days[0].dataset.period;
+    console.log('number = ' + n)
+    console.log('startDate = ' + startDate)
+    $.ajax({
+        url: "/api/changeMonth",
+        type: "POST",
+        contentType: "application/JSON",
+        data: JSON.stringify({
+            number : n,
+            startDate : startDate
+        }),
+        success: function(result) {
 
-window.addEventListener("mousemove", createChart)
+            days.forEach( e => {
+                e.remove();
+            })
+
+            result.forEach(e =>{
+                console.log(e)
+                let child = document.createElement("LI");
+                child.innerHTML = e.toString();
+                child.setAttribute('data-period', e.toString());
+                    // <li th:attr="data-period=${day}" th:each="day : ${dates}" th:text="${day.getDayOfWeek().name()}+'  '+${day.getDayOfMonth()}"></li>
+                daysList.appendChild(child);
+            })
+            //
+
+
+
+            console.log("success")
+        },
+        error: function() {
+            console.log("Error in AJAX request.")
+        }
+    })
+}
+
+window.addEventListener("mousemove", e => {createChart();})
 window.addEventListener("load", createChart);
 window.addEventListener("resize", createChart);
